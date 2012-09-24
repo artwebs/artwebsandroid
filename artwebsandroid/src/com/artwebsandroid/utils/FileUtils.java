@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
+import android.util.Log;
 
 public class FileUtils {
 	private String SDPATH;
@@ -20,7 +22,22 @@ public class FileUtils {
 	public FileUtils() {
 		//得到当前外部存储设备的目录
 		// /SDCARD
-		SDPATH = Environment.getExternalStorageDirectory() + "/";
+		if (android.os.Environment.getExternalStorageState().equals(
+				android.os.Environment.MEDIA_MOUNTED))
+			SDPATH = Environment.getExternalStorageDirectory() + "/";
+		else
+			SDPATH="/";
+			
+	}
+	
+	public FileUtils(String root)
+	{
+		if (android.os.Environment.getExternalStorageState().equals(
+				android.os.Environment.MEDIA_MOUNTED))
+			SDPATH = Environment.getExternalStorageDirectory() + "/";
+		else
+			SDPATH=root+"/";
+		
 	}
 	/**
 	 * 在SD卡上创建文件
@@ -31,6 +48,12 @@ public class FileUtils {
 		File file = new File(SDPATH + fileName);
 		file.createNewFile();
 		return file;
+	}
+	
+	public void deleteSDFile(String fileName)
+	{
+		File file = new File(SDPATH + fileName);
+		file.delete();
 	}
 	
 	/**
@@ -59,7 +82,7 @@ public class FileUtils {
 		File file = null;
 		OutputStream output = null;
 		try{
-			creatSDDir(path);
+			creatSDDir(path);			
 			file = creatSDFile(path + fileName);
 			output = new FileOutputStream(file);
 			byte buffer [] = new byte[4 * 1024];			
@@ -68,6 +91,40 @@ public class FileUtils {
 			{
 				output.write(buffer, 0, count);
 			}
+			output.flush();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				output.close();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return file;
+	}
+	
+	/**
+	 * 将一个InputStream里面的数据写入到SD卡中
+	 */
+	public File write2SDFromInput(String path,String fileName,InputStream input,Handler handler){
+		File file = null;
+		OutputStream output = null;
+		try{
+			creatSDDir(path);			
+			file = creatSDFile(path + fileName);
+			output = new FileOutputStream(file);
+			byte buffer [] = new byte[1024];			
+			int count=0;
+			while((count=input.read(buffer))!=-1)
+			{
+				output.write(buffer, 0, count);
+				handler.sendEmptyMessage(1);
+			}
+			handler.sendEmptyMessage(2);
 			output.flush();
 		}
 		catch(Exception e){
@@ -93,7 +150,7 @@ public class FileUtils {
 		String type="application/vnd.android.package-archive";
 		intent.setDataAndType(Uri.fromFile(file), type);
 		activity.startActivity(intent);
-		file.delete();
+//		file.delete();
 	}
 
 }

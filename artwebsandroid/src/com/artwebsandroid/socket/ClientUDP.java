@@ -1,9 +1,11 @@
 package com.artwebsandroid.socket;
 
+import java.io.InputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import android.os.Handler;
 import android.util.Log;
 
 public class ClientUDP extends Client {
@@ -60,6 +62,19 @@ public class ClientUDP extends Client {
 	public void closeConnetion() {
 		this.socket.close();
 		this.socket=null;		
+	}
+
+	@Override
+	public int downFile(String meg, String path, String fileName,
+			Handler handler) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public InputStream downStream(String meg) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,4 +1,10 @@
 package com.artwebsandroid.socket;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import android.os.Handler;
+
 public abstract class Client {
 	protected String host;
 	protected Integer port;
@@ -30,6 +36,10 @@ public abstract class Client {
 	public abstract String download(String msg);
 	
 	public abstract int downFile(String meg, String path, String fileName);
+	
+	public abstract int downFile(String meg, String path, String fileName,Handler handler);
+	
+	public abstract InputStream downStream(String meg);
 	
 	public abstract void closeConnetion();
 	

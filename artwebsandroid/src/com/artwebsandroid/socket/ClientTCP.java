@@ -9,6 +9,9 @@ import java.net.Socket;
 
 import com.artwebsandroid.utils.FileUtils;
 
+import android.os.Handler;
+import android.util.Log;
+
 public class ClientTCP extends Client {
 	private Socket socket;
 	
@@ -95,6 +98,54 @@ public class ClientTCP extends Client {
 		}
 		this.socket=null;
 		
+	}
+
+	@Override
+	public int downFile(String meg, String path, String fileName,
+			Handler handler) {
+		InputStream inputStream = null;
+		try {
+			FileUtils fileUtils = new FileUtils();
+			
+			if (fileUtils.isFileExist(path + fileName)) {
+				return 1;
+			} else {
+				this.getConnetion();
+				inputStream = this.socket.getInputStream();
+				OutputStream outputstream =this.socket.getOutputStream();
+				outputstream.write(meg.getBytes());
+				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream,handler);
+				if (resultFile == null) {
+					return -1;
+				}
+				inputStream.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			
+		}
+		return 0;
+	}
+
+	@Override
+	public InputStream downStream(String meg) {
+		InputStream inputStream = null;
+		try {
+			
+				this.getConnetion();
+				inputStream = this.socket.getInputStream();
+				OutputStream outputstream =this.socket.getOutputStream();
+				outputstream.write(meg.getBytes());
+				return inputStream;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return null;
 	}
 
 }
