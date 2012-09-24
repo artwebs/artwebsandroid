@@ -21,7 +21,7 @@ public abstract class AbsDataParse implements IDataParse {
 		public void startElement(String namespaceURI, String localName,
 				String qName, Attributes attr) throws SAXException {
 			sb.delete(0, sb.length());
-			if(localName.equals("root"))
+			if(localName.equals("doc"))
 			AbsDataParse.this.para.put("type", attr.getValue("type"));
 		}
 
@@ -76,8 +76,8 @@ public abstract class AbsDataParse implements IDataParse {
 	public void setTextElement()
 	{
 		textElement.add("count");
-		textElement.add("return");
-		textElement.add("returnflag");
+		textElement.add("code");
+		textElement.add("message");
 		textElement.add("type");
 	}
 	
