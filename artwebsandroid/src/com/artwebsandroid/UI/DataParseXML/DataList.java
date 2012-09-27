@@ -24,8 +24,8 @@ public class DataList extends AbsDataParse{
 
 			public void endElement(String namespaceURI, String localName, String qName)
 					throws SAXException {	
-				if(localName.equals("row"))newRow=false;
-				if(localName.equals("root"))DataList.this.para.put("rows", rows);
+				if(localName.equals("item"))newRow=false;
+				if(localName.equals("doc"))DataList.this.para.put("rows", rows);
 			}
 			
 			
@@ -34,7 +34,7 @@ public class DataList extends AbsDataParse{
 				sb.append(new String(ch, start, length));
 				if (DataList.this.textElement.indexOf(tagName)>=0)
 					DataList.this.para.put(tagName,sb.toString());
-				else if(tagName.equals("first")||tagName.equals("second")||tagName.equals("third")||tagName.equals("findkey"))
+				else if(tagName.equals("text")||tagName.equals("id")||tagName.equals("findkey"))
 				{			
 					rows.put(newRow, tagName, sb.toString());
 					newRow=true;
