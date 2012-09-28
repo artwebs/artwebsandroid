@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.os.Handler;
 import android.util.Log;
 
 
@@ -68,6 +69,36 @@ public class HttpDownloader {
 			} else {
 				inputStream = getInputStreamFromUrl(urlStr);
 				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream);
+				if (resultFile == null) {
+					return -1;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				inputStream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	/**
+	 * 该函数返回整形 -1：代表下载文件出错 0：代表下载文件成功 1：代表文件已经存在
+	 */
+	public int downFile(String urlStr, String path, String fileName,Handler handler) {
+		InputStream inputStream = null;
+		try {
+			FileUtils fileUtils = new FileUtils();
+			
+			if (fileUtils.isFileExist(path + fileName)) {
+				return 1;
+			} else {
+				inputStream = getInputStreamFromUrl(urlStr);
+				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream,handler);
 				if (resultFile == null) {
 					return -1;
 				}
