@@ -29,8 +29,8 @@ public class DataForm extends AbsDataParse{
 		this.rowElement.add("CONMETHOD");
 		this.rowElement.add("CONURL");
 		
-		this.itemElement.add("first");
-		this.itemElement.add("second");
+		this.itemElement.add("text");
+		this.itemElement.add("id");
 		this.itemElement.add("findkey");
 		
 		this.contentHandler=new DefaultHandler(){
@@ -43,7 +43,7 @@ public class DataForm extends AbsDataParse{
 
 			public void endElement(String namespaceURI, String localName, String qName)
 					throws SAXException {	
-				if(localName.equals("ITEM"))newItem=false;
+				if(localName.equals("item"))newItem=false;
 				if(localName.equals("row"))newRow=false;	
 				if(localName.equals("ITEMS"))
 				{
@@ -64,7 +64,7 @@ public class DataForm extends AbsDataParse{
 					newRow=true;
 				}
 				
-				if(localName.equals("root"))DataForm.this.para.put("rows", rows);
+				if(localName.equals("doc"))DataForm.this.para.put("rows", rows);
 			}
 			public void characters(char[] ch, int start, int length)
 					throws SAXException {

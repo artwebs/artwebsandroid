@@ -21,17 +21,24 @@ import com.artwebsandroid.object.BinMap;
 
 public class CodeUIList extends CodeUI {
 	private BinList rows=new BinList();
+	private BaseAdapter adapter;
 	
+	public void setAdapter(BaseAdapter adapter)
+	{
+		this.adapter=adapter;
+	}
 	
 	@Override
 	public View drawnView(final Activity activity,Integer parentid,Integer id) {
-		final ListAdapter adapter=new ListAdapter(this.para,activity);	
+//		adapter=new ListAdapter(this.para,activity);	
 //		ListView listView=(ListView)activity.findViewById(id);
 		ListView listView=new ListView(activity);
 		listView.setAdapter(adapter);		
 		listView.setOnItemClickListener(this.onItemClickListener);
 		return listView;
 	}
+	
+	
 	
 	class ListAdapter extends BaseAdapter
 	{	

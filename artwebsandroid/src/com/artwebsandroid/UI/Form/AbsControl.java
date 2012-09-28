@@ -60,6 +60,7 @@ public abstract class AbsControl {
 		this.activity=activity;
 		this.para=para;
 		this.tbrow=new TableRow(activity);
+		this.strName=this.para.getValue("NAME").toString();
 	}
 	
 	public void setTransmit(ITransmit transmit)

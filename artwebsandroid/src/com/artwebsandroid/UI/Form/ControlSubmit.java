@@ -72,7 +72,7 @@ public class ControlSubmit extends AbsControl {
 			factory.dranView(ControlSubmit.this.activity,sb.toString());
 			
 			
-			Toast toast=Toast.makeText(ControlSubmit.this.activity, factory.getMap().getValue("returnflag").toString(), Toast.LENGTH_LONG);
+			Toast toast=Toast.makeText(ControlSubmit.this.activity, factory.getMap().getValue("message").toString(), Toast.LENGTH_LONG);
 			toast.show();
 			
 		}

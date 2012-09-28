@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class UIFactory implements IUIFactory {
+	private final static String tag="UIFactory";
 	protected CodeUI uiobj;
 	private String dataStr;
 	private Activity mainActity;
@@ -71,10 +72,11 @@ public class UIFactory implements IUIFactory {
 	@SuppressWarnings("unchecked")
 	public void uiIntance()
 	{
+		Log.i(tag,"com.artwebsandroid.UI.CodeUI"+this.type.substring(0,1).toUpperCase()+this.type.substring(1));
 		this.uiFactory=new UIFactory(); 
 		Class<CodeUI> objclass=null;
 		try {
-			objclass=(Class<CodeUI>)Class.forName("com.artcode.UI.CodeUI"+this.type.substring(0,1).toUpperCase()+this.type.substring(1));
+			objclass=(Class<CodeUI>)Class.forName("com.artwebsandroid.UI.CodeUI"+this.type.substring(0,1).toUpperCase()+this.type.substring(1));
 			uiobj=(CodeUI)objclass.newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +89,7 @@ public class UIFactory implements IUIFactory {
 	{
 		Class<IDataParse> objclass=null;
 		try {
-			objclass=(Class<IDataParse>)Class.forName("com.artcode.UI.DataParseXML.Data"+this.type.substring(0,1).toUpperCase()+this.type.substring(1));
+			objclass=(Class<IDataParse>)Class.forName("com.artwebsandroid.UI.DataParseXML.Data"+this.type.substring(0,1).toUpperCase()+this.type.substring(1));
 			parseobj=(IDataParse)objclass.newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();

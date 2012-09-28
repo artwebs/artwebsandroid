@@ -9,7 +9,7 @@ public class CodeUIFlag extends CodeUI {
 	@Override
 	public View drawnView(Activity activity, Integer parentid, Integer id) {
 		TextView text=new TextView(activity);
-		text.setText(this.para.getValue("returnflag").toString());
+		text.setText(this.para.getValue("message").toString());
 		return text;
 	}
 	

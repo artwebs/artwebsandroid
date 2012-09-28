@@ -11,7 +11,7 @@ public class UIFactoryJSON extends UIFactory {
 	{
 		Class<IDataParse> objclass=null;
 		try {
-			objclass=(Class<IDataParse>)Class.forName("com.artcode.UI.DataParseJSON.Data"+this.type.substring(0,1).toUpperCase()+this.type.substring(1));
+			objclass=(Class<IDataParse>)Class.forName("com.artwebsandroid.UI.DataParseJSON.Data"+this.type.substring(0,1).toUpperCase()+this.type.substring(1));
 			parseobj=(IDataParse)objclass.newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();

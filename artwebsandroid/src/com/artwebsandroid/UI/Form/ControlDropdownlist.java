@@ -2,7 +2,9 @@ package com.artwebsandroid.UI.Form;
 
 import java.util.HashMap;
 
+import android.R;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,7 +50,7 @@ public class ControlDropdownlist extends AbsControl {
 			spinner=new Spinner(activity);
 			BinList items=(BinList)this.para.getValue("ITEMS");
 			
-			SimpleAdapter adapter=new SimpleAdapter(activity,items.getItem(),android.R.layout.simple_spinner_item,new String[]{"first"},new int[]{android.R.id.text1});
+			SimpleAdapter adapter=new SimpleAdapter(activity,items.getItem(),android.R.layout.simple_spinner_item,new String[]{"text"},new int[]{R.id.text1});
 			SimpleAdapter.ViewBinder viewBinder = new SimpleAdapter.ViewBinder() { 
 				 
 		        public boolean setViewValue(View view, Object data, 
@@ -63,12 +65,13 @@ public class ControlDropdownlist extends AbsControl {
 			spinner.setAdapter(adapter);
 			
 			spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
-
+				private final static String tag="OnItemSelectedListener";
 				@Override
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
-					strValue=((HashMap)arg0.getAdapter().getItem(arg2)).get("second").toString();
-					strText=((HashMap)arg0.getAdapter().getItem(arg2)).get("first").toString();
+					Log.i(tag,((HashMap)arg0.getAdapter().getItem(arg2)).toString());
+					strValue=((HashMap)arg0.getAdapter().getItem(arg2)).get("id").toString();
+					strText=((HashMap)arg0.getAdapter().getItem(arg2)).get("text").toString();
 				}
 
 				@Override

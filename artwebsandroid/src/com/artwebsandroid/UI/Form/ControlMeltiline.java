@@ -22,7 +22,6 @@ public class ControlMeltiline extends AbsControl{
 		textView.setWidth(100);
 		textView.setGravity(Gravity.CENTER);
 		textView.setText(this.para.getValue("CNAME").toString());
-		this.strName=this.para.getValue("NAME").toString();
 		tbrow.addView(textView);
 		
 		meltlline=new EditText(activity);

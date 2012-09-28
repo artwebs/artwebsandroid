@@ -23,7 +23,6 @@ public class ControlTextbox extends AbsControl {
 		textView.setWidth(100);
 		textView.setGravity(Gravity.CENTER);
 		textView.setText(this.para.getValue("CNAME").toString());
-		this.strName=this.para.getValue("NAME").toString();
 		tbrow.addView(textView);
 		editText=new EditText(activity);
 		editText.setText(this.para.getValue("VALUE").toString());
