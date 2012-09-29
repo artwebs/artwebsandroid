@@ -2,6 +2,7 @@ package com.artwebsandroid.UI;
 
 import java.io.InputStream;
 
+import android.content.Context;
 import android.os.Handler;
 
 public interface ITransmit {
@@ -16,9 +17,7 @@ public interface ITransmit {
 	
 	
 	public String download(String commend);
-	
 	public int downFile(String commend, String path, String fileName);
-	
 	public int downFile(String commend, String path, String fileName,Handler handler);
 	
 	public InputStream downStream(String commend);

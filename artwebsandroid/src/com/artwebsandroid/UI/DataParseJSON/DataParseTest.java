@@ -6,6 +6,7 @@ import com.artwebsandroid.UI.ITransmit;
 import com.artwebsandroid.object.BinMap;
 import com.artwebsandroid.socket.ClientTCP;
 
+import android.content.Context;
 import android.os.Handler;
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -50,6 +51,13 @@ public class DataParseTest extends AndroidTestCase{
 			
 		}
 
+
+		@Override
+		public InputStream downStream(String commend) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 		@Override
 		public int downFile(String commend, String path, String fileName,
 				Handler handler) {
@@ -57,11 +65,8 @@ public class DataParseTest extends AndroidTestCase{
 			return 0;
 		}
 
-		@Override
-		public InputStream downStream(String commend) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	
+
 	};
 	
 	public void testParseList()
