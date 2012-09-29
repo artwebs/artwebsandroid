@@ -21,7 +21,7 @@ public class ITransmitImplHttp implements ITransmit {
 		this.host=host;
 		this.skip=skip;
 	}
-	public ITransmitImplHttp(String host,String skip,String andCmd)
+	public ITransmitImplHttp(String host,String skip,String addCmd)
 	{
 		this.host=host;
 		this.skip=skip;
