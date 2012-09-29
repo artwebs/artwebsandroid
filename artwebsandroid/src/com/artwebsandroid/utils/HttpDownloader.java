@@ -14,6 +14,7 @@ import android.util.Log;
 
 
 public class HttpDownloader {
+	private final static String tag="HttpDownloader";
 	private URL url = null;
 
 	/**
@@ -87,7 +88,7 @@ public class HttpDownloader {
 	}
 	
 	/**
-	 * 该函数返回整形 -1：代表下载文件出错 0：代表下载文件成功 1：代表文件已经存在
+	 * 该函数返回整形 -1：代表下载文件出错 -2保存文件错误 0：代表下载文件成功 1：代表文件已经存在
 	 */
 	public int downFile(String urlStr, String path, String fileName,Handler handler) {
 		InputStream inputStream = null;
@@ -97,10 +98,11 @@ public class HttpDownloader {
 			if (fileUtils.isFileExist(path + fileName)) {
 				return 1;
 			} else {
+				Log.d(tag,urlStr);
 				inputStream = getInputStreamFromUrl(urlStr);
 				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream,handler);
 				if (resultFile == null) {
-					return -1;
+					return -2;
 				}
 			}
 		} catch (Exception e) {
