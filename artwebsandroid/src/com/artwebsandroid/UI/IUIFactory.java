@@ -1,6 +1,7 @@
 package com.artwebsandroid.UI;
 
 import com.artwebsandroid.object.BinMap;
+import com.artwebsandroid.transmit.ITransmit;
 
 import android.app.Activity;
 import android.view.View;

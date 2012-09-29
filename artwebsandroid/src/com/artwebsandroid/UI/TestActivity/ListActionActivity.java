@@ -3,8 +3,8 @@ package com.artwebsandroid.UI.TestActivity;
 import java.util.HashMap;
 
 import com.artwebs.R;
-import com.artwebsandroid.UI.TransmitExample;
 import com.artwebsandroid.UI.UIFactory;
+import com.artwebsandroid.transmit.TransmitExample;
 
 import android.app.Activity;
 import android.content.Intent;

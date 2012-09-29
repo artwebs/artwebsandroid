@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.artwebs.R;
-import com.artwebsandroid.UI.TransmitExample;
 import com.artwebsandroid.UI.UIFactory;
+import com.artwebsandroid.transmit.TransmitExample;
 
 public class SelectActivity extends Activity {
 	private String conurl="";

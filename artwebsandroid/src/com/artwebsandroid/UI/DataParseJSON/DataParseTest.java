@@ -2,9 +2,9 @@ package com.artwebsandroid.UI.DataParseJSON;
 
 import java.io.InputStream;
 
-import com.artwebsandroid.UI.ITransmit;
 import com.artwebsandroid.object.BinMap;
 import com.artwebsandroid.socket.ClientTCP;
+import com.artwebsandroid.transmit.ITransmit;
 
 import android.content.Context;
 import android.os.Handler;

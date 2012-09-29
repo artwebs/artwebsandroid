@@ -1,4 +1,4 @@
-package com.artwebsandroid.UI;
+package com.artwebsandroid.transmit;
 
 import java.io.InputStream;
 

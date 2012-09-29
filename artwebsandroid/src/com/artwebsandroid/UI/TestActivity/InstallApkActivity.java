@@ -1,6 +1,6 @@
 package com.artwebsandroid.UI.TestActivity;
 
-import com.artwebsandroid.UI.TransmitExample;
+import com.artwebsandroid.transmit.TransmitExample;
 import com.artwebsandroid.utils.FileUtils;
 
 import android.app.Activity;

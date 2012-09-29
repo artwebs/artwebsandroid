@@ -4,6 +4,7 @@ import com.artwebsandroid.ArtwebsandroidActivity;
 import com.artwebsandroid.object.BinList;
 import com.artwebsandroid.object.BinMap;
 import com.artwebsandroid.socket.ClientTCP;
+import com.artwebsandroid.transmit.TransmitExample;
 import com.artwebsandroid.utils.HttpDownloader;
 
 import android.test.AndroidTestCase;

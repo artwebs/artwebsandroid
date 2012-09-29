@@ -1,4 +1,4 @@
-package com.artwebsandroid.UI;
+package com.artwebsandroid.transmit;
 
 import android.test.AndroidTestCase;
 import android.util.Log;

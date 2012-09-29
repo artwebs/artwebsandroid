@@ -1,8 +1,8 @@
 package com.artwebsandroid.UI.DataParseJSON;
 
 import com.artwebsandroid.UI.IDataParse;
-import com.artwebsandroid.UI.ITransmit;
 import com.artwebsandroid.object.BinMap;
+import com.artwebsandroid.transmit.ITransmit;
 
 public abstract class AbsDataParse implements IDataParse {
 	protected String dataStr;

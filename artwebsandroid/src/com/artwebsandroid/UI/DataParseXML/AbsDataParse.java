@@ -10,8 +10,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import android.util.Log;
 
 import com.artwebsandroid.UI.IDataParse;
-import com.artwebsandroid.UI.ITransmit;
 import com.artwebsandroid.object.BinMap;
+import com.artwebsandroid.transmit.ITransmit;
 import com.artwebsandroid.utils.Utils;
 
 public abstract class AbsDataParse implements IDataParse {

@@ -3,6 +3,7 @@ package com.artwebsandroid.UI;
 
 import com.artwebsandroid.UI.DataParseXML.DataDefault;
 import com.artwebsandroid.object.BinMap;
+import com.artwebsandroid.transmit.ITransmit;
 
 import android.app.Activity;
 import android.util.Log;

@@ -2,9 +2,9 @@ package com.artwebsandroid.UI.Form;
 
 import java.util.ArrayList;
 
-import com.artwebsandroid.UI.ITransmit;
 import com.artwebsandroid.UI.IUIFactory;
 import com.artwebsandroid.object.BinMap;
+import com.artwebsandroid.transmit.ITransmit;
 
 import android.app.Activity;
 import android.view.View.OnClickListener;

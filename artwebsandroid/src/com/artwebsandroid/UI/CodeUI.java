@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.artwebsandroid.object.BinMap;
+import com.artwebsandroid.transmit.ITransmit;
 
 public abstract class CodeUI extends Activity {
 	protected BinMap para=new BinMap();
