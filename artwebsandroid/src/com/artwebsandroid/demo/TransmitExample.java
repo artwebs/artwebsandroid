@@ -1,4 +1,4 @@
-package com.artwebsandroid.transmit;
+package com.artwebsandroid.demo;
 
 import java.io.InputStream;
 
@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.artwebsandroid.socket.ClientTCP;
+import com.artwebsandroid.transmit.ITransmit;
 
 public class TransmitExample implements ITransmit {
 	private String skip;

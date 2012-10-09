@@ -1,5 +1,7 @@
 package com.artwebsandroid.transmit;
 
+import com.artwebsandroid.demo.TransmitExample;
+
 import android.test.AndroidTestCase;
 import android.util.Log;
 

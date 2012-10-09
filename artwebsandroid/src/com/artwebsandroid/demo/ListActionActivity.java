@@ -1,10 +1,9 @@
-package com.artwebsandroid.UI.TestActivity;
+package com.artwebsandroid.demo;
 
 import java.util.HashMap;
 
 import com.artwebs.R;
 import com.artwebsandroid.UI.UIFactory;
-import com.artwebsandroid.transmit.TransmitExample;
 
 import android.app.Activity;
 import android.content.Intent;

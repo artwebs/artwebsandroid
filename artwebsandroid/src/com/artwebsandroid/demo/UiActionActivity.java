@@ -1,9 +1,8 @@
-package com.artwebsandroid.UI.TestActivity;
+package com.artwebsandroid.demo;
 
 import com.artwebsandroid.UI.UIFactory;
 import com.artwebsandroid.net.MobileNet;
 import com.artwebsandroid.socket.ClientTCP;
-import com.artwebsandroid.transmit.TransmitExample;
 
 import android.app.Activity;
 import android.content.Intent;

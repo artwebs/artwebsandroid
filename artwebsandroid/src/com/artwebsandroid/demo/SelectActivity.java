@@ -1,4 +1,4 @@
-package com.artwebsandroid.UI.Form;
+package com.artwebsandroid.demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 
 import com.artwebs.R;
 import com.artwebsandroid.UI.UIFactory;
-import com.artwebsandroid.transmit.TransmitExample;
 
 public class SelectActivity extends Activity {
 	private String conurl="";
