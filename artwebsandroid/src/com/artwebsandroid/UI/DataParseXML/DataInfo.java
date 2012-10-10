@@ -24,12 +24,12 @@ public class DataInfo extends AbsDataParse{
 
 			public void endElement(String namespaceURI, String localName, String qName)
 					throws SAXException {	
-				if(localName.equals("row"))newRow=false;
-				if(localName.equals("root"))DataInfo.this.para.put("rows", rows);
+				if(localName.equals("item"))newRow=false;
+				if(localName.equals("doc"))DataInfo.this.para.put("rows", rows);
 				
 				if (DataInfo.this.textElement.indexOf(localName)>=0)
 					DataInfo.this.para.put(localName, sb.toString());
-				else if(localName.equals("row"))
+				else if(localName.equals("item"))
 				{				
 					rows.put(newRow, localName, sb.toString());
 					newRow=true;

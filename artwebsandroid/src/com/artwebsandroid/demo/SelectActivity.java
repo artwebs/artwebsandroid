@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.artwebs.R;
+import com.artwebsandroid.R;
 import com.artwebsandroid.UI.UIFactory;
 
 public class SelectActivity extends Activity {

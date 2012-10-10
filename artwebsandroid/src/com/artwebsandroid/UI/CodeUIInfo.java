@@ -15,13 +15,13 @@ public class CodeUIInfo extends CodeUI {
 		 TextView text=new TextView(activity);
 		 if(id!=null)text.setId(id);
 		 Log.i("Info",this.para.getItem().toString());
-		 if("-1".equals(this.para.getValue("return").toString()))
+		 if("-1".equals(this.para.getValue("code").toString()))
 		 {
-			 text.setText(this.para.getValue("returnflag").toString());			 
+			 text.setText(this.para.getValue("message").toString());			 
 		 }
 		 else if(Integer.parseInt(this.para.getValue("count").toString())>0)
 		 {
-			 text.setText(((BinList)(this.para.getValue("rows"))).getValue(0, "row").toString());	
+			 text.setText(((BinList)(this.para.getValue("rows"))).getValue(0, "item").toString());	
 		 }
 		 else
 		 {

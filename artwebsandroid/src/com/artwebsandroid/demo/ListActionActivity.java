@@ -2,7 +2,6 @@ package com.artwebsandroid.demo;
 
 import java.util.HashMap;
 
-import com.artwebs.R;
 import com.artwebsandroid.UI.UIFactory;
 
 import android.app.Activity;
@@ -18,19 +17,24 @@ public class ListActionActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); 
-        LinearLayout main=(LinearLayout)getLayoutInflater().inflate(R.layout.binlist, null);
-        setContentView(main);
+//        LinearLayout main=(LinearLayout)getLayoutInflater().inflate(R.layout.binlist, null);
+//        setContentView(main);
 //        MobileNet net=new MobileNet(this);
-//        net.setEnable();       
+//        net.setEnable();   
+        
+        LinearLayout main=new LinearLayout(this);
+        main.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        main.setOrientation(LinearLayout.VERTICAL);
+        this.setContentView(main);
         
 		UIFactory factory=new UIFactory();
-		factory.setTransmit(new TransmitExample("test/"));
+		factory.setTransmit(C.transmit.transObj);
 		
 		factory.setOnItemClickListener(new OnItemClickListener() {			 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {	
-					String id=((HashMap)arg0.getAdapter().getItem(arg2)).get("second").toString();
+					String id=((HashMap)arg0.getAdapter().getItem(arg2)).get("id").toString();
 					Intent intent=new Intent();
 					intent.setClass(ListActionActivity.this, InfoActionActivity.class);
 					intent.putExtra("id", id);
@@ -40,7 +44,7 @@ public class ListActionActivity extends Activity {
 					
 				}				 
 			  });
-			View view=factory.dranView(this, "LHBSystem_1/index.php?mod=examplexml&act=glist&source=1");
+			View view=factory.dranView(this, String.format(C.transmit.list, 1,5));
 			view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.FILL_PARENT));
 			
 			main.addView(view);

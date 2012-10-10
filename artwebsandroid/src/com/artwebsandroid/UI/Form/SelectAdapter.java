@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.artwebs.R;
+import com.artwebsandroid.R;
 import com.artwebsandroid.object.BinList;
 
 public class SelectAdapter extends BaseAdapter {

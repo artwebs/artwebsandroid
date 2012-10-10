@@ -15,13 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.artwebs.R;
+import com.artwebsandroid.R;
 import com.artwebsandroid.object.BinList;
 import com.artwebsandroid.object.BinMap;
 
 public class CodeUIList extends CodeUI {
 	private BinList rows=new BinList();
-	private BaseAdapter adapter;
+	private BaseAdapter adapter=null;
 	
 	public void setAdapter(BaseAdapter adapter)
 	{
@@ -33,6 +33,7 @@ public class CodeUIList extends CodeUI {
 //		adapter=new ListAdapter(this.para,activity);	
 //		ListView listView=(ListView)activity.findViewById(id);
 		ListView listView=new ListView(activity);
+		if(adapter==null)this.setAdapter(new ListAdapter(this.para,activity));
 		listView.setAdapter(adapter);		
 		listView.setOnItemClickListener(this.onItemClickListener);
 		return listView;
@@ -79,7 +80,7 @@ public class CodeUIList extends CodeUI {
 				TextView firstView=(TextView)rowView.findViewById(R.id.first);
 				firstView.setMaxLines(2);
 				HashMap<Object, Object> row=(HashMap<Object, Object>)this.getItem(position);
-				firstView.setText(row.get("first").toString());
+				firstView.setText(row.get("text").toString());
 				rowViews.put(position, rowView);
 			}
 			return rowView;

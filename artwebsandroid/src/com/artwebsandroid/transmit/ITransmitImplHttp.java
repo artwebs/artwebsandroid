@@ -56,7 +56,7 @@ public class ITransmitImplHttp implements ITransmit {
 		String inStr=this.host+arg0+this.addCmd;
 		Log.i(tag,inStr);
 		String rs=client.download(inStr);
-		Log.i(tag,rs);
+		Log.i(tag,"rs=>"+rs);
 		return rs;
 	}
 	

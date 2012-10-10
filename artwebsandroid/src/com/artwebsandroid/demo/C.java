@@ -1,10 +1,21 @@
 package com.artwebsandroid.demo;
 
+import com.artwebsandroid.transmit.ITransmit;
+import com.artwebsandroid.transmit.ITransmitImplHttp;
+
 public final class C {
 	public final static class transmit	{
-		public final static String host="http://192.168.1.18:8100/";
-		public final static String skip="hribs/index.php?";
-		public static String addCmd="&key="+AgentApplication.loginKey;
+		public final static String host="http://psdemo.sinaapp.com/";
+		public final static String skip="";
+		public static String addCmd="";
+		public static ITransmit transObj=new ITransmitImplHttp(host,skip,addCmd);
+		
+		
+		
+		public final static String list="user/userAllList";
+		public final static String pagelist="user/userPageList/%s/%s";
+		public final static String info="user/userInfo/%s";
+		
 	}
 	
 }

@@ -34,8 +34,8 @@ public class InfoActionActivity extends Activity {
 	        main.setOrientation(LinearLayout.VERTICAL);
 	        this.setContentView(main);
 	        final UIFactory factory=new UIFactory();
-	        factory.setTransmit(new TransmitExample("test/"));
-			View view=factory.dranView(this,"LHBSystem_1/index.php?mod=examplexml&act=sissoninfo&"+var);
+	        factory.setTransmit(C.transmit.transObj);
+			View view=factory.dranView(this,String.format(C.transmit.info, var));
 			view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
 			main.addView(view);
 			
