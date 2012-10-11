@@ -19,6 +19,8 @@
             
         </activity>
         <activity android:name=".demo.ListActionActivity" android:label="列表">
+        </activity>
+        <activity android:name=".demo.PageListActionActivity" android:label="分页列表">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

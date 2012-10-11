@@ -9,10 +9,11 @@ import com.artwebsandroid.object.BinList;
 public class DataList extends AbsDataParse{
 	String tagName;
 	boolean newRow=false;
-	private BinList rows=new BinList();
+	protected BinList rows=new BinList();
 	
 	@Override
 	public void newInstance() {
+		super.setTextElement();
 		this.contentHandler=new DefaultHandler(){
 			private StringBuffer sb=new StringBuffer();
 			

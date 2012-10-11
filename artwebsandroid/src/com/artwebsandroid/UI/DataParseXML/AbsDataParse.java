@@ -15,6 +15,7 @@ import com.artwebsandroid.transmit.ITransmit;
 import com.artwebsandroid.utils.Utils;
 
 public abstract class AbsDataParse implements IDataParse {
+	private final static String tag="AbsDataParse";
 	protected BinMap para=new BinMap();
 	protected ContentHandler contentHandler =new DefaultHandler(){
 		private StringBuffer sb=new StringBuffer();
@@ -93,6 +94,7 @@ public abstract class AbsDataParse implements IDataParse {
 	{
 		this.newInstance();
 		Utils.parseXMLBySAX(this.dataStr, this.contentHandler);
+		Log.d(tag,this.para.getItem().toString());
 		return this.para;
 	}
 

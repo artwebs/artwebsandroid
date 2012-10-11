@@ -53,7 +53,7 @@ public class ITransmitImplHttp implements ITransmit {
 
 	@Override
 	public String download(String arg0) {
-		String inStr=this.host+arg0+this.addCmd;
+		String inStr=this.host+arg0.replace("#and", "&")+this.addCmd;
 		Log.i(tag,inStr);
 		String rs=client.download(inStr);
 		Log.i(tag,"rs=>"+rs);

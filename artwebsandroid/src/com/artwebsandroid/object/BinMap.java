@@ -180,16 +180,28 @@ public class BinMap {
 		}
 		return Flage;
 	}
+	
+	public void addend(BinMap adder)
+	{
+		adder.getItem().addAll(0,this.item);
+	}
 	public static void main(String[] args) {
 		BinMap pm=new BinMap();
 		pm.put("1", "a");
 		pm.put("2", "b");
 		pm.setValue("2", "c");
-		String rs="";
-		System.out.println(pm.getValue("3"));
-		if(pm.getValue("2")!=null)rs=(String)pm.getValue("3");
-		System.out.println(pm.getItem());
+//		String rs="";
+//		System.out.println(pm.getValue("3"));
+//		if(pm.getValue("2")!=null)rs=(String)pm.getValue("3");
+//		System.out.println(pm.getItem());
 		
+		BinMap adder=new BinMap();
+		adder.put("3", "d");
+		adder.put("4", "e");
+		adder.put("5", "f");
+		
+		pm.addend(adder);
+		System.out.println(pm.getItem());
 		
 
 	}

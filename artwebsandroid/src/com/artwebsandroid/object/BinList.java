@@ -173,6 +173,11 @@ public class BinList {
 		return Flage;
 	}
 	
+	public void addend(BinList adder)
+	{
+		this.item.addAll(adder.getItem());
+	}
+	
 	public BinList clone(){
 		BinList rsList=new BinList();
 		rsList.setItem((ArrayList)item.clone());
