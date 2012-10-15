@@ -1,20 +1,16 @@
 package com.artwebsandroid.UI;
 
+import com.artwebsandroid.UI.DataParseXML.DataPagelist;
 import com.artwebsandroid.object.BinList;
 import com.artwebsandroid.object.BinMap;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -48,10 +44,11 @@ public class CodeUIPagelist extends CodeUIList implements OnScrollListener {
 	
 	private void loadMoreData()
 	{
-		if(next==null)next=this.para.getValue("next").toString();
-		this.uiFactory.setTransmit(transmit);
-        this.uiFactory.parseData(next);        
-        BinMap para=this.uiFactory.getMap();
+		if(next==null)next=this.para.getValue("next").toString();        
+        IDataParse parseObj=new DataPagelist();
+		String outStr=this.transmit.download(next);
+        parseObj.setDataStr(outStr);
+        BinMap para=parseObj.parse();
         
         if(!para.getValue("next").equals(next))
         {
