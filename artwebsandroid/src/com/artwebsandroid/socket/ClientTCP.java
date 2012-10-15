@@ -13,7 +13,7 @@ import android.os.Handler;
 import android.util.Log;
 
 public class ClientTCP extends Client {
-	private Socket socket;
+	protected Socket socket;
 	
 	public ClientTCP(){}
 	

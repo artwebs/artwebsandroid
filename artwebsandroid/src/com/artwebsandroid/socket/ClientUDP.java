@@ -9,8 +9,8 @@ import android.os.Handler;
 import android.util.Log;
 
 public class ClientUDP extends Client {
-	private DatagramPacket packet;
-	private DatagramSocket socket;
+	protected DatagramPacket packet;
+	protected DatagramSocket socket;
 	@Override
 	public void getConnetion() {
 		if(packet!=null)	
