@@ -34,6 +34,8 @@ public class CodeUIForm extends CodeUI {
 	{
 		if("1".equals(this.para.getValue("code").toString()))
 		{
+			if(para.containsKey("title"))
+				activity.setTitle(this.para.getValue("title").toString());
 			BinList rows=(BinList)(this.para.getValue("rows"));
 			for(int i=0;i<rows.size();i++)
 			{
@@ -44,22 +46,37 @@ public class CodeUIForm extends CodeUI {
 				Class<CodeUI> objclass=null;
 				AbsControl ctlobj=null;
 				String type=ctlpara.getValue("CONMETHOD").toString().toLowerCase();
-				try {
-					objclass=(Class<CodeUI>)Class.forName("com.artwebsandroid.UI.Form.Control"+type.substring(0,1).toUpperCase()+type.substring(1));
-					Constructor constructor = objclass.getConstructor(TableLayout.class,Activity.class,BinMap.class); 
-					ctlobj=(AbsControl)constructor.newInstance(this.formLayout,activity,ctlpara);
-					ctlobj.setTransmit(this.transmit);
-					ctlobj.setUiFactory(this.uiFactory);
-					ctlobj.setCtlList(ctlList);
-					ctlobj.create();
-					ctlobj.display();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}finally{
-					
-				}
+				ctlobj=this.getControlObj(type, activity, ctlpara);
+				ctlobj.setTransmit(this.transmit);
+				ctlobj.setUiFactory(this.uiFactory);
+				ctlobj.setCtlList(ctlList);
+				ctlobj.create();
+				ctlobj.display();
 			}
 		}
+	}
+	
+	private AbsControl getControlObj(String type,Activity activity, BinMap para)
+	{
+		Class<CodeUI> objclass=null;
+		AbsControl ctlobj=null;
+		try{
+			objclass=(Class<CodeUI>)Class.forName("com.artwebsandroid.UI.Form.Control"+type.substring(0,1).toUpperCase()+type.substring(1));
+			Constructor constructor = objclass.getConstructor(TableLayout.class,Activity.class,BinMap.class); 
+			ctlobj=(AbsControl)constructor.newInstance(this.formLayout,activity,para);
+		}catch(Exception e)
+		{
+			try {
+				objclass=(Class<CodeUI>)Class.forName("com.artwebsandroid.UI.Form.ControlTextbox");
+				Constructor constructor = objclass.getConstructor(TableLayout.class,Activity.class,BinMap.class); 
+				ctlobj=(AbsControl)constructor.newInstance(this.formLayout,activity,para);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}			
+		}		
+		return ctlobj;
+		
 	}
 
 	

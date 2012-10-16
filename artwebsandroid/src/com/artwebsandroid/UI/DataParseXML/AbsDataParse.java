@@ -80,6 +80,8 @@ public abstract class AbsDataParse implements IDataParse {
 		textElement.add("code");
 		textElement.add("message");
 		textElement.add("type");
+		textElement.add("rsid");
+		textElement.add("rstext");
 	}
 	
 	public void appendTextElement(String name)

@@ -20,6 +20,7 @@ public class DataForm extends AbsDataParse{
 	@Override
 	public void newInstance() {
 		super.setTextElement();
+		this.appendTextElement("title");
 		this.rowElement.add("NAME");
 		this.rowElement.add("CNAME");
 		this.rowElement.add("VALUE");

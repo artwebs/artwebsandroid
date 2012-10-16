@@ -11,7 +11,7 @@ import com.artwebsandroid.object.BinMap;
 import com.artwebsandroid.utils.AndroidUtils;
 
 public class ControlTextbox extends AbsControl {
-	private EditText editText;
+	protected EditText editText;
 	public ControlTextbox(TableLayout layout, Activity activity, BinMap para) {
 		super(layout, activity, para);
 		// TODO Auto-generated constructor stub
@@ -25,7 +25,7 @@ public class ControlTextbox extends AbsControl {
 		textView.setText(this.para.getValue("CNAME").toString());
 		tbrow.addView(textView);
 		editText=new EditText(activity);
-		editText.setText(this.para.getValue("VALUE").toString());
+		editText.setText(this.para.getValue("DICVALUE").toString());
 		
 		editText.setSingleLine();
 		if(!this.para.containsKey("READONLY")&&!"".equals(this.para.getValue("VALUE")))

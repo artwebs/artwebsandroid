@@ -3,6 +3,7 @@ package com.artwebsandroid.UI.Form;
 import java.util.ArrayList;
 
 import com.artwebsandroid.UI.UIFactory;
+import com.artwebsandroid.control.CircleAsyncTask;
 import com.artwebsandroid.object.BinMap;
 import com.artwebsandroid.utils.Utils;
 
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 public class ControlSubmit extends AbsControl {
 	private Button button;
+	protected CircleAsyncTask syncTask;
 	
 	public ControlSubmit(TableLayout layout, Activity activity, BinMap para) {
 		super(layout, activity, para);
@@ -44,7 +46,7 @@ public class ControlSubmit extends AbsControl {
 		row.addView(button);
 		
 		TableRow.LayoutParams rowvar=new TableRow.LayoutParams(row.getLayoutParams());
-		rowvar.span=2;
+		rowvar.span=3;
 		row.setLayoutParams(rowvar);
 		
 		tbrow.addView(row);		
@@ -55,25 +57,37 @@ public class ControlSubmit extends AbsControl {
 	{
 		@Override
 		public void onClick(View v) {
-			StringBuilder sb=new StringBuilder();
-			sb.append(ControlSubmit.this.para.getValue("CONURL").toString().replace("#and", "&"));
-			ArrayList<AbsControl> ctls=ControlSubmit.this.ctlList;
+			syncTask=new CircleAsyncTask(ControlSubmit.this.activity){
+
+				@Override
+				public BinMap doRun() {
+					StringBuilder sb=new StringBuilder();
+					sb.append(ControlSubmit.this.para.getValue("CONURL").toString().replace("#and", "&"));
+					ArrayList<AbsControl> ctls=ControlSubmit.this.ctlList;
+					
+					for(int i=0;i<ControlSubmit.this.ctlList.size();i++)
+					{
+						sb.append("&");
+						sb.append(ctls.get(i).getStrName());
+						sb.append("=");
+						sb.append(Utils.UrlEncode(ctls.get(i).getStrValue(), "utf-8"));
+					}
+					
+					UIFactory factory=new UIFactory();
+					factory.setTransmit(ControlSubmit.this.transmit);
+					factory.dranView(ControlSubmit.this.activity,sb.toString());
+					return factory.getMap();
+				}
+				
+				@Override
+				public void doUpdate(BinMap para)
+				{
+					Toast toast=Toast.makeText(ControlSubmit.this.activity, para.getValue("message").toString(), Toast.LENGTH_LONG);
+					toast.show();
+				}
+				
+			};
 			
-			for(int i=0;i<ControlSubmit.this.ctlList.size();i++)
-			{
-				sb.append("&");
-				sb.append(ctls.get(i).getStrName());
-				sb.append("=");
-				sb.append(Utils.UrlEncode(ctls.get(i).getStrValue(), "utf-8"));
-			}
-			
-			UIFactory factory=new UIFactory();
-			factory.setTransmit(ControlSubmit.this.transmit);
-			factory.dranView(ControlSubmit.this.activity,sb.toString());
-			
-			
-			Toast toast=Toast.makeText(ControlSubmit.this.activity, factory.getMap().getValue("message").toString(), Toast.LENGTH_LONG);
-			toast.show();
 			
 		}
 		
