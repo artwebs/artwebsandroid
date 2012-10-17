@@ -57,7 +57,7 @@ public class ControlSubmit extends AbsControl {
 	{
 		@Override
 		public void onClick(View v) {
-			syncTask=new CircleAsyncTask(ControlSubmit.this.activity){
+			syncTask=new CircleAsyncTask(ControlSubmit.this.activity,""){
 
 				@Override
 				public BinMap doRun() {
@@ -84,10 +84,11 @@ public class ControlSubmit extends AbsControl {
 				{
 					Toast toast=Toast.makeText(ControlSubmit.this.activity, para.getValue("message").toString(), Toast.LENGTH_LONG);
 					toast.show();
+					this.getProgressDialog().dismiss();
 				}
 				
 			};
-			
+			syncTask.start();
 			
 		}
 		
