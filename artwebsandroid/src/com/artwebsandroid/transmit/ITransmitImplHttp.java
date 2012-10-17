@@ -48,7 +48,9 @@ public class ITransmitImplHttp implements ITransmit {
 
 	@Override
 	public InputStream downStream(String arg0) {	
-		return null;
+		String inStr=this.host+arg0;
+		Log.i(tag,inStr);
+		return client.getInputStreamFromUrl(inStr);
 	}
 
 	@Override

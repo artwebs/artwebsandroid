@@ -126,11 +126,16 @@ public class HttpDownloader {
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
-	public InputStream getInputStreamFromUrl(String urlStr)
-			throws MalformedURLException, IOException {
-		url = new URL(urlStr);
-		HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-		InputStream inputStream = urlConn.getInputStream();
+	public InputStream getInputStreamFromUrl(String urlStr){
+		InputStream inputStream=null;
+		try {
+			url = new URL(urlStr);
+			HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+			inputStream = urlConn.getInputStream();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		return inputStream;
 	}
 }
