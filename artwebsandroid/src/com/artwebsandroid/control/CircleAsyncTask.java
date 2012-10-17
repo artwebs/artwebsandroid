@@ -31,7 +31,7 @@ public abstract class CircleAsyncTask extends BaseAsyncTask {
 	
 	public void start()
 	{
-		this.hide();
+		this.show();
 		this.task.execute();
 	}
 
