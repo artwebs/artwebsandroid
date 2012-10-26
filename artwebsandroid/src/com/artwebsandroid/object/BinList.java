@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class BinList {
+public class BinList extends IBinObject {
 	private ArrayList item=new ArrayList();
 	public void setItem(ArrayList item) {
 		this.item = item;

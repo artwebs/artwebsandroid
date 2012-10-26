@@ -1,5 +1,7 @@
 package com.artwebsandroid.object;
 
-public class IBinObject {
+import java.io.Serializable;
+
+public abstract class IBinObject implements Serializable {
 
 }

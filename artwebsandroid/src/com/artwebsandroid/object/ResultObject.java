@@ -1,6 +1,6 @@
 package com.artwebsandroid.object;
 
-public class ResultObject {
+public class ResultObject extends IBinObject {
 	private String code;
 	private String message;
 	private BinMap args;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class BinMap {
+public class BinMap extends IBinObject {
 	private ArrayList item=new ArrayList();
 	public ArrayList getItem() {
 		return item;
