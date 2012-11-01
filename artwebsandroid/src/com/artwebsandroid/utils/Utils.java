@@ -19,7 +19,7 @@ public class Utils {
 		try {
 			reader = factory.newSAXParser().getXMLReader();
 			reader.setContentHandler(handler);
-			//¿ªÊ¼½âÎöÎÄ¼ş
+			//å¼€å§‹è§£ææ–‡ä»¶
 			reader.parse(new InputSource(new StringReader(xmlStr)));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

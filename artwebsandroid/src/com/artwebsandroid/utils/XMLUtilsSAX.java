@@ -20,7 +20,7 @@ public class XMLUtilsSAX extends DefaultHandler{
 			String qName, Attributes attr) throws SAXException {
 		tagName = localName;
 		if (localName.equals("worker")) {
-			//»ñÈ¡±êÇ©µÄÈ«²¿ÊôĞÔ
+			//è·å–æ ‡ç­¾çš„å…¨éƒ¨å±æ€§
 			for (int i = 0; i < attr.getLength(); i++) {
 				System.out.println(attr.getLocalName(i) + "=" + attr.getValue(i));
 			}
@@ -29,7 +29,7 @@ public class XMLUtilsSAX extends DefaultHandler{
 
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
-		//ÔÚworkr±êÇ©½âÎöÍêÖ®ºó£¬»á´òÓ¡³öËùÓĞµÃµ½µÄÊı¾İ
+		//åœ¨workræ ‡ç­¾è§£æå®Œä¹‹åï¼Œä¼šæ‰“å°å‡ºæ‰€æœ‰å¾—åˆ°çš„æ•°æ®
 		tagName = "";
 		if (localName.equals("worker")) {
 			this.printout();

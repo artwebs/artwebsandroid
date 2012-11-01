@@ -5,7 +5,7 @@ import java.util.*;
 public class CnToSpell {
 
     private static Map<String, Integer> spellMap = null;   
-    //´æ·ÅÉúÆ§×ÖºÍÆäÆ´ÒôµÄMap   
+    //å­˜æ”¾ç”Ÿåƒ»å­—å’Œå…¶æ‹¼éŸ³çš„Map   
     private static Map<Character, String> uncommonWordsMap = null;   
   
     static {   
@@ -20,14 +20,14 @@ public class CnToSpell {
     private CnToSpell() {}   
   
     /**  
-     * ³õÊ¼»¯  
+     * åˆå§‹åŒ–  
      */  
     private static void initialize() {   
-        spellMap.put("¡¯a", -20319);   
-        spellMap.put("¡¯ai", -20317);   
-        spellMap.put("¡¯an", -20304);   
-        spellMap.put("¡¯ang", -20295);   
-        spellMap.put("¡¯ao", -20292);   
+        spellMap.put("â€™a", -20319);   
+        spellMap.put("â€™ai", -20317);   
+        spellMap.put("â€™an", -20304);   
+        spellMap.put("â€™ang", -20295);   
+        spellMap.put("â€™ao", -20292);   
         spellMap.put("ba", -20283);   
         spellMap.put("bai", -20265);   
         spellMap.put("ban", -20257);   
@@ -97,9 +97,9 @@ public class CnToSpell {
         spellMap.put("dui", -18735);   
         spellMap.put("dun", -18731);   
         spellMap.put("duo", -18722);   
-        spellMap.put("¡¯e", -18710);   
-        spellMap.put("¡¯en", -18697);   
-        spellMap.put("¡¯er", -18696);   
+        spellMap.put("â€™e", -18710);   
+        spellMap.put("â€™en", -18697);   
+        spellMap.put("â€™er", -18696);   
         spellMap.put("fa", -18526);   
         spellMap.put("fan", -18518);   
         spellMap.put("fang", -18501);   
@@ -246,8 +246,8 @@ public class CnToSpell {
         spellMap.put("nuan", -14929);   
         spellMap.put("nue", -14928);   
         spellMap.put("nuo", -14926);   
-        spellMap.put("¡¯o", -14922);   
-        spellMap.put("¡¯ou", -14921);   
+        spellMap.put("â€™o", -14922);   
+        spellMap.put("â€™ou", -14921);   
         spellMap.put("pa", -14914);   
         spellMap.put("pai", -14908);   
         spellMap.put("pan", -14902);   
@@ -422,179 +422,179 @@ public class CnToSpell {
     }   
   
     /**  
-     * Ìí¼ÓÉúÆ§×Ö  
-     * @param cnWord ÉúÆ§×Ö  
-     * @param spell ÉúÆ§×ÖµÄÆ´Òô, Èç¹ûÆ´ÒôÒÔ a, o ,e ¿ªÍ·£¬ Çë½«¿ªÍ··Ö±ğ¸ÄÎª ¡¯a, ¡¯o, ¡¯e£¬ Èç£º°²(¡¯an)  
+     * æ·»åŠ ç”Ÿåƒ»å­—  
+     * @param cnWord ç”Ÿåƒ»å­—  
+     * @param spell ç”Ÿåƒ»å­—çš„æ‹¼éŸ³, å¦‚æœæ‹¼éŸ³ä»¥ a, o ,e å¼€å¤´ï¼Œ è¯·å°†å¼€å¤´åˆ†åˆ«æ”¹ä¸º â€™a, â€™o, â€™eï¼Œ å¦‚ï¼šå®‰(â€™an)  
      */  
     public static void putUncommonWord(char cnWord, String spell){   
         uncommonWordsMap.put(cnWord, spell);   
     }   
        
     /**  
-     * ³õÊ¼»¯ÉúÆ§×Ö  
+     * åˆå§‹åŒ–ç”Ÿåƒ»å­—  
      */  
     private static void initUncommonWords(){   
-        putUncommonWord('ŠS', "ao");   
-        putUncommonWord('å±', "ba");   
-        putUncommonWord(' Ä', "ben");   
-        putUncommonWord('ªY', "biao");   
-        putUncommonWord('óT', "biao");   
-        putUncommonWord('è¾', "cha");   
-        putUncommonWord('—²', "chen");   
-        putUncommonWord('¬b', "cheng");   
-        putUncommonWord('÷Î', "chi");   
-        putUncommonWord('Ïx', "chong");   
-        putUncommonWord('Áˆ', "chong");   
-        putUncommonWord('û›', "cu");   
-        putUncommonWord('ë¥', "cui");   
-        putUncommonWord('•P', "fang");   
-        putUncommonWord('ãã', "feng");   
-        putUncommonWord('«v', "gou");   
-        putUncommonWord('ìÊ', "han");   
-        putUncommonWord('¬H', "han");   
-        putUncommonWord('êÏ', "han");   
-        putUncommonWord('›¿', "han");   
-        putUncommonWord('ôç', "he");   
-        putUncommonWord('ÂG', "he");   
-        putUncommonWord('‹Ö', "huan");   
-        putUncommonWord('Á™', "hui");   
-        putUncommonWord('„Â', "jie");   
-        putUncommonWord('­Z', "jing");   
-        putUncommonWord('Õe', "jing");   
-        putUncommonWord('¸‚', "jing");   
-        putUncommonWord('Ÿj', "kun");   
-        putUncommonWord('çû', "kun");   
-        putUncommonWord('ûd', "kun");   
-        putUncommonWord('æê', "li");   
-        putUncommonWord('öÌ', "liu");   
-        putUncommonWord('‹ ', "man");   
-        putUncommonWord('˜', "mei");   
-        putUncommonWord('íµ', "miao");   
-        putUncommonWord('‹R', "nan");   
-        putUncommonWord('•¨', "nan");   
-        putUncommonWord('å¸', "ning");   
-        putUncommonWord('Œ„', "ning");   
-        putUncommonWord('’ö', "pa");   
-        putUncommonWord('«n', "pi");   
-        putUncommonWord('›F', "qian");   
-        putUncommonWord('óV', "qin");   
-        putUncommonWord('®_', "qing");   
-        putUncommonWord('•¦', "qing");   
-        putUncommonWord('ƒõ', "qing");   
-        putUncommonWord('àW', "qing");   
-        putUncommonWord('ìm', "qing");   
-        putUncommonWord('í¨', "que");   
-        putUncommonWord('‘U', "que");   
-        putUncommonWord('¬Œ', "rong");   
-        putUncommonWord('«|', "shen");   
-        putUncommonWord('Œæ', "shen");   
-        putUncommonWord('Ÿö', "shen");   
-        putUncommonWord('Ÿ„', "sheng");   
-        putUncommonWord('«{', "sheng");   
-        putUncommonWord('êÉ', "sheng");   
-        putUncommonWord('•N', "sheng");   
-        putUncommonWord('íò', "sheng");   
-        putUncommonWord('œ¤', "sheng");   
-        putUncommonWord('ê’', "sheng");   
-        putUncommonWord('¸i', "sheng");   
-        putUncommonWord('¬]', "sheng");   
-        putUncommonWord('œ›', "shi");   
-        putUncommonWord('®d', "su");   
-        putUncommonWord('|', "tao");   
-        putUncommonWord('¬™', "tian");   
-        putUncommonWord('ÙÚ', "tong");   
-        putUncommonWord('ù', "wei");   
-        putUncommonWord('ì¿', "wei");   
-        putUncommonWord('çâ', "wei");   
-        putUncommonWord('›^', "wu");   
-        putUncommonWord('Úù', "wu");   
-        putUncommonWord('•„', "xi");   
-        putUncommonWord('î‡', "xian");   
-        putUncommonWord('Šë', "xiao");   
-        putUncommonWord('Ì', "xiao");   
-        putUncommonWord('óã', "xiao");   
-        putUncommonWord('ÛÄ', "xie");   
-        putUncommonWord('ĞÃ', "xin");   
-        putUncommonWord('âÓ', "xiu");   
-        putUncommonWord('‹€', "xu");   
-        putUncommonWord('«', "xu");   
-        putUncommonWord('•d', "xu");   
-        putUncommonWord('Ÿ@', "xuan");   
-        putUncommonWord('ìÓ', "xuan");   
-        putUncommonWord('ÂQ', "xuan");   
-        putUncommonWord('•R', "xuan");   
-        putUncommonWord('êÑ', "xuan");   
-        putUncommonWord('æ«', "ya");   
-        putUncommonWord('çü', "yan");   
-        putUncommonWord('åû', "yan");   
-        putUncommonWord('ìÍ', "yan");   
-        putUncommonWord('«`', "yang");   
-        putUncommonWord('•D', "yang");   
-        putUncommonWord('ïr', "yang");   
-        putUncommonWord('ˆ', "yao");   
-        putUncommonWord('i', "yao");   
-        putUncommonWord('âù', "yi");   
-        putUncommonWord(' D', "yi");   
-        putUncommonWord('•”', "yi");   
-        putUncommonWord('µt', "yi");   
-        putUncommonWord('çø', "ying");   
-        putUncommonWord('Ÿ–', "ying");   
-        putUncommonWord('‹k', "ying");   
-        putUncommonWord('•£', "ying");   
-        putUncommonWord('äŞ', "ying");   
-        putUncommonWord('éA', "ying");   
-        putUncommonWord('İ¯', "you");   
-        putUncommonWord('êÅ', "yu");   
-        putUncommonWord('›V', "yun");   
-        putUncommonWord('•†', "zhe");   
-        putUncommonWord('†´', "zhe");   
-        putUncommonWord('Å]', "zhi");   
+        putUncommonWord('å¥¡', "ao");   
+        putUncommonWord('ç', "ba");   
+        putUncommonWord('çŠ‡', "ben");   
+        putUncommonWord('çŒ‹', "biao");   
+        putUncommonWord('éª‰', "biao");   
+        putUncommonWord('æˆ', "cha");   
+        putUncommonWord('æ£½', "chen");   
+        putUncommonWord('ç¤', "cheng");   
+        putUncommonWord('é­‘', "chi");   
+        putUncommonWord('èŸ²', "chong");   
+        putUncommonWord('ç¿€', "chong");   
+        putUncommonWord('éº¤', "cu");   
+        putUncommonWord('æ¯³', "cui");   
+        putUncommonWord('æ˜‰', "fang");   
+        putUncommonWord('æ²£', "feng");   
+        putUncommonWord('ç½', "gou");   
+        putUncommonWord('ç„“', "han");   
+        putUncommonWord('ç€', "han");   
+        putUncommonWord('æ™—', "han");   
+        putUncommonWord('æµ›', "han");   
+        putUncommonWord('ç¿®', "he");   
+        putUncommonWord('ç¿¯', "he");   
+        putUncommonWord('å¬›', "huan");   
+        putUncommonWord('ç¿™', "hui");   
+        putUncommonWord('åŠ¼', "jie");   
+        putUncommonWord('ç’Ÿ', "jing");   
+        putUncommonWord('èª©', "jing");   
+        putUncommonWord('ç«¶', "jing");   
+        putUncommonWord('ç„œ', "kun");   
+        putUncommonWord('ç¨', "kun");   
+        putUncommonWord('é¹', "kun");   
+        putUncommonWord('éªŠ', "li");   
+        putUncommonWord('é', "liu");   
+        putUncommonWord('å«š', "man");   
+        putUncommonWord('æ§‘', "mei");   
+        putUncommonWord('æ·¼', "miao");   
+        putUncommonWord('å©»', "nan");   
+        putUncommonWord('æš”', "nan");   
+        putUncommonWord('ç”¯', "ning");   
+        putUncommonWord('å¯—', "ning");   
+        putUncommonWord('æ±', "pa");   
+        putUncommonWord('ç­', "pi");   
+        putUncommonWord('æ±§', "qian");   
+        putUncommonWord('éª', "qin");   
+        putUncommonWord('ç” ', "qing");   
+        putUncommonWord('æš’', "qing");   
+        putUncommonWord('å‡Š', "qing");   
+        putUncommonWord('éƒ¬', "qing");   
+        putUncommonWord('é˜', "qing");   
+        putUncommonWord('æ‚«', "que");   
+        putUncommonWord('æ…¤', "que");   
+        putUncommonWord('ç‘¢', "rong");   
+        putUncommonWord('ç…', "shen");   
+        putUncommonWord('å±¾', "shen");   
+        putUncommonWord('ç‡Š', "shen");   
+        putUncommonWord('ç„º', "sheng");   
+        putUncommonWord('ç„', "sheng");   
+        putUncommonWord('æ™Ÿ', "sheng");   
+        putUncommonWord('æ˜‡', "sheng");   
+        putUncommonWord('çœš', "sheng");   
+        putUncommonWord('æ¹¦', "sheng");   
+        putUncommonWord('é™¹', "sheng");   
+        putUncommonWord('ç«”', "sheng");   
+        putUncommonWord('ç', "sheng");   
+        putUncommonWord('æ¹œ', "shi");   
+        putUncommonWord('ç”¦', "su");   
+        putUncommonWord('å¼¢', "tao");   
+        putUncommonWord('ç‘±', "tian");   
+        putUncommonWord('ä»', "tong");   
+        putUncommonWord('çƒ“', "wei");   
+        putUncommonWord('ç‚œ', "wei");   
+        putUncommonWord('ç®', "wei");   
+        putUncommonWord('æ²•', "wu");   
+        putUncommonWord('é‚¬', "wu");   
+        putUncommonWord('æ™', "xi");   
+        putUncommonWord('é¡•', "xian");   
+        putUncommonWord('å©‹', "xiao");   
+        putUncommonWord('è™“', "xiao");   
+        putUncommonWord('ç­±', "xiao");   
+        putUncommonWord('å‹°', "xie");   
+        putUncommonWord('å¿»', "xin");   
+        putUncommonWord('åº¥', "xiu");   
+        putUncommonWord('åª­', "xu");   
+        putUncommonWord('ç', "xu");   
+        putUncommonWord('æ˜«', "xu");   
+        putUncommonWord('çƒœ', "xuan");   
+        putUncommonWord('ç…Š', "xuan");   
+        putUncommonWord('ç¿¾', "xuan");   
+        putUncommonWord('æ˜', "xuan");   
+        putUncommonWord('æš„', "xuan");   
+        putUncommonWord('å¨…', "ya");   
+        putUncommonWord('ç°', "yan");   
+        putUncommonWord('å¦', "yan");   
+        putUncommonWord('ç„±', "yan");   
+        putUncommonWord('çš', "yang");   
+        putUncommonWord('æ—¸', "yang");   
+        putUncommonWord('é£', "yang");   
+        putUncommonWord('åš', "yao");   
+        putUncommonWord('å³£', "yao");   
+        putUncommonWord('æ€¡', "yi");   
+        putUncommonWord('ç‡š', "yi");   
+        putUncommonWord('æ™¹', "yi");   
+        putUncommonWord('ç¥', "yi");   
+        putUncommonWord('ç‘›', "ying");   
+        putUncommonWord('ç…', "ying");   
+        putUncommonWord('åª–', "ying");   
+        putUncommonWord('æš', "ying");   
+        putUncommonWord('æ»¢', "ying");   
+        putUncommonWord('é”³', "ying");   
+        putUncommonWord('èœ', "you");   
+        putUncommonWord('æ˜±', "yu");   
+        putUncommonWord('æ²„', "yun");   
+        putUncommonWord('æ™¢', "zhe");   
+        putUncommonWord('å–†', "zhe");   
+        putUncommonWord('è‡¸', "zhi");   
     }   
        
     /**  
-     * »ñµÃµ¥¸öºº×ÖµÄAscii.  
-     * @param cn ºº×Ö×Ö·û  
-     * @return ºº×Ö¶ÔÓ¦µÄ ascii, ´íÎóÊ±·µ»Ø 0  
+     * è·å¾—å•ä¸ªæ±‰å­—çš„Ascii.  
+     * @param cn æ±‰å­—å­—ç¬¦  
+     * @return æ±‰å­—å¯¹åº”çš„ ascii, é”™è¯¯æ—¶è¿”å› 0  
      */  
     public static int getCnAscii(char cn) {   
         byte[] bytes = (String.valueOf(cn)).getBytes();   
-        if (bytes == null || bytes.length == 0|| bytes.length > 2 ) { // ´íÎó   
+        if (bytes == null || bytes.length == 0|| bytes.length > 2 ) { // é”™è¯¯   
             return 0;   
         }   
-        if (bytes.length == 1) { // Ó¢ÎÄ×Ö·û   
+        if (bytes.length == 1) { // è‹±æ–‡å­—ç¬¦   
             return bytes[0];   
         }   
-        if (bytes.length == 2) { // ÖĞÎÄ×Ö·û   
+        if (bytes.length == 2) { // ä¸­æ–‡å­—ç¬¦   
             int hightByte = 256 + bytes[0];   
             int lowByte = 256 + bytes[1];   
-            return (256 * hightByte + lowByte) - 256 * 256; //·µ»Ø ASCII   
+            return (256 * hightByte + lowByte) - 256 * 256; //è¿”å› ASCII   
         }   
-        return 0; // ´íÎó   
+        return 0; // é”™è¯¯   
     }   
   
     /**  
-     * ¸ù¾İASCIIÂëµ½SpellMapÖĞ²éÕÒ¶ÔÓ¦µÄÆ´Òô  
+     * æ ¹æ®ASCIIç åˆ°SpellMapä¸­æŸ¥æ‰¾å¯¹åº”çš„æ‹¼éŸ³  
      * @param ascii ASCII  
-     * @return ascii¶ÔÓ¦µÄÆ´Òô, Èç¹ûascii¶ÔÓ¦µÄ×Ö·ûÎªµ¥×Ö·û£¬Ôò·µ»Ø¶ÔÓ¦µÄµ¥×Ö·û, Èç¹û²»ÊÇµ¥×Ö·ûÇÒÔÚ spellMap ÖĞÃ»ÕÒµ½¶ÔÓ¦µÄÆ´Òô£¬Ôò·µ»Ø¿Õ×Ö·û´®(""),   
+     * @return asciiå¯¹åº”çš„æ‹¼éŸ³, å¦‚æœasciiå¯¹åº”çš„å­—ç¬¦ä¸ºå•å­—ç¬¦ï¼Œåˆ™è¿”å›å¯¹åº”çš„å•å­—ç¬¦, å¦‚æœä¸æ˜¯å•å­—ç¬¦ä¸”åœ¨ spellMap ä¸­æ²¡æ‰¾åˆ°å¯¹åº”çš„æ‹¼éŸ³ï¼Œåˆ™è¿”å›ç©ºå­—ç¬¦ä¸²(""),   
      */  
     public static String getSpellByAscii(int ascii) {   
-        if (ascii > 0 && ascii < 160) { // µ¥×Ö·û   
+        if (ascii > 0 && ascii < 160) { // å•å­—ç¬¦   
             return String.valueOf((char) ascii);   
         }   
   
-        if (ascii < -20319 || ascii > -10247) { // ²»ÖªµÀµÄ×Ö·û   
+        if (ascii < -20319 || ascii > -10247) { // ä¸çŸ¥é“çš„å­—ç¬¦   
             return "";   
         }   
   
         String spell = null; //key   
         Integer asciiRang; //value   
-        String spellPrevious = null; //ÓÃÀ´±£´æÉÏ´ÎÂÖÑ­»·µÄkey   
-        int asciiRangPrevious = -20319; //ÓÃÀ´±£´æÉÏÒ»´ÎÑ­»·µÄvalue   
+        String spellPrevious = null; //ç”¨æ¥ä¿å­˜ä¸Šæ¬¡è½®å¾ªç¯çš„key   
+        int asciiRangPrevious = -20319; //ç”¨æ¥ä¿å­˜ä¸Šä¸€æ¬¡å¾ªç¯çš„value   
         for (Iterator it = spellMap.keySet().iterator(); it.hasNext();) {   
-            spell = (String) it.next(); //Æ´Òô   
-            asciiRang = spellMap.get(spell); //Æ´ÒôµÄASCII   
+            spell = (String) it.next(); //æ‹¼éŸ³   
+            asciiRang = spellMap.get(spell); //æ‹¼éŸ³çš„ASCII   
             if(asciiRang != null){   
-                if (ascii >= asciiRangPrevious && ascii < asciiRang) { // Çø¼äÕÒµ½, ·µ»Ø¶ÔÓ¦µÄÆ´Òô   
+                if (ascii >= asciiRangPrevious && ascii < asciiRang) { // åŒºé—´æ‰¾åˆ°, è¿”å›å¯¹åº”çš„æ‹¼éŸ³   
                     return (spellPrevious == null) ? spell : spellPrevious;   
                 } else {   
                     spellPrevious = spell;   
@@ -606,10 +606,10 @@ public class CnToSpell {
     }   
   
     /**  
-     * »ñÈ¡×Ö·û´®µÄÈ«Æ´»òÊ×Æ´,ÊÇºº×ÖÔò×ª»¯Îª¶ÔÓ¦µÄÆ´Òô»òÆ´ÒôÊ××ÖÄ¸,ÆäËü×Ö·û²»½øĞĞ×ª»»  
-     * @param cnStr Òª»ñÈ¡È«Æ´»òÊ×Æ´µÄ×Ö·û´®  
-     * @param onlyFirstSpell ÊÇ·ñÖ»»ñÈ¡Ê×Æ´£¬ÎªtrueÊ±£¬Ö»»ñÈ¡Ê×Æ´£¬ÎªfalseÊ±£¬»ñÈ¡È«Æ´  
-     * @return String cnStrµÄÈ«Æ´»òÊ×Æ´, Èç¹û cnStr Îªnull Ê±, ·µ»Ø""  
+     * è·å–å­—ç¬¦ä¸²çš„å…¨æ‹¼æˆ–é¦–æ‹¼,æ˜¯æ±‰å­—åˆ™è½¬åŒ–ä¸ºå¯¹åº”çš„æ‹¼éŸ³æˆ–æ‹¼éŸ³é¦–å­—æ¯,å…¶å®ƒå­—ç¬¦ä¸è¿›è¡Œè½¬æ¢  
+     * @param cnStr è¦è·å–å…¨æ‹¼æˆ–é¦–æ‹¼çš„å­—ç¬¦ä¸²  
+     * @param onlyFirstSpell æ˜¯å¦åªè·å–é¦–æ‹¼ï¼Œä¸ºtrueæ—¶ï¼Œåªè·å–é¦–æ‹¼ï¼Œä¸ºfalseæ—¶ï¼Œè·å–å…¨æ‹¼  
+     * @return String cnStrçš„å…¨æ‹¼æˆ–é¦–æ‹¼, å¦‚æœ cnStr ä¸ºnull æ—¶, è¿”å›""  
      */  
     public static String getSpell(String cnStr, boolean onlyFirstSpell) {   
         if (cnStr == null) {   
@@ -620,19 +620,19 @@ public class CnToSpell {
         StringBuffer sb = new StringBuffer();   
         for (int i = 0, len = chars.length; i < len; i++) {   
             int ascii = getCnAscii(chars[i]);   
-            if (ascii == 0){ //Èç¹û»ñÈ¡ºº×ÖµÄASCII³ö´í£¬Ôò²»½øĞĞ×ª»»   
+            if (ascii == 0){ //å¦‚æœè·å–æ±‰å­—çš„ASCIIå‡ºé”™ï¼Œåˆ™ä¸è¿›è¡Œè½¬æ¢   
                 sb.append(chars[i]);   
             }else{   
-                String spell = getSpellByAscii(ascii); //¸ù¾İASCIIÈ¡Æ´Òô   
-                if(spell == null || spell.length() == 0){ //Èç¹û¸ù¾İASCIIÈ¡Æ´ÒôÃ»È¡µ½£¬Ôòµ½ÉúÆ§×ÖMapÖĞÈ¡   
+                String spell = getSpellByAscii(ascii); //æ ¹æ®ASCIIå–æ‹¼éŸ³   
+                if(spell == null || spell.length() == 0){ //å¦‚æœæ ¹æ®ASCIIå–æ‹¼éŸ³æ²¡å–åˆ°ï¼Œåˆ™åˆ°ç”Ÿåƒ»å­—Mapä¸­å–   
                     spell = uncommonWordsMap.get(chars[i]);   
                 }   
                    
-                if(spell == null || spell.length() == 0){ //Èç¹ûÃ»ÓĞÈ¡µ½¶ÔÓ¦µÄÆ´Òô£¬Ôò²»×ö×ª»»£¬×·¼ÓÔ­×Ö·û   
+                if(spell == null || spell.length() == 0){ //å¦‚æœæ²¡æœ‰å–åˆ°å¯¹åº”çš„æ‹¼éŸ³ï¼Œåˆ™ä¸åšè½¬æ¢ï¼Œè¿½åŠ åŸå­—ç¬¦   
                     spell = uncommonWordsMap.get(chars[i]);   
                 }else{   
                     if(onlyFirstSpell){   
-                        sb.append(spell.startsWith("¡¯") ? spell.substring(1, 2) : spell.substring(0, 1));   
+                        sb.append(spell.startsWith("â€™") ? spell.substring(1, 2) : spell.substring(0, 1));   
                     }else{   
                         sb.append(spell);   
                     }   
@@ -643,12 +643,12 @@ public class CnToSpell {
     }   
   
     public static void main(String[] args) {   
-        String[] s = {"»ñÈ¡ºº×ÖÈ«Æ´ºÍÊ×Æ´²âÊÔ","This is a test","a,b; c[d]","±ê£¬µã¡£","Ô²½ÇÊı×Ö£±£²£³£¬ÌØÊâ·ûºÅ¡¤£¤%¡ª¡ª¡­¡­", "·±Ìå×Ö£ºÎ÷°²•ş×h", "Î÷°²", "—² Ÿö î‡ i É½ ","Áõºé±ò"};   
+        String[] s = {"è·å–æ±‰å­—å…¨æ‹¼å’Œé¦–æ‹¼æµ‹è¯•","This is a test","a,b; c[d]","æ ‡ï¼Œç‚¹ã€‚","åœ†è§’æ•°å­—ï¼‘ï¼’ï¼“ï¼Œç‰¹æ®Šç¬¦å·Â·ï¿¥%â€”â€”â€¦â€¦", "ç¹ä½“å­—ï¼šè¥¿å®‰æœƒè­°", "è¥¿å®‰", "æ£½ ç‡Š é¡• å³£ å±± ","åˆ˜æ´ªå½¬"};   
         for (int i = 0; i < s.length; i++) {   
             long l1 = System.currentTimeMillis();   
-            System.out.println(s[i]+" µÄÈ«Æ´:" + getSpell(s[i], false));   
-            System.out.println(s[i]+" µÄÊ×Æ´:" + getSpell(s[i], true));   
-            System.out.println("»ñÈ¡È«Æ´ºÍÊ×Æ´¹²ÓÃÁË"+(System.currentTimeMillis()-l1)+"ºÁÃë\n");   
+            System.out.println(s[i]+" çš„å…¨æ‹¼:" + getSpell(s[i], false));   
+            System.out.println(s[i]+" çš„é¦–æ‹¼:" + getSpell(s[i], true));   
+            System.out.println("è·å–å…¨æ‹¼å’Œé¦–æ‹¼å…±ç”¨äº†"+(System.currentTimeMillis()-l1)+"æ¯«ç§’\n");   
         }   
     } 
 

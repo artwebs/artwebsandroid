@@ -20,7 +20,7 @@ public class FileUtils {
 		return SDPATH;
 	}
 	public FileUtils() {
-		//µÃµ½µ±Ç°Íâ²¿´æ´¢Éè±¸µÄÄ¿Â¼
+		//å¾—åˆ°å½“å‰å¤–éƒ¨å­˜å‚¨è®¾å¤‡çš„ç›®å½•
 		// /SDCARD
 		if (android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED))
@@ -40,7 +40,7 @@ public class FileUtils {
 		
 	}
 	/**
-	 * ÔÚSD¿¨ÉÏ´´½¨ÎÄ¼ş
+	 * åœ¨SDå¡ä¸Šåˆ›å»ºæ–‡ä»¶
 	 * 
 	 * @throws IOException
 	 */
@@ -57,7 +57,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * ÔÚSD¿¨ÉÏ´´½¨Ä¿Â¼
+	 * åœ¨SDå¡ä¸Šåˆ›å»ºç›®å½•
 	 * 
 	 * @param dirName
 	 */
@@ -68,7 +68,7 @@ public class FileUtils {
 	}
 
 	/**
-	 * ÅĞ¶ÏSD¿¨ÉÏµÄÎÄ¼ş¼ĞÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­SDå¡ä¸Šçš„æ–‡ä»¶å¤¹æ˜¯å¦å­˜åœ¨
 	 */
 	public boolean isFileExist(String fileName){
 		File file = new File(SDPATH + fileName);
@@ -76,7 +76,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * ½«Ò»¸öInputStreamÀïÃæµÄÊı¾İĞ´Èëµ½SD¿¨ÖĞ
+	 * å°†ä¸€ä¸ªInputStreamé‡Œé¢çš„æ•°æ®å†™å…¥åˆ°SDå¡ä¸­
 	 */
 	public File write2SDFromInput(String path,String fileName,InputStream input){
 		File file = null;
@@ -108,7 +108,7 @@ public class FileUtils {
 	}
 	
 	/**
-	 * ½«Ò»¸öInputStreamÀïÃæµÄÊı¾İĞ´Èëµ½SD¿¨ÖĞ
+	 * å°†ä¸€ä¸ªInputStreamé‡Œé¢çš„æ•°æ®å†™å…¥åˆ°SDå¡ä¸­
 	 */
 	public File write2SDFromInput(String path,String fileName,InputStream input,Handler handler){
 		File file = null;

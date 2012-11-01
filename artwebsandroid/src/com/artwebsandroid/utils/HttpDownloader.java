@@ -18,11 +18,11 @@ public class HttpDownloader {
 	private URL url = null;
 
 	/**
-	 * ¸ù¾İURLÏÂÔØÎÄ¼ş£¬Ç°ÌáÊÇÕâ¸öÎÄ¼şµ±ÖĞµÄÄÚÈİÊÇÎÄ±¾£¬º¯ÊıµÄ·µ»ØÖµ¾ÍÊÇÎÄ¼şµ±ÖĞµÄÄÚÈİ
-	 * 1.´´½¨Ò»¸öURL¶ÔÏó
-	 * 2.Í¨¹ıURL¶ÔÏó£¬´´½¨Ò»¸öHttpURLConnection¶ÔÏó
-	 * 3.µÃµ½InputStram
-	 * 4.´ÓInputStreamµ±ÖĞ¶ÁÈ¡Êı¾İ
+	 * æ ¹æ®URLä¸‹è½½æ–‡ä»¶ï¼Œå‰ææ˜¯è¿™ä¸ªæ–‡ä»¶å½“ä¸­çš„å†…å®¹æ˜¯æ–‡æœ¬ï¼Œå‡½æ•°çš„è¿”å›å€¼å°±æ˜¯æ–‡ä»¶å½“ä¸­çš„å†…å®¹
+	 * 1.åˆ›å»ºä¸€ä¸ªURLå¯¹è±¡
+	 * 2.é€šè¿‡URLå¯¹è±¡ï¼Œåˆ›å»ºä¸€ä¸ªHttpURLConnectionå¯¹è±¡
+	 * 3.å¾—åˆ°InputStram
+	 * 4.ä»InputStreamå½“ä¸­è¯»å–æ•°æ®
 	 * @param urlStr
 	 * @return
 	 */
@@ -31,13 +31,13 @@ public class HttpDownloader {
 		String line = null;
 		BufferedReader buffer = null;
 		try {
-			// ´´½¨Ò»¸öURL¶ÔÏó
+			// åˆ›å»ºä¸€ä¸ªURLå¯¹è±¡
 			url = new URL(urlStr);
-			// ´´½¨Ò»¸öHttpÁ¬½Ó
+			// åˆ›å»ºä¸€ä¸ªHttpè¿æ¥
 			HttpURLConnection urlConn = (HttpURLConnection) url
 					.openConnection();
 			urlConn.connect();
-			// Ê¹ÓÃIOÁ÷¶ÁÈ¡Êı¾İ
+			// ä½¿ç”¨IOæµè¯»å–æ•°æ®
 			buffer = new BufferedReader(new InputStreamReader(urlConn
 					.getInputStream()));
 			while ((line = buffer.readLine()) != null) {
@@ -58,7 +58,7 @@ public class HttpDownloader {
 	}
 
 	/**
-	 * ¸Ãº¯Êı·µ»ØÕûĞÎ -1£º´ú±íÏÂÔØÎÄ¼ş³ö´í 0£º´ú±íÏÂÔØÎÄ¼ş³É¹¦ 1£º´ú±íÎÄ¼şÒÑ¾­´æÔÚ
+	 * è¯¥å‡½æ•°è¿”å›æ•´å½¢ -1ï¼šä»£è¡¨ä¸‹è½½æ–‡ä»¶å‡ºé”™ 0ï¼šä»£è¡¨ä¸‹è½½æ–‡ä»¶æˆåŠŸ 1ï¼šä»£è¡¨æ–‡ä»¶å·²ç»å­˜åœ¨
 	 */
 	public int downFile(String urlStr, String path, String fileName) {
 		InputStream inputStream = null;
@@ -88,7 +88,7 @@ public class HttpDownloader {
 	}
 	
 	/**
-	 * ¸Ãº¯Êı·µ»ØÕûĞÎ -1£º´ú±íÏÂÔØÎÄ¼ş³ö´í -2±£´æÎÄ¼ş´íÎó 0£º´ú±íÏÂÔØÎÄ¼ş³É¹¦ 1£º´ú±íÎÄ¼şÒÑ¾­´æÔÚ
+	 * è¯¥å‡½æ•°è¿”å›æ•´å½¢ -1ï¼šä»£è¡¨ä¸‹è½½æ–‡ä»¶å‡ºé”™ -2ä¿å­˜æ–‡ä»¶é”™è¯¯ 0ï¼šä»£è¡¨ä¸‹è½½æ–‡ä»¶æˆåŠŸ 1ï¼šä»£è¡¨æ–‡ä»¶å·²ç»å­˜åœ¨
 	 */
 	public int downFile(String urlStr, String path, String fileName,Handler handler) {
 		InputStream inputStream = null;
@@ -119,7 +119,7 @@ public class HttpDownloader {
 	}
 
 	/**
-	 * ¸ù¾İURLµÃµ½ÊäÈëÁ÷
+	 * æ ¹æ®URLå¾—åˆ°è¾“å…¥æµ
 	 * 
 	 * @param urlStr
 	 * @return
