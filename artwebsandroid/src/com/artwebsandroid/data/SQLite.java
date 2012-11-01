@@ -75,7 +75,7 @@ public abstract class SQLite{
 	{
 		boolean flag=false;
 		this.connection();
-		 //¿ªÆôÊÂÎñ
+		 //å¼€å¯äº‹åŠ¡
 		this.db.beginTransaction();
 		try
 		{

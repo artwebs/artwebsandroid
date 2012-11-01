@@ -24,7 +24,7 @@ public class SQLiteTest extends AndroidTestCase {
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			db.execSQL(" ALTER TABLE person ADD phone VARCHAR(12) NULL "); //往表中增加
+			db.execSQL(" ALTER TABLE person ADD phone VARCHAR(12) NULL "); //寰�琛ㄤ腑澧炲姞
 		}
 		
 	}
@@ -32,8 +32,8 @@ public class SQLiteTest extends AndroidTestCase {
 	public void testQuery()
 	{
 		Db db=new Db(this.getContext());
-		db.execute("insert into person(name, age) values(?,?)",new Object[]{"张三",30});
-		db.execute("insert into person(name, age) values(?,?)",new Object[]{"李四",30});
+		db.execute("insert into person(name, age) values(?,?)",new Object[]{"寮犱笁",30});
+		db.execute("insert into person(name, age) values(?,?)",new Object[]{"鏉庡洓",30});
 		BinList list=db.query("select personid,age,name from person", null);
 		Log.d(tag,list.getItem().toString());
 		

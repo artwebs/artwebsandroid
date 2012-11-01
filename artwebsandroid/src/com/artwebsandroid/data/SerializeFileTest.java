@@ -11,8 +11,8 @@ public class SerializeFileTest extends AndroidTestCase {
 	{
 		BinMap para=new BinMap();
 		para.put("id", "00001");
-		para.put("name", "ÕÅÈı");
-		para.put("sex", "ÄĞ");
+		para.put("name", "å¼ ä¸‰");
+		para.put("sex", "ç”·");
 		
 		SerializeFile file=new SerializeFile();
 		assertEquals(file.saveObject("com_artwebsandroid_data","info", para), true);
