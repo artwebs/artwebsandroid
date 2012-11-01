@@ -16,10 +16,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class InfoActionActivity extends Activity {
+	private final static String tag="InfoActionActivity"; 
 	 public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);  
 //	        MobileNet net=new MobileNet(this);
 //	        net.setEnable();
+	        Log.d(tag,getApplicationContext().getFilesDir().getAbsolutePath());
 	        String var="";
 
 	        Intent intent=this.getIntent();
@@ -40,7 +42,7 @@ public class InfoActionActivity extends Activity {
 			main.addView(view);
 			
 			Button button=new Button(this);
-			button.setText("新增信息");
+			button.setText("鏂板");
 			button.setOnClickListener(new OnClickListener(){
 				@Override
 				public void onClick(View arg0) {

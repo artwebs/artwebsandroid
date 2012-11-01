@@ -14,10 +14,9 @@ public class SerializeFileTest extends AndroidTestCase {
 		para.put("name", "张三");
 		para.put("sex", "男");
 		
-		SerializeFile file=new SerializeFile();
-		assertEquals(file.saveObject("com_artwebsandroid_data","info", para), true);
+		assertEquals(SerializeFile.saveObject("/data/data/com.artwebsandroid/files/com_artwebsandroid_data","info", para), true);
 		
-		BinMap rs=(BinMap)file.readObject("com_artwebsandroid_data","info");
+		BinMap rs=(BinMap)SerializeFile.readObject("/data/data/com.artwebsandroid/files/com_artwebsandroid_data","info");
 		Log.d(tag, rs.getItem().toString());
 	}
 }

@@ -18,7 +18,7 @@ public abstract class CircleAsyncTask extends BaseAsyncTask {
 		
 	public CircleAsyncTask(Context context)
 	{
-		this(context, "ÕıÔÚ¼ÓÔØ");
+		this(context, "æ­£åœ¨åŠ è½½");
 	}
 	public CircleAsyncTask(Context context,String message)
 	{
@@ -26,7 +26,7 @@ public abstract class CircleAsyncTask extends BaseAsyncTask {
 		progressDialog=new ProgressDialog(this.context);
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progressDialog.setMessage(message);	
-		progressDialog.setCancelable(false);//²»¿É±»·µ»Ø¼üÈ¡Ïû¶Ô»°¿ò
+		progressDialog.setCancelable(false);//ä¸å¯è¢«è¿”å›é”®å–æ¶ˆå¯¹è¯æ¡†
 	}
 	
 	public void start()
