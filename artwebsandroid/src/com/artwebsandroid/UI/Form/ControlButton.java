@@ -101,7 +101,7 @@ public class ControlButton extends AbsControl {
 		builder.setCancelable(false);   
 		builder.setTitle(this.para.getValue("CNAME").toString());  
 		builder.setView(main);  
-		builder.setPositiveButton("确认",  
+		builder.setPositiveButton("纭",  
 		        new DialogInterface.OnClickListener() {  
 		            public void onClick(DialogInterface dialog, int whichButton) {  
 		                button.setText(tempValue);
@@ -109,7 +109,7 @@ public class ControlButton extends AbsControl {
 		                ControlButton.this.strText=tempValue;
 		            }  
 		        });  
-		builder.setNegativeButton("取消",  
+		builder.setNegativeButton("鍙栨秷",  
 		        new DialogInterface.OnClickListener() {  
 		            public void onClick(DialogInterface dialog, int whichButton) {  
 //		                setTitle("");  

@@ -35,7 +35,7 @@ public class ControlRefreshtextbox extends ControlTextbox implements OnClickList
 
 	@Override
 	public void onClick(View v) {
-		syncTask=new CircleAsyncTask(this.activity,"正在同步..."){
+		syncTask=new CircleAsyncTask(this.activity,"姝ｅ湪鍚屾..."){
 
 			@Override
 			public BinMap doRun() {

@@ -9,11 +9,11 @@ import android.widget.TextView;
 
 public class AndroidUtils {
 	public static void setEditTextReadOnly(TextView view){  
-	      view.setTextColor(Color.GRAY);   //ÉèÖÃÖ»¶ÁÊ±µÄÎÄ×ÖÑÕÉ«  
+	      view.setTextColor(Color.GRAY);   //è®¾ç½®åªè¯»æ—¶çš„æ–‡å­—é¢œè‰²  
 	      if (view instanceof android.widget.EditText){  
-	          view.setCursorVisible(false);      //ÉèÖÃÊäÈë¿òÖĞµÄ¹â±ê²»¿É¼û  
-	          view.setFocusable(false);           //ÎŞ½¹µã  
-	          view.setFocusableInTouchMode(false);     //´¥ÃşÊ±Ò²µÃ²»µ½½¹µã  
+	          view.setCursorVisible(false);      //è®¾ç½®è¾“å…¥æ¡†ä¸­çš„å…‰æ ‡ä¸å¯è§  
+	          view.setFocusable(false);           //æ— ç„¦ç‚¹  
+	          view.setFocusableInTouchMode(false);     //è§¦æ‘¸æ—¶ä¹Ÿå¾—ä¸åˆ°ç„¦ç‚¹  
 	      }  
 	}  
 	
@@ -22,7 +22,7 @@ public class AndroidUtils {
 		new AlertDialog.Builder(context)
 		.setTitle(title)
         .setMessage(message)   
-        .setPositiveButton("È·¶¨",  
+        .setPositiveButton("ç¡®å®š",  
                 new DialogInterface.OnClickListener() {  
                     public void onClick(DialogInterface dialog,  
                             int whichButton) {  
