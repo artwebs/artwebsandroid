@@ -10,9 +10,10 @@ import android.os.Handler;
 import android.util.Log;
 
 public class ITransmitImplTcp implements ITransmit {
-	private String skip="test";
+	private String skip="";
 	private ClientTCP sok;
 	private String host="";
+	private int prot=3456;
 
 	
 	public ITransmitImplTcp(String host,String skip)
@@ -20,6 +21,14 @@ public class ITransmitImplTcp implements ITransmit {
 		this.host=host;
 		this.skip=skip;
 	}
+	
+	public ITransmitImplTcp(String host,int port,String skip)
+	{
+		this.host=host;
+		this.prot=port;
+		this.skip=skip;
+	}
+
 
 	
 	@Override
@@ -47,7 +56,7 @@ public class ITransmitImplTcp implements ITransmit {
 	@Override
 	public String download(String commend) {
 		Log.i("trans",commend);
-		sok=new ClientTCP(host,3456);	
+		sok=new ClientTCP(host,prot);	
 		String rs= sok.download(this.skip+commend);
 		Log.i("trans",rs);
 		return rs;
@@ -55,7 +64,7 @@ public class ITransmitImplTcp implements ITransmit {
 
 	@Override
 	public int downFile(String commend, String path, String fileName) {
-		sok=new ClientTCP(host,3456);	
+		sok=new ClientTCP(host,prot);	
 		Log.i("Trans",this.skip+commend);
 		return sok.downFile(this.skip+commend, path, fileName);
 	}
@@ -63,13 +72,13 @@ public class ITransmitImplTcp implements ITransmit {
 	@Override
 	public int downFile(String commend, String path, String fileName,
 			Handler handler) {
-		sok=new ClientTCP(host,3456);	
+		sok=new ClientTCP(host,prot);	
 		return sok.downFile(this.skip+commend, path, fileName,handler);
 	}
 
 	@Override
 	public InputStream downStream(String commend) {
-		sok=new ClientTCP(host,3456);	
+		sok=new ClientTCP(host,prot);	
 		return sok.downStream(this.skip+commend);
 	}
 
