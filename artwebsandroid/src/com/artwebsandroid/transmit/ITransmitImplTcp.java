@@ -58,6 +58,7 @@ public class ITransmitImplTcp implements ITransmit {
 		Log.i("trans",commend);
 		sok=new ClientTCP(host,prot);	
 		String rs= sok.download(this.skip+commend);
+		sok.closeConnetion();
 		Log.i("trans",rs);
 		return rs;
 	}
