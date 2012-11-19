@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.util.Log;
 
 public class ITransmitImplTcp implements ITransmit {
+	private final static String tag="ITransmitImplTcp";
 	private String skip="";
 	private ClientTCP sok;
 	private String host="";
@@ -59,7 +60,7 @@ public class ITransmitImplTcp implements ITransmit {
 		sok=new ClientTCP(host,prot);	
 		String rs= sok.download(this.skip+commend);
 		sok.closeConnetion();
-		Log.i("trans",rs);
+		Log.i(tag,"rs=>"+rs);
 		return rs;
 	}
 
@@ -88,7 +89,19 @@ public class ITransmitImplTcp implements ITransmit {
 		Log.i("trans","commend="+commend);
 		Log.i("trans","size="+size);
 		sok=new ClientTCP(host,prot);
-		return sok.download(commend, size);
+		String rs=sok.download(commend, size);
+		Log.i(tag,"rs=>"+rs);
+		return rs;
+	}
+
+	@Override
+	public String download(String commend, String end) {
+		Log.i("trans","commend="+commend);
+		Log.i("trans","end="+end);
+		sok=new ClientTCP(host,prot);
+		String rs=sok.download(commend, end);
+		Log.i(tag,"rs=>"+rs);
+		return rs;
 	}
 
 	

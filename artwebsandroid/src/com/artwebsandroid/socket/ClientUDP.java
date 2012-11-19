@@ -83,4 +83,10 @@ public class ClientUDP extends Client {
 		return null;
 	}
 
+	@Override
+	public String download(String msg, String end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

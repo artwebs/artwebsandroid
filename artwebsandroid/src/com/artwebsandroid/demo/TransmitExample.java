@@ -75,5 +75,11 @@ public class TransmitExample implements ITransmit {
 		return null;
 	}
 
+	@Override
+	public String download(String commend, String end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

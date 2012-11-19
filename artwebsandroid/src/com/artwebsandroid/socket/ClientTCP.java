@@ -16,6 +16,7 @@ import android.util.Log;
 public class ClientTCP extends Client {
 	private static String tag="ClientTCP";
 	protected Socket socket;
+	private int timeOut=10000;
 	
 	public ClientTCP(){}
 	
@@ -23,12 +24,23 @@ public class ClientTCP extends Client {
 		super(host, port);
 	}
 	
+	
+	
+	public Socket getSocket() {
+		return socket;
+	}
+
+	public void setSocket(Socket socket) {
+		this.socket = socket;
+	}
+
 	@Override
 	public void getConnetion() {
 		if(this.socket==null)
 		{
 			try {
-				this.socket=new Socket(this.host,this.port);				
+				this.socket=new Socket(this.host,this.port);		
+				this.socket.setSoTimeout(timeOut);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				Log.i(tag,e.toString());
@@ -166,6 +178,29 @@ public class ClientTCP extends Client {
 		    b = bais.toByteArray();
 		    bais.close();
 		    rs=new String(b);
+			this.closeConnetion();
+					
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
+	@Override
+	public String download(String msg, String end) {
+		this.getConnetion();
+		String rs="";
+		try {
+			BufferedReader in=new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+			OutputStream outputstream =this.socket.getOutputStream();
+			outputstream.write(msg.getBytes());
+			String line=null;
+			while((line=in.readLine())!=null)
+			{
+				rs=rs+line+"\n";
+				if(rs.indexOf(end)>0)break;
+			}
 			this.closeConnetion();
 					
 		} catch (Exception e) {
