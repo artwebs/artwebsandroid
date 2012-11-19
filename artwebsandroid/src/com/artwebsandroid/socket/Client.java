@@ -34,6 +34,7 @@ public abstract class Client {
 	public abstract void getConnetion();
 	
 	public abstract String download(String msg);
+	public abstract String download(String msg,int size);
 	
 	public abstract int downFile(String meg, String path, String fileName);
 	

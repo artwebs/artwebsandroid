@@ -17,6 +17,7 @@ public interface ITransmit {
 	
 	
 	public String download(String commend);
+	public String download(String commend,int size);
 	public int downFile(String commend, String path, String fileName);
 	public int downFile(String commend, String path, String fileName,Handler handler);
 	

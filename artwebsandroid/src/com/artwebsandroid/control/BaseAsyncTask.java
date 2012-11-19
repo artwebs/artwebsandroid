@@ -36,4 +36,9 @@ public abstract class BaseAsyncTask {
 	public abstract void show();
 	
 	public abstract void hide();
+	
+	public void stop()
+	{
+		this.task.cancel(true);
+	}
 }

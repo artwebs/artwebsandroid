@@ -83,5 +83,13 @@ public class ITransmitImplTcp implements ITransmit {
 		return sok.downStream(this.skip+commend);
 	}
 
+	@Override
+	public String download(String commend, int size) {
+		Log.i("trans","commend="+commend);
+		Log.i("trans","size="+size);
+		sok=new ClientTCP(host,prot);
+		return sok.download(commend, size);
+	}
+
 	
 }

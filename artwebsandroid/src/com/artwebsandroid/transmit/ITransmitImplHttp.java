@@ -87,6 +87,11 @@ public class ITransmitImplHttp implements ITransmit {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public String download(String commend, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

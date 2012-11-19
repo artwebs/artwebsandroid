@@ -1,6 +1,7 @@
 package com.artwebsandroid.socket;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,6 +14,7 @@ import android.os.Handler;
 import android.util.Log;
 
 public class ClientTCP extends Client {
+	private static String tag="ClientTCP";
 	protected Socket socket;
 	
 	public ClientTCP(){}
@@ -29,6 +31,7 @@ public class ClientTCP extends Client {
 				this.socket=new Socket(this.host,this.port);				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				Log.i(tag,e.toString());
 				e.printStackTrace();
 			}
 		}
@@ -146,6 +149,30 @@ public class ClientTCP extends Client {
 			
 		}
 		return null;
+	}
+
+	@Override
+	public String download(String msg, int size) {
+		this.getConnetion();
+		String rs="";
+		try {
+			byte[] b = new byte[size];
+			OutputStream outputstream =this.socket.getOutputStream();
+			outputstream.write(msg.getBytes());
+			int len = this.socket.getInputStream().read(b);
+		    ByteArrayOutputStream bais = new ByteArrayOutputStream();
+		    bais.write(b, 0, len);
+		    bais.flush();
+		    b = bais.toByteArray();
+		    bais.close();
+		    rs=new String(b);
+			this.closeConnetion();
+					
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 }

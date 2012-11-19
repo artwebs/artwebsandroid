@@ -65,6 +65,12 @@ public class DataParseTest extends AndroidTestCase{
 			return 0;
 		}
 
+		@Override
+		public String download(String commend, int size) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	
 
 	};
