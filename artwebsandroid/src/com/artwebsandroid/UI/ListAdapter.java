@@ -22,6 +22,16 @@ public class ListAdapter extends BaseAdapter {
 	protected Activity activity=null;
 	protected int dataSize=0;
 	
+	public ListAdapter(Activity activity)
+	{
+		this.activity=activity;
+	}
+	
+	public void setList(BinList list)
+	{
+		dataSize=list.size();
+		this.list=list;
+	}
 	public ListAdapter(BinMap para,Activity activity)
 	{
 		this.para=para;
