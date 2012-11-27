@@ -192,13 +192,20 @@ public class ClientTCP extends Client {
 		this.getConnetion();
 		String rs="";
 		try {
-			BufferedReader in=new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			OutputStream outputstream =this.socket.getOutputStream();
 			outputstream.write(msg.getBytes());
-			String line=null;
-			while((line=in.readLine())!=null)
+			String line="";
+			while(true)
 			{
-				rs=rs+line+"\n";
+				byte[] b = new byte[1024];
+				int len = this.socket.getInputStream().read(b);
+			    ByteArrayOutputStream bais = new ByteArrayOutputStream();
+			    bais.write(b, 0, len);
+			    bais.flush();
+			    b = bais.toByteArray();
+			    bais.close();
+			    line=new String(b);
+				rs=rs+line;
 				if(rs.indexOf(end)>0)break;
 			}
 			this.closeConnetion();
