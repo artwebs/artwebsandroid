@@ -97,7 +97,7 @@ public class BinList extends IBinObject {
 		}else{
 			HashMap hm=new HashMap();
 		    hm.put(key, value);
-		    item.add(hm);
+		    item.add(index,hm);
 		}
 
 	}
