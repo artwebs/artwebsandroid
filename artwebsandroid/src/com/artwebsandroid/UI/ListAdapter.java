@@ -78,7 +78,6 @@ public class ListAdapter extends BaseAdapter {
 			rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.binlistitem, null);
 			TextView firstView=(TextView)rowView.findViewById(R.id.first);
 			firstView.setMaxLines(2);
-			Log.i(tag,((HashMap<Object, Object>)this.getItem(position)).toString());
 			HashMap<Object, Object> row=(HashMap<Object, Object>)this.getItem(position);
 			firstView.setText(row.get("text").toString());
 			rowViews.put(position, rowView);
