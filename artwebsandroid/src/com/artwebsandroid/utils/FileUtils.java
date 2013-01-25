@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -39,6 +40,12 @@ public class FileUtils {
 			SDPATH=root+"/";
 		
 	}
+	
+	public FileUtils(Context context)
+	{
+		SDPATH=context.getApplicationContext().getFilesDir().getAbsolutePath()+"/";
+	}
+	
 	/**
 	 * 在SD卡上创建文件
 	 * 
