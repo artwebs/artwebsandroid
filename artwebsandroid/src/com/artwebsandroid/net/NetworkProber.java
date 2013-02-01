@@ -16,7 +16,7 @@ import android.telephony.TelephonyManager;
 public class NetworkProber {  
   
     /** 
-     * ÍøÂçÊÇ·ñ¿ÉÓÃ 
+     * ç½‘ç»œæ˜¯å¦å¯ç”¨ 
      *  
      * @param activity 
      * @return 
@@ -39,7 +39,7 @@ public class NetworkProber {
     }  
   
     /** 
-     * GpsÊÇ·ñ´ò¿ª 
+     * Gpsæ˜¯å¦æ‰“å¼€ 
      *  
      * @param context 
      * @return 
@@ -52,7 +52,7 @@ public class NetworkProber {
     }  
   
     /** 
-     * wifiÊÇ·ñ´ò¿ª 
+     * wifiæ˜¯å¦æ‰“å¼€ 
      */  
     public static boolean isWifiEnabled(Context context) {  
         ConnectivityManager mgrConn = (ConnectivityManager) context  
@@ -65,8 +65,8 @@ public class NetworkProber {
     }  
   
     /** 
-     * ÅĞ¶Ïµ±Ç°ÍøÂçÊÇ·ñÊÇwifiÍøÂç 
-     * if(activeNetInfo.getType()==ConnectivityManager.TYPE_MOBILE) { //ÅĞ¶Ï3GÍø 
+     * åˆ¤æ–­å½“å‰ç½‘ç»œæ˜¯å¦æ˜¯wifiç½‘ç»œ 
+     * if(activeNetInfo.getType()==ConnectivityManager.TYPE_MOBILE) { //åˆ¤æ–­3Gç½‘ 
      *  
      * @param context 
      * @return boolean 
@@ -83,7 +83,7 @@ public class NetworkProber {
     }  
   
     /** 
-     * ÅĞ¶Ïµ±Ç°ÍøÂçÊÇ·ñÊÇ3GÍøÂç 
+     * åˆ¤æ–­å½“å‰ç½‘ç»œæ˜¯å¦æ˜¯3Gç½‘ç»œ 
      *  
      * @param context 
      * @return boolean 
@@ -146,17 +146,17 @@ public class NetworkProber {
     {
     	AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setIcon(android.R.drawable.ic_dialog_alert);
-        builder.setTitle("µ±Ç°ÍøÂç²»¿ÉÓÃ");
-        builder.setMessage("ÉèÖÃÍøÂç");
-        builder.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+        builder.setTitle("å½“å‰ç½‘ç»œä¸å¯ç”¨");
+        builder.setMessage("è®¾ç½®ç½‘ç»œ");
+        builder.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
             
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Èç¹ûÃ»ÓĞÍøÂçÁ¬½Ó£¬Ôò½øÈëÍøÂçÉèÖÃ½çÃæ
+                // å¦‚æœæ²¡æœ‰ç½‘ç»œè¿æ¥ï¼Œåˆ™è¿›å…¥ç½‘ç»œè®¾ç½®ç•Œé¢
             	context.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
             }
         });
-        builder.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
             
             @Override
             public void onClick(DialogInterface dialog, int which) {
