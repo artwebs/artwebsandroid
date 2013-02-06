@@ -27,7 +27,7 @@ public class FileUtils {
 				android.os.Environment.MEDIA_MOUNTED))
 			SDPATH = Environment.getExternalStorageDirectory() + "/";
 		else
-			SDPATH="/";
+			SDPATH=Environment.getDownloadCacheDirectory()+"/";
 			
 	}
 	
