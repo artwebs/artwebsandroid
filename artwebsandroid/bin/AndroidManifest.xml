@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.artwebsandroid"
+    package="cn.artwebs"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme" >
          <uses-library android:name="android.test.runner" />
         <activity
-            android:name="com.artwebsandroid.ArtwebsandroidActivity"
+            android:name="cn.artwebs.ArtwebsandroidActivity"
             android:label="@string/app_name" >
             
         </activity>
@@ -37,7 +37,7 @@
         <activity android:name=".demo.SelectActivity" android:label="界面"></activity> 
     </application>
     <instrumentation android:name="android.test.InstrumentationTestRunner"
-          android:targetPackage="com.artwebsandroid"
+          android:targetPackage="cn.artwebs"
           android:label="your tests label" />
 
 </manifest>

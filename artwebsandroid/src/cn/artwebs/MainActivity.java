@@ -1,6 +1,6 @@
 package cn.artwebs;
 
-import com.artwebsandroid.R;
+import cn.artwebs.R;
 
 import android.os.Bundle;
 import android.app.Activity;

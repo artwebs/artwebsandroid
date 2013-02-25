@@ -13,7 +13,7 @@ import android.widget.TextView;
 import cn.artwebs.object.BinList;
 import cn.artwebs.object.BinMap;
 
-import com.artwebsandroid.R;
+import cn.artwebs.R;
 
 public class ListAdapter extends BaseAdapter {
 	private final String tag="ListAdapter";

@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import cn.artwebs.UI.UIFactory;
 
-import com.artwebsandroid.R;
+import cn.artwebs.R;
 
 public class SelectActivity extends Activity {
 	private String conurl="";

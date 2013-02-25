@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import cn.artwebs.object.BinList;
 
-import com.artwebsandroid.R;
+import cn.artwebs.R;
 
 public class SelectAdapter extends BaseAdapter {
 	private HashMap<Integer,View> rowViews=new HashMap<Integer,View>();
