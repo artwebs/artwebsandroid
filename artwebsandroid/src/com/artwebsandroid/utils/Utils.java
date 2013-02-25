@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Calendar;
 
 import javax.xml.parsers.SAXParserFactory;
 
@@ -99,4 +100,41 @@ public class Utils {
 	     {  
 	        return (byte) "0123456789ABCDEF".indexOf(c);  
 	     }  
+	     
+	     public static String GetEnoughLenStr(int num,String basestr){
+	 		String rs=basestr;
+	 		int baseint=rs.length();
+	 		if(baseint<num){
+	 			for(int i=baseint;i<num;i++)
+	 			{
+	 				rs="0"+rs;
+	 			}
+	 		}
+	 		return rs;
+	 	}
+	     
+	     /**
+		    * 获取当前时间
+		    * @param type yyyy MM dd ww hh mm ss
+		    * @return
+		    */
+		   public static String getNowStr(String type){
+			   	String rsStr=type;
+			      Calendar ca = Calendar.getInstance(); 
+			      String year = Utils.GetEnoughLenStr(4, ""+ca.get(Calendar.YEAR));//获取年份 
+			      String month=Utils.GetEnoughLenStr(2, ""+(ca.get(Calendar.MONTH)+1));//获取月份  
+			      String day=Utils.GetEnoughLenStr(2, ""+ca.get(Calendar.DATE));//获取日 
+			      String minute=Utils.GetEnoughLenStr(2, ""+ca.get(Calendar.MINUTE));//分  
+			      String hour=Utils.GetEnoughLenStr(2, ""+ca.get(Calendar.HOUR_OF_DAY));//小时  
+			      String second=Utils.GetEnoughLenStr(2, ""+ca.get(Calendar.SECOND));//秒 
+			      String WeekOfYear =Utils.GetEnoughLenStr(2, ""+ca.get(Calendar.DAY_OF_WEEK));  
+			      rsStr=rsStr.replace("yyyy", year+"");
+			      rsStr=rsStr.replace("MM", month+"");
+			      rsStr=rsStr.replace("dd", day+"");
+			      rsStr=rsStr.replace("ww", WeekOfYear+"");
+			      rsStr=rsStr.replace("hh", hour+"");
+			      rsStr=rsStr.replace("mm", minute+"");
+			      rsStr=rsStr.replace("ss", second+"");		      
+			      return rsStr;
+		   }
 }
