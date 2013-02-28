@@ -55,6 +55,19 @@ public class Base64
     byte[] decoded = decode(bytes);
     return new String(decoded);
   }
+  
+  public static byte[] decodeStr(String str)
+		    throws RuntimeException
+  {
+    byte[] bytes;
+    try
+    {
+      bytes = str.getBytes("ASCII");
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException("ASCII is not supported!", e);
+    }
+    return decode(bytes);
+  }
 
   public static String decode(String str, String charset)
     throws RuntimeException
