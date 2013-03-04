@@ -107,7 +107,7 @@ public class ITransmitImplTcp implements ITransmit {
 
 	@Override
 	public void close() {
-		sok.closeConnetion();
+		if(sok!=null)sok.closeConnetion();
 	}
 
 	
