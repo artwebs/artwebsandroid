@@ -105,5 +105,10 @@ public class ITransmitImplTcp implements ITransmit {
 		return rs;
 	}
 
+	@Override
+	public void close() {
+		sok.closeConnetion();
+	}
+
 	
 }

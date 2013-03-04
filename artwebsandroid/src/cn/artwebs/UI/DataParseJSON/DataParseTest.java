@@ -78,6 +78,12 @@ public class DataParseTest extends AndroidTestCase{
 			return null;
 		}
 
+		@Override
+		public void close() {
+			// TODO Auto-generated method stub
+			
+		}
+
 	
 
 	};

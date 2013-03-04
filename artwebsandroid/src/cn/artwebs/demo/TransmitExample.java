@@ -82,5 +82,11 @@ public class TransmitExample implements ITransmit {
 		return null;
 	}
 
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

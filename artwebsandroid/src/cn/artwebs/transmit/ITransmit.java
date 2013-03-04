@@ -14,7 +14,7 @@ public interface ITransmit {
 	
 	public void setHost(String host);
 	
-	
+	public void close();
 	
 	public String download(String commend);
 	public String download(String commend,int size);
