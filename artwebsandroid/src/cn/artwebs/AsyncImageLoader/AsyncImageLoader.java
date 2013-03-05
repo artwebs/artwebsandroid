@@ -43,7 +43,7 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 		if(imageUrl.lastIndexOf("/")>0)
 			imgFileName=imageUrl.substring(imageUrl.lastIndexOf("/")+1);
 		else
-			imgFileName=imageUrl.replace("/", this.rpString);
+			imgFileName=imageUrl;
 		imgFileName=Base64.encode(imgFileName)+".jpg";
 		String filename=this.path+imgFileName;
 		if(fileutil.isFileExist(filename))		
