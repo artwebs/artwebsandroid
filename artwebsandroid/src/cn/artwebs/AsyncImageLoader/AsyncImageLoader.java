@@ -6,12 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import cn.artwebs.transmit.ITransmit;
+import cn.artwebs.utils.Base64;
 import cn.artwebs.utils.FileUtils;
+import cn.artwebs.utils.Utils;
 
 
 import android.graphics.drawable.Drawable;
@@ -25,7 +28,7 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	//键是图片的URL，值是一个SoftReference对象，该对象指向一个Drawable对象
 	private FileUtils fileutil=new FileUtils();
 	private String path="artwebs/Cache/";
-	private String rpString="tandt";
+	private String imgFileName="";
 		
 	private ITransmit trans;
 	
@@ -37,7 +40,12 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	//实现图片的异步加载
 	public Drawable loadDrawable(final String imageUrl,final ImageCallback callback,ITransmit trans){
 		this.trans=trans;
-		String filename=this.path+imageUrl.replace("/", this.rpString);
+		if(imageUrl.lastIndexOf("/")>0)
+			imgFileName=imageUrl.substring(imageUrl.lastIndexOf("/")+1);
+		else
+			imgFileName=imageUrl.replace("/", this.rpString);
+		imgFileName=Base64.encode(imgFileName)+".jpg";
+		String filename=this.path+imgFileName;
 		if(fileutil.isFileExist(filename))		
 		{
 			try {
@@ -67,10 +75,18 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	//该方法用于根据图片的URL，从网络上下载图片
 	protected Drawable loadImageFromUrl(String imageUrl) {
 		try {
-			InputStream inputStream=this.trans.downStream(imageUrl);
+			InputStream inputStream;
+			if(this.trans!=null)
+				inputStream=this.trans.downStream(imageUrl);
+			else{
+				URL url = new URL(imageUrl);
+				HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+				inputStream = urlConn.getInputStream();
+			}
 			//根据图片的URL，下载图片，并生成一个Drawable对象
-			fileutil.write2SDFromInput(this.path, imageUrl.replace("/", this.rpString), inputStream);
-			return Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+this.path+imageUrl.replace("/", this.rpString))), "src");
+		
+			fileutil.write2SDFromInput(this.path, imgFileName, inputStream);
+			return Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+this.path+imgFileName)), "src");
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e);

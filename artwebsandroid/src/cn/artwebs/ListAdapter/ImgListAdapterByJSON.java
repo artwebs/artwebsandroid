@@ -2,6 +2,8 @@ package cn.artwebs.ListAdapter;
 
 import java.util.HashMap;
 
+import org.json.JSONArray;
+
 import cn.artwebs.R;
 import cn.artwebs.AsyncImageLoader.AsyncImageLoader;
 import cn.artwebs.AsyncImageLoader.CallbackImpl;
@@ -20,10 +22,10 @@ import android.widget.TextView;
 
 
 
-public class ImgListAdapterByJSON extends ListAdapter {
-	private IAsyncImageLoader loader = new AsyncImageLoader();
-	public ImgListAdapterByJSON(BinMap para, Activity activity) {
-		super(para, activity);
+public class ImgListAdapterByJSON extends ListAdapterByJSON {
+	protected IAsyncImageLoader loader = new AsyncImageLoader();
+	public ImgListAdapterByJSON(JSONArray list, Activity activity) {
+		super(list, activity);
 		// TODO Auto-generated constructor stub
 	}
 
