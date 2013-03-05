@@ -1,6 +1,7 @@
 package cn.artwebs.UI;
 
 
+import cn.artwebs.ListAdapter.ListAdapter;
 import android.app.Activity;
 import android.view.View;
 import android.widget.ListView;

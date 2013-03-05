@@ -1,5 +1,6 @@
 package cn.artwebs.UI;
 
+import cn.artwebs.ListAdapter.ListAdapter;
 import cn.artwebs.UI.DataParseXML.DataPagelist;
 import cn.artwebs.object.BinList;
 import cn.artwebs.object.BinMap;

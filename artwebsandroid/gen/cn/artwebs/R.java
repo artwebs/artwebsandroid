@@ -17,20 +17,22 @@ public final class R {
         public static int ListViewPeople=0x7f070001;
         public static int findkey=0x7f070004;
         public static int first=0x7f070002;
-        public static int installApkButton=0x7f070007;
-        public static int listButton=0x7f070006;
-        public static int menu_settings=0x7f070009;
+        public static int imageView=0x7f070006;
+        public static int installApkButton=0x7f070008;
+        public static int listButton=0x7f070007;
+        public static int menu_settings=0x7f07000a;
         public static int mytextxx=0x7f070000;
         public static int second=0x7f070003;
         public static int text1=0x7f070005;
-        public static int uiButton=0x7f070008;
+        public static int uiButton=0x7f070009;
     }
     public static final class layout {
         public static int activity_main=0x7f030000;
         public static int binlist=0x7f030001;
         public static int binlistitem=0x7f030002;
         public static int diclistitem=0x7f030003;
-        public static int main=0x7f030004;
+        public static int imgbinlistitem=0x7f030004;
+        public static int main=0x7f030005;
     }
     public static final class menu {
         public static int activity_main=0x7f060000;
