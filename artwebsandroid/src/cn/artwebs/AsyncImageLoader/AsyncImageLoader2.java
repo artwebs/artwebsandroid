@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +67,14 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 	//该方法用于根据图片的URL，从网络上下载图片
 	protected Drawable loadImageFromUrl(String imageUrl) {
 		try {
-			InputStream inputStream=this.trans.downStream(imageUrl);
+			InputStream inputStream;
+			if(this.trans!=null)
+				inputStream=this.trans.downStream(imageUrl);
+			else{
+				URL url = new URL(imageUrl);
+				HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+				inputStream = urlConn.getInputStream();
+			}
 			//根据图片的URL，下载图片，并生成一个Drawable对象
 			return Drawable.createFromStream(inputStream, "src");
 			

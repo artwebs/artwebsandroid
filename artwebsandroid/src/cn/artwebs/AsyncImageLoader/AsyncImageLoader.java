@@ -40,11 +40,7 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	//实现图片的异步加载
 	public Drawable loadDrawable(final String imageUrl,final ImageCallback callback,ITransmit trans){
 		this.trans=trans;
-		if(imageUrl.lastIndexOf("/")>0)
-			imgFileName=imageUrl.substring(imageUrl.lastIndexOf("/")+1);
-		else
-			imgFileName=imageUrl;
-		imgFileName=Base64.encode(imgFileName)+".jpg";
+		imgFileName=Base64.encode(imageUrl)+".jpg";
 		String filename=this.path+imgFileName;
 		if(fileutil.isFileExist(filename))		
 		{
@@ -84,7 +80,7 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 				inputStream = urlConn.getInputStream();
 			}
 			//根据图片的URL，下载图片，并生成一个Drawable对象
-		
+		    
 			fileutil.write2SDFromInput(this.path, imgFileName, inputStream);
 			return Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+this.path+imgFileName)), "src");
 			
