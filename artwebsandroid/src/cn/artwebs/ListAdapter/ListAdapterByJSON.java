@@ -23,7 +23,7 @@ public class ListAdapterByJSON extends BaseAdapter {
 	private final String tag="ListAdapterByJSON";
 	protected Activity activity=null;
 	protected HashMap<Integer,View> rowViews=new HashMap<Integer,View>();
-	private JSONArray list;
+	private JSONArray list=new JSONArray();
 	protected int dataSize=0;
 	
 	public ListAdapterByJSON(Activity activity)

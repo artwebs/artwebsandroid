@@ -1,5 +1,6 @@
 package cn.artwebs.AsyncImageLoader;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +18,8 @@ import cn.artwebs.utils.FileUtils;
 import cn.artwebs.utils.Utils;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
@@ -28,7 +31,7 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	//键是图片的URL，值是一个SoftReference对象，该对象指向一个Drawable对象
 	private FileUtils fileutil=new FileUtils();
 	private String path="artwebs/Cache/";
-	private String imgFileName="";
+
 		
 	private ITransmit trans;
 	
@@ -40,12 +43,12 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	//实现图片的异步加载
 	public Drawable loadDrawable(final String imageUrl,final ImageCallback callback,ITransmit trans){
 		this.trans=trans;
-		imgFileName=Base64.encode(imageUrl)+".jpg";
-		String filename=this.path+imgFileName;
+		String filename=this.path+Base64.encode(imageUrl)+".jpg";
 		if(fileutil.isFileExist(filename))		
 		{
 			try {
-			  return Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+filename)), "src");
+				callback.imageLoaded(Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+filename)), filename));
+			  return null;
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -55,7 +58,8 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 		final Handler handler=new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
-				callback.imageLoaded((Drawable) msg.obj);
+				if(msg.obj!=null)
+					callback.imageLoaded((Drawable) msg.obj);
 			}
 		};
 		//新开辟一个线程，该线程用于进行图片的下载
@@ -70,6 +74,7 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	}
 	//该方法用于根据图片的URL，从网络上下载图片
 	protected Drawable loadImageFromUrl(String imageUrl) {
+		String imgFileName=Base64.encode(imageUrl)+".jpg";
 		try {
 			InputStream inputStream;
 			if(this.trans!=null)
@@ -80,13 +85,30 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 				inputStream = urlConn.getInputStream();
 			}
 			//根据图片的URL，下载图片，并生成一个Drawable对象
-		    
-			fileutil.write2SDFromInput(this.path, imgFileName, inputStream);
-			return Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+this.path+imgFileName)), "src");
-			
+			BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            bitmapOptions.inSampleSize = 4;
+			Bitmap bm;
+			File file = fileutil.creatSDFile(path + imgFileName);
+			FileOutputStream output = new FileOutputStream(file);
+			bm=BitmapFactory.decodeStream(inputStream,null,bitmapOptions);
+			if(bm.compress(Bitmap.CompressFormat.JPEG, 50,output))
+			{
+				output.close();
+				output.flush();
+			}
+			if (bm != null && !bm.isRecycled())
+				bm.recycle();
+			inputStream.close();
+			inputStream=null;
+			if(fileutil.isFileExist(this.path+imgFileName))
+//			fileutil.write2SDFromInput(this.path, imgFileName, inputStream);
+				return Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+this.path+imgFileName)), this.path+imgFileName);
+			else
+				return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+		finally{}
 	}
 	
 

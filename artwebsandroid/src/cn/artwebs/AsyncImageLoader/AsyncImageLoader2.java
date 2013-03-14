@@ -66,8 +66,9 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 	}
 	//该方法用于根据图片的URL，从网络上下载图片
 	protected Drawable loadImageFromUrl(String imageUrl) {
+		InputStream inputStream;
 		try {
-			InputStream inputStream;
+			
 			if(this.trans!=null)
 				inputStream=this.trans.downStream(imageUrl);
 			else{
@@ -75,14 +76,14 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 				HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
 				inputStream = urlConn.getInputStream();
 			}
+			Drawable drawable=Drawable.createFromStream(inputStream, "src");
+			inputStream.close();
+			inputStream=null;
 			//根据图片的URL，下载图片，并生成一个Drawable对象
-			return Drawable.createFromStream(inputStream, "src");
-			
-//			Log.i("img","http://10.0.2.2:8081"+imageUrl);
-//			return Drawable.createFromStream(new URL("http://10.0.2.2:8081"+imageUrl).openStream(), "src");
+			return drawable;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
-		}
+		}finally{}
 	}
 	
 

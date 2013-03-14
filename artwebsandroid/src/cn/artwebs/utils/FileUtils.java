@@ -92,7 +92,7 @@ public class FileUtils {
 			creatSDDir(path);			
 			file = creatSDFile(path + fileName);
 			output = new FileOutputStream(file);
-			byte buffer [] = new byte[4 * 1024];			
+			byte buffer [] = new byte[1024];			
 			int count=0;
 			while((count=input.read(buffer))!=-1)
 			{
