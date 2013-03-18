@@ -15,6 +15,7 @@ import java.util.Map;
 import cn.artwebs.transmit.ITransmit;
 
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
@@ -84,6 +85,12 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}finally{}
+	}
+
+	@Override
+	public void setRootContext(Context context) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

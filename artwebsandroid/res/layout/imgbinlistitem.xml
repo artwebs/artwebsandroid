@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="120dip"
     android:background="#00000000"
     >
     	<ImageView android:layout_height="100dip" 
@@ -12,8 +12,9 @@
         <TextView android:id="@+id/first"
             android:layout_width="wrap_content"            
             android:layout_height="100dip" 
+            android:padding="4dip"
             android:gravity="center_vertical"
-            android:textSize="22dp"/> 
+            android:textSize="16dp"/> 
         <TextView android:id="@+id/second"
             android:layout_width="wrap_content"
             android:layout_height="55dip"

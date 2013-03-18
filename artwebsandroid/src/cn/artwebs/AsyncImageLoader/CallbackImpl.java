@@ -13,7 +13,7 @@ public class CallbackImpl implements ImageCallback{
 
 	@Override
 	public void imageLoaded(Drawable imageDrawable) {
-		imageView.setImageDrawable(imageDrawable);
+		imageView.setBackgroundDrawable(imageDrawable);
 	}
 
 }

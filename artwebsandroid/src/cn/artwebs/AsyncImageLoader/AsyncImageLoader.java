@@ -1,23 +1,19 @@
 package cn.artwebs.AsyncImageLoader;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.lang.ref.SoftReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import cn.artwebs.transmit.ITransmit;
 import cn.artwebs.utils.Base64;
 import cn.artwebs.utils.FileUtils;
-import cn.artwebs.utils.Utils;
 
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -27,10 +23,11 @@ import android.util.Log;
 
 //该类的主要作用是实现图片的异步加载
 public class AsyncImageLoader implements IAsyncImageLoader {
+	private static final String tag="AsyncImageLoader";
 	//图片缓存对象
 	//键是图片的URL，值是一个SoftReference对象，该对象指向一个Drawable对象
 	private FileUtils fileutil=new FileUtils();
-	private String path="artwebs/Cache/";
+	private String path="";
 
 		
 	private ITransmit trans;
@@ -38,16 +35,24 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	public void setRootPath(String path)
 	{
 		fileutil=new FileUtils(path);
+		
+	}
+	
+	public void setRootContext(Context context)
+	{
+		fileutil=new FileUtils(context,"tempimage");
+		this.path=fileutil.getSDPATH();
 	}
 
 	//实现图片的异步加载
 	public Drawable loadDrawable(final String imageUrl,final ImageCallback callback,ITransmit trans){
 		this.trans=trans;
-		String filename=this.path+Base64.encode(imageUrl)+".jpg";
+		String filename=Base64.encode(imageUrl)+".jpg";
+		Log.d(tag,filename);
 		if(fileutil.isFileExist(filename))		
 		{
 			try {
-				callback.imageLoaded(Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+filename)), filename));
+				callback.imageLoaded(Drawable.createFromStream(new FileInputStream(fileutil.getFile(filename)), filename));
 			  return null;
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -88,7 +93,7 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 			BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             bitmapOptions.inSampleSize = 4;
 			Bitmap bm;
-			File file = fileutil.creatSDFile(path + imgFileName);
+			File file = fileutil.creatSDFile(imgFileName);
 			FileOutputStream output = new FileOutputStream(file);
 			bm=BitmapFactory.decodeStream(inputStream,null,bitmapOptions);
 			if(bm.compress(Bitmap.CompressFormat.JPEG, 50,output))
@@ -100,9 +105,9 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 				bm.recycle();
 			inputStream.close();
 			inputStream=null;
-			if(fileutil.isFileExist(this.path+imgFileName))
+			if(fileutil.isFileExist(imgFileName))
 //			fileutil.write2SDFromInput(this.path, imgFileName, inputStream);
-				return Drawable.createFromStream(new FileInputStream(new File(fileutil.getSDPATH()+this.path+imgFileName)), this.path+imgFileName);
+				return Drawable.createFromStream(new FileInputStream(fileutil.getFile(imgFileName)), this.path+"/"+imgFileName);
 			else
 				return null;
 		} catch (Exception e) {

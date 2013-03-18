@@ -15,7 +15,8 @@ import android.os.Handler;
 import android.util.Log;
 
 public class FileUtils {
-	private String SDPATH;
+	private static final String tag="FileUtils";
+	private String SDPATH="";
 
 	public String getSDPATH() {
 		return SDPATH;
@@ -27,23 +28,23 @@ public class FileUtils {
 				android.os.Environment.MEDIA_MOUNTED))
 			SDPATH = Environment.getExternalStorageDirectory() + "/";
 		else
-			SDPATH=Environment.getDownloadCacheDirectory()+"/";
+			SDPATH="cn/artwebs/data/";
 			
 	}
 	
-	public FileUtils(String root)
+	public FileUtils(String path)
 	{
-		if (android.os.Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED))
-			SDPATH = Environment.getExternalStorageDirectory() + "/";
-		else
-			SDPATH=root+"/";
+		this.creatSDDir(path);
+		SDPATH=SDPATH+path+"/";
 		
 	}
 	
-	public FileUtils(Context context)
+	public FileUtils(Context context,String path)
 	{
-		SDPATH=context.getApplicationContext().getFilesDir().getAbsolutePath()+"/";
+		SDPATH=context.getApplicationContext().getFilesDir().getAbsolutePath();
+		this.creatSDDir(path);
+		SDPATH+=path+"/";
+		Log.d(tag,"FileUtils="+SDPATH);
 	}
 	
 	/**
@@ -52,14 +53,15 @@ public class FileUtils {
 	 * @throws IOException
 	 */
 	public File creatSDFile(String fileName) throws IOException {
-		File file = new File(SDPATH + fileName);
+		Log.d(tag,"creatSDFile="+SDPATH+fileName);
+		File file = new File(SDPATH , fileName);
 		file.createNewFile();
 		return file;
 	}
 	
 	public void deleteSDFile(String fileName)
 	{
-		File file = new File(SDPATH + fileName);
+		File file = new File(SDPATH,fileName);
 		file.delete();
 	}
 	
@@ -69,8 +71,8 @@ public class FileUtils {
 	 * @param dirName
 	 */
 	public File creatSDDir(String dirName) {
-		File dir = new File(SDPATH + dirName);
-		dir.mkdirs();
+		File dir = new File(SDPATH,dirName);
+		if(!dir.exists())dir.mkdirs();
 		return dir;
 	}
 
@@ -78,8 +80,17 @@ public class FileUtils {
 	 * 判断SD卡上的文件夹是否存在
 	 */
 	public boolean isFileExist(String fileName){
-		File file = new File(SDPATH + fileName);
+		File file = new File(SDPATH+ fileName);
 		return file.exists();
+	}
+	
+	/**
+	 * 判断SD卡上的文件夹是否存在
+	 */
+	public File getFile(String fileName){
+		Log.d(tag,"getFile="+SDPATH+fileName);
+		File file = new File(SDPATH+fileName);
+		return file;
 	}
 	
 	/**
