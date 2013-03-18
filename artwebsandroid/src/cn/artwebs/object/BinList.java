@@ -178,6 +178,11 @@ public class BinList extends IBinObject {
 		this.item.addAll(adder.getItem());
 	}
 	
+	public void addendTop(BinList adder)
+	{
+		this.item.addAll(0,adder.getItem());
+	}
+	
 	public BinList clone(){
 		BinList rsList=new BinList();
 		rsList.setItem((ArrayList)item.clone());

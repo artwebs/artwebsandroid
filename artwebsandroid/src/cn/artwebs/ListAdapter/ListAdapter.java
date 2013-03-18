@@ -74,15 +74,12 @@ public class ListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView=rowViews.get(position);
-		if(rowView==null)
-		{
-			rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.binlistitem, null);
-			TextView firstView=(TextView)rowView.findViewById(R.id.first);
-			firstView.setMaxLines(2);
-			HashMap<Object, Object> row=(HashMap<Object, Object>)this.getItem(position);
-			firstView.setText(row.get("text").toString());
-			rowViews.put(position, rowView);
-		}
+		rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.binlistitem, null);
+		TextView firstView=(TextView)rowView.findViewById(R.id.first);
+		firstView.setMaxLines(2);
+		HashMap<Object, Object> row=(HashMap<Object, Object>)this.getItem(position);
+		firstView.setText(row.get("text").toString());
+		rowViews.put(position, rowView);
 		return rowView;
 	}
 }

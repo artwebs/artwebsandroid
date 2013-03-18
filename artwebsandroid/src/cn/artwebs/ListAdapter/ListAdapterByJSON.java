@@ -79,20 +79,17 @@ public class ListAdapterByJSON extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView=rowViews.get(position);
-		if(rowView==null)
-		{
-			rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.binlistitem, null);
-			TextView firstView=(TextView)rowView.findViewById(R.id.first);
-			firstView.setMaxLines(2);
-			JSONObject row=(JSONObject)this.getItem(position);
-			try {
-				firstView.setText(row.getString("fist"));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			rowViews.put(position, rowView);
+		rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.binlistitem, null);
+		TextView firstView=(TextView)rowView.findViewById(R.id.first);
+		firstView.setMaxLines(2);
+		JSONObject row=(JSONObject)this.getItem(position);
+		try {
+			firstView.setText(row.getString("fist"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		rowViews.put(position, rowView);
 		return rowView;
 	}
 }

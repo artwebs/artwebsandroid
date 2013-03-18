@@ -28,13 +28,11 @@ public class ImgListAdapter extends ListAdapterByJSON {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView=rowViews.get(position);
-		if(rowView==null)
-		{
-			rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.imgbinlistitem, null);
-			
-			TextView firstView=(TextView)rowView.findViewById(R.id.first);
-			firstView.setMaxLines(2);
-			HashMap<Object, Object> row=(HashMap<Object, Object>)this.getItem(position);
+		rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.imgbinlistitem, null);
+		
+		TextView firstView=(TextView)rowView.findViewById(R.id.first);
+		firstView.setMaxLines(2);
+		HashMap<Object, Object> row=(HashMap<Object, Object>)this.getItem(position);
 //			firstView.setText(row.get("text").toString());
 //			Log.i("img",activity.getApplicationContext().getFilesDir().toString());
 //			loader.setRootPath(activity.getApplicationContext().getFilesDir().toString());
@@ -45,9 +43,8 @@ public class ImgListAdapter extends ListAdapterByJSON {
 //			if (cacheImage != null) {
 //				imageView.setImageDrawable(cacheImage);
 //			}
-			
-			rowViews.put(position, rowView);
-		}
+		
+		rowViews.put(position, rowView);
 		return rowView;
 	}
 	
