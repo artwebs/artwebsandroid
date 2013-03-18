@@ -35,13 +35,6 @@ public class AsyncImageLoader implements IAsyncImageLoader {
 	public void setRootPath(String path)
 	{
 		fileutil=new FileUtils(path);
-		
-	}
-	
-	public void setRootContext(Context context)
-	{
-		fileutil=new FileUtils(context,"tempimage");
-		this.path=fileutil.getSDPATH();
 	}
 
 	//实现图片的异步加载

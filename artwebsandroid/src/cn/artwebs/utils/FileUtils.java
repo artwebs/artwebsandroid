@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import cn.artwebs.comm.AppApplication;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,30 +23,25 @@ public class FileUtils {
 	public String getSDPATH() {
 		return SDPATH;
 	}
+	
 	public FileUtils() {
 		//得到当前外部存储设备的目录
 		// /SDCARD
 		if (android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED))
-			SDPATH = Environment.getExternalStorageDirectory() + "/";
+			SDPATH =Environment.getExternalStorageDirectory() + "/";
 		else
-			SDPATH="cn/artwebs/data/";
+			SDPATH=AppApplication.getAppContext().getApplicationContext().getFilesDir().getAbsolutePath()+"/";
+		
 			
 	}
 	
 	public FileUtils(String path)
 	{
+		this();
 		this.creatSDDir(path);
 		SDPATH=SDPATH+path+"/";
-		
-	}
-	
-	public FileUtils(Context context,String path)
-	{
-		SDPATH=context.getApplicationContext().getFilesDir().getAbsolutePath();
-		this.creatSDDir(path);
-		SDPATH+=path+"/";
-		Log.d(tag,"FileUtils="+SDPATH);
+		Log.d(tag,"SDPATH="+SDPATH);
 	}
 	
 	/**

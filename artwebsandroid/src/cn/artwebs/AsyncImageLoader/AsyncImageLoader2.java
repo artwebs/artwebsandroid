@@ -86,12 +86,6 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 			throw new RuntimeException(e);
 		}finally{}
 	}
-
-	@Override
-	public void setRootContext(Context context) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 
 
