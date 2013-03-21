@@ -1,5 +1,6 @@
 package cn.artwebs.ListAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -23,7 +24,7 @@ public class ListAdapterByJSON extends BaseAdapter {
 	private final String tag="ListAdapterByJSON";
 	protected Activity activity=null;
 	protected HashMap<Integer,View> rowViews=new HashMap<Integer,View>();
-	private JSONArray list=new JSONArray();
+	private ArrayList<JSONObject> list=new ArrayList<JSONObject>();
 	protected int dataSize=0;
 	
 	public ListAdapterByJSON(Activity activity)
@@ -31,23 +32,41 @@ public class ListAdapterByJSON extends BaseAdapter {
 		this.activity=activity;
 	}
 	
-	public void setList(JSONArray list)
+	public void setList(JSONArray newList)
 	{
-		dataSize=list.length();
-		this.list=list;
+		convertJSONArray(newList);
+		dataSize=list.size();
 	}
-	public ListAdapterByJSON(JSONArray list,Activity activity)
+	public ListAdapterByJSON(JSONArray newList,Activity activity)
 	{
-		dataSize=list.length();
-		this.list=list;
+		convertJSONArray(newList);
+		dataSize=list.size();
 		this.activity=activity;
 	}
 	
 	public void appendItem(JSONObject obj)
 	{
-		this.list.put(obj);
+		this.list.add(obj);
 	}
 	
+	public void clearItem()
+	{
+		this.list.clear();
+	}
+	
+	private void convertJSONArray(JSONArray newList)
+	{
+		for(int i=0;i<newList.length();i++)
+		{
+			try {
+				if(newList.get(i)!=null)
+					this.list.add((JSONObject) newList.get(i));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	public int getDataSize() {
@@ -56,18 +75,12 @@ public class ListAdapterByJSON extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return this.list.length();
+		return this.list.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		try {
-			return this.list.get(arg0);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return this.list.get(arg0);
 	}
 
 	@Override

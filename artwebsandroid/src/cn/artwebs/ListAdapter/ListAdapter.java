@@ -49,6 +49,11 @@ public class ListAdapter extends BaseAdapter {
 		Log.d(tag,"appendItem"+this.list.getItem().toString());
 	}
 	
+	public void clearItem()
+	{
+		this.list.clear();
+	}
+	
 	
 	
 	public int getDataSize() {
