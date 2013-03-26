@@ -29,6 +29,7 @@ public class ITransmitImplTcp implements ITransmit {
 		this.host=host;
 		this.prot=port;
 		this.skip=skip;
+		sok=new ClientTCP(host,prot);	
 	}
 
 
@@ -58,16 +59,13 @@ public class ITransmitImplTcp implements ITransmit {
 	@Override
 	public String download(String commend) {
 		Log.i("trans",commend);
-		sok=new ClientTCP(host,prot);	
 		String rs= sok.download(this.skip+commend);
-		sok.closeConnetion();
 		Log.i(tag,"rs=>"+rs);
 		return rs;
 	}
 
 	@Override
 	public int downFile(String commend, String path, String fileName) {
-		sok=new ClientTCP(host,prot);	
 		Log.i("Trans",this.skip+commend);
 		return sok.downFile(this.skip+commend, path, fileName);
 	}
@@ -75,13 +73,11 @@ public class ITransmitImplTcp implements ITransmit {
 	@Override
 	public int downFile(String commend, String path, String fileName,
 			Handler handler) {
-		sok=new ClientTCP(host,prot);	
 		return sok.downFile(this.skip+commend, path, fileName,handler);
 	}
 
 	@Override
 	public InputStream downStream(String commend) {
-		sok=new ClientTCP(host,prot);	
 		return sok.downStream(this.skip+commend);
 	}
 
@@ -89,7 +85,6 @@ public class ITransmitImplTcp implements ITransmit {
 	public String download(String commend, int size) {
 		Log.i("trans","commend="+commend);
 		Log.i("trans","size="+size);
-		sok=new ClientTCP(host,prot);
 		String rs=sok.download(commend, size);
 		Log.i(tag,"rs=>"+rs);
 		return rs;
@@ -99,7 +94,6 @@ public class ITransmitImplTcp implements ITransmit {
 	public String download(String commend, String end) {
 		Log.i("trans","commend="+commend);
 		Log.i("trans","end="+end);
-		sok=new ClientTCP(host,prot);
 		String rs=sok.download(commend, end);
 		Log.i(tag,"rs=>"+rs);
 		return rs;
@@ -108,6 +102,11 @@ public class ITransmitImplTcp implements ITransmit {
 	@Override
 	public void close() {
 		if(sok!=null)sok.closeConnetion();
+	}
+
+	@Override
+	public byte[] download(byte[] commend, int size) {
+		return sok.download(commend, size);
 	}
 
 	

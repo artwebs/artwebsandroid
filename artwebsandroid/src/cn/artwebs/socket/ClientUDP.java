@@ -89,4 +89,22 @@ public class ClientUDP extends Client {
 		return null;
 	}
 
+	@Override
+	public byte[] download(byte[] msg, int size) {
+		byte rData[]=new byte[size];
+		packet=new DatagramPacket(msg,msg.length);
+		this.getConnetion();
+		try {			
+			this.socket.send(packet);
+			Log.i("port", this.socket.getLocalPort()+"");
+			DatagramPacket rPacket=new DatagramPacket(rData,rData.length);
+			this.socket.receive(rPacket);	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.closeConnetion();			
+		return rData;
+	}
+
 }

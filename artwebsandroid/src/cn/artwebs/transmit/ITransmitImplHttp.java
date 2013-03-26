@@ -103,6 +103,11 @@ public class ITransmitImplHttp implements ITransmit {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public byte[] download(byte[] commend, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

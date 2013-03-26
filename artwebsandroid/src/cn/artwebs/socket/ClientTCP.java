@@ -3,6 +3,7 @@ package cn.artwebs.socket;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -16,7 +17,7 @@ import android.util.Log;
 public class ClientTCP extends Client {
 	private static String tag="ClientTCP";
 	protected Socket socket;
-	private int timeOut=10000;
+	private int timeOut=1000*10;
 	
 	public ClientTCP(){}
 	
@@ -41,10 +42,21 @@ public class ClientTCP extends Client {
 			try {
 				this.socket=new Socket(this.host,this.port);		
 				this.socket.setSoTimeout(timeOut);
+				Log.d(tag,"create Client");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				Log.i(tag,e.toString());
 				e.printStackTrace();
+				if(socket!=null)
+				{
+					try {
+						socket.close();
+						socket=null;
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		}
 		
@@ -63,7 +75,6 @@ public class ClientTCP extends Client {
 			{
 				rs=rs+line+"\n";
 			}
-			this.closeConnetion();
 					
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -105,8 +116,10 @@ public class ClientTCP extends Client {
 	
 	@Override
 	public void closeConnetion() {
+		if(this.socket!=null)
 		try {
 			this.socket.close();
+			this.socket=null;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -178,13 +191,35 @@ public class ClientTCP extends Client {
 		    b = bais.toByteArray();
 		    bais.close();
 		    rs=new String(b);
-			this.closeConnetion();
 					
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	
+	
+	@Override
+	public byte[] download(byte[] msg, int size) {
+		this.getConnetion();
+		byte[] b = new byte[size];
+		try {
+			
+			OutputStream outputstream =this.socket.getOutputStream();
+			outputstream.write(msg);
+			int len = this.socket.getInputStream().read(b);
+		    ByteArrayOutputStream bais = new ByteArrayOutputStream();
+		    bais.write(b, 0, len);
+		    bais.flush();
+		    b = bais.toByteArray();
+		    bais.close();
+					
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return b;
 	}
 
 	@Override
@@ -208,7 +243,6 @@ public class ClientTCP extends Client {
 				rs=rs+line;
 				if(rs.indexOf(end)>0)break;
 			}
-			this.closeConnetion();
 					
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

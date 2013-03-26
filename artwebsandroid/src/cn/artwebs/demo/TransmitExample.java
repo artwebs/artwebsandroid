@@ -88,5 +88,11 @@ public class TransmitExample implements ITransmit {
 		
 	}
 
+	@Override
+	public byte[] download(byte[] commend, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

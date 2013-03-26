@@ -35,6 +35,7 @@ public abstract class Client {
 	
 	public abstract String download(String msg);
 	public abstract String download(String msg,int size);
+	public abstract byte[] download(byte[] msg, int size);
 	public abstract String download(String msg,String end);
 	
 	public abstract int downFile(String meg, String path, String fileName);
