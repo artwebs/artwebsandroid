@@ -1,9 +1,14 @@
 package cn.artwebs.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import javax.xml.parsers.SAXParserFactory;
@@ -11,6 +16,9 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
+
+import android.util.Log;
+
 
 public class Utils {
 	public static void parseXMLBySAX(String xmlStr,ContentHandler handler)
@@ -216,4 +224,19 @@ public class Utils {
 	        src[0] =  (byte) (value & 0xFF);                  
 	        return src;   
 	    } 
+	    
+	   public static byte[] inputStreamToBtye(InputStream inputstream,int size) throws IOException
+	   {
+		    ByteArrayOutputStream bais;
+			byte[] b;
+			int len;
+			b = new byte[size];
+			len = inputstream.read(b);
+		    bais = new ByteArrayOutputStream();
+		    bais.write(b, 0, len);
+		    bais.flush();
+		    b = bais.toByteArray();
+		    bais.close();
+		    return b;
+	   }
 }
