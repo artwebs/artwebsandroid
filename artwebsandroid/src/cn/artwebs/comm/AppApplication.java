@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import cn.artwebs.UI.DataParseXML.DataFlag;
+import cn.artwebs.utils.HttpDownloader;
+import cn.artwebs.utils.Utils;
+
 
 import android.app.Activity;
 import android.app.Application;
@@ -13,6 +17,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
@@ -24,6 +30,7 @@ public class AppApplication extends Application {
 	private String loginName="";
 	private String password="";
 	public static String loginKey="";
+	private static PackageInfo pkg;
     public String getLoginName() {
 		return loginName;
 	}
@@ -77,7 +84,12 @@ public class AppApplication extends Application {
             getBaseContext().getResources().updateConfiguration(config,
                     getBaseContext().getResources().getDisplayMetrics());
         }
-
+        try {
+			pkg= getPackageManager().getPackageInfo(this.getPackageName(), 0);
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         instance = this;
     }
 
@@ -109,6 +121,8 @@ public class AppApplication extends Application {
     }
     
     
+    
+    
     public static void showNotification(int id,int icon,String title,String head,String content,Class obj)
 	{
 		NotificationManager notificationManager=(NotificationManager)getAppContext().getSystemService(NOTIFICATION_SERVICE);
@@ -128,4 +142,64 @@ public class AppApplication extends Application {
     	NotificationManager notificationManager=(NotificationManager)getAppContext().getSystemService(NOTIFICATION_SERVICE);
     	notificationManager.cancel(id);
     }
+    
+    public static Version getLocalVersion()
+    {
+    	Version obj=new Version();
+    	obj.setAppName(pkg.applicationInfo.loadLabel(instance.getPackageManager()).toString());
+    	obj.setVersion(Float.valueOf(pkg.versionName));
+    	obj.setUpdateUrl("");
+    	return obj;
+    }
+    
+    public static Version getControlVersion()
+    {
+    	
+    	Version localVersion=getLocalVersion();
+    	HttpDownloader httpobj=new HttpDownloader();
+    	String url="http://http://artwebsapp.duapp.com/appversion/appupdate/%s/%f";
+    	String rs=httpobj.download(String.format(url, localVersion.getAppName(),localVersion.getVersion()));
+    	Version ctlVersion=new Version();
+    	ctlVersion.setAppName(Utils.getMarkString(rs, "<appName>", "</appName>"));
+    	ctlVersion.setUpdateUrl(Utils.getMarkString(rs, "<updateUrl>", "</updateUrl>"));
+    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(rs, "<updateUrl>", "</updateUrl>")));
+		return ctlVersion;
+    	
+    }
 }
+
+class Version
+{
+	private float version;
+	private String updateUrl;
+	private String appName;
+	private int apkSize;
+	
+	public float getVersion() {
+		return version;
+	}
+	public void setVersion(float version) {
+		this.version = version;
+	}
+	public String getUpdateUrl() {
+		return updateUrl;
+	}
+	public void setUpdateUrl(String updateUrl) {
+		this.updateUrl = updateUrl;
+	}
+	public String getAppName() {
+		return appName;
+	}
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+	public int getApkSize() {
+		return apkSize;
+	}
+	public void setApkSize(int apkSize) {
+		this.apkSize = apkSize;
+	}
+	
+	
+}
+

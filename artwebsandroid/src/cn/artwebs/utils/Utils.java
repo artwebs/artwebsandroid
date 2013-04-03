@@ -8,6 +8,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -37,6 +38,40 @@ public class Utils {
 		finally{}
 	}
 	
+	
+	public static String getMarkString(String Str, String LeftMark, String RightMark) {
+		String tmpreturn = Str;
+		if (tmpreturn.indexOf(LeftMark, 0) != -1)
+		{
+			int LeftMarkPoint = tmpreturn.indexOf(LeftMark, 0) + LeftMark.length();
+			int RightMarkPoint = tmpreturn.indexOf(RightMark, LeftMarkPoint);
+			if (RightMarkPoint != -1)
+			{
+				int ValueLength = RightMarkPoint;
+				tmpreturn = tmpreturn.substring(LeftMarkPoint, ValueLength);
+			}
+		}
+		if (tmpreturn == Str)
+		{
+			return "";
+		}
+		
+		return tmpreturn;
+	}
+		
+	public static ArrayList getMarkStringList(String Str, String LeftMark, String RightMark)
+	{
+		ArrayList al = new ArrayList();
+		String tempstr = new String(Str);
+		String tempv = "";
+		while (!(getMarkString(tempstr, LeftMark, RightMark).equals(""))) {
+			tempv = getMarkString(tempstr, LeftMark, RightMark);
+			if (tempv.equals("")) break;
+			al.add(new String(tempv));
+			tempstr = tempstr.replace(LeftMark + tempv + RightMark, "");
+		}
+		return al;
+	}
 	
 	public static String UrlEncode(String code, String charset)
 	  {
