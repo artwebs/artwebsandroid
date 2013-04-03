@@ -35,7 +35,12 @@ public class UpdateApp {
 		if(obj.fileUtils.isFileExist(obj.version.getAppName()+".apk"))obj.fileUtils.deleteSDFile(obj.version.getAppName()+".apk");
 		if(localVersion.getVersion()<ctlVersion.getVersion())
 		{
-			
+			if(!android.os.Environment.getExternalStorageState().equals(
+					android.os.Environment.MEDIA_MOUNTED))
+			{
+				Toast.makeText(AppApplication.getAppContext(), "设备无SDCard，无法完成自动升级",Toast.LENGTH_LONG).show();
+				return;
+			}
 			obj.downApk();
 		}
 	}
