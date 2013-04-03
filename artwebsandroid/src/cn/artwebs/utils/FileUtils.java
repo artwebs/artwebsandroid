@@ -41,7 +41,7 @@ public class FileUtils {
 		this();
 		this.creatSDDir(path);
 		SDPATH=SDPATH+path+"/";
-		Log.d(tag,"SDPATH="+SDPATH);
+		Log.d(tag,"FileUtils="+SDPATH);
 	}
 	
 	/**
@@ -58,6 +58,7 @@ public class FileUtils {
 	
 	public void deleteSDFile(String fileName)
 	{
+		Log.d(tag,"deleteSDFile="+SDPATH+fileName);
 		File file = new File(SDPATH,fileName);
 		file.delete();
 	}
@@ -77,6 +78,7 @@ public class FileUtils {
 	 * 判断SD卡上的文件夹是否存在
 	 */
 	public boolean isFileExist(String fileName){
+		Log.d(tag,"isFileExist:"+SDPATH+ fileName);
 		File file = new File(SDPATH+ fileName);
 		return file.exists();
 	}
@@ -93,12 +95,11 @@ public class FileUtils {
 	/**
 	 * 将一个InputStream里面的数据写入到SD卡中
 	 */
-	public File write2SDFromInput(String path,String fileName,InputStream input){
+	public File write2SDFromInput(String fileName,InputStream input){
 		File file = null;
 		OutputStream output = null;
-		try{
-			creatSDDir(path);			
-			file = creatSDFile(path + fileName);
+		try{	
+			file = creatSDFile(fileName);
 			output = new FileOutputStream(file);
 			byte buffer [] = new byte[1024];			
 			int count=0;
@@ -125,17 +126,17 @@ public class FileUtils {
 	/**
 	 * 将一个InputStream里面的数据写入到SD卡中
 	 */
-	public File write2SDFromInput(String path,String fileName,InputStream input,Handler handler){
+	public File write2SDFromInput(String fileName,InputStream input,Handler handler){
 		File file = null;
 		OutputStream output = null;
-		try{
-			creatSDDir(path);			
-			file = creatSDFile(path + fileName);
+		try{	
+			file = creatSDFile(fileName);
 			output = new FileOutputStream(file);
 			byte buffer [] = new byte[1024];			
 			int count=0;
 			while((count=input.read(buffer))!=-1)
 			{
+				
 				output.write(buffer, 0, count);
 				handler.sendEmptyMessage(1);
 			}

@@ -63,13 +63,13 @@ public class HttpDownloader {
 	public int downFile(String urlStr, String path, String fileName) {
 		InputStream inputStream = null;
 		try {
-			FileUtils fileUtils = new FileUtils();
+			FileUtils fileUtils = new FileUtils(path);
 			
-			if (fileUtils.isFileExist(path + fileName)) {
+			if (fileUtils.isFileExist(fileName)) {
 				return 1;
 			} else {
 				inputStream = getInputStreamFromUrl(urlStr);
-				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream);
+				File resultFile = fileUtils.write2SDFromInput(fileName, inputStream);
 				if (resultFile == null) {
 					return -1;
 				}
@@ -91,16 +91,19 @@ public class HttpDownloader {
 	 * 该函数返回整形 -1：代表下载文件出错 -2保存文件错误 0：代表下载文件成功 1：代表文件已经存在
 	 */
 	public int downFile(String urlStr, String path, String fileName,Handler handler) {
+		
 		InputStream inputStream = null;
 		try {
-			FileUtils fileUtils = new FileUtils();
-			
-			if (fileUtils.isFileExist(path + fileName)) {
+
+			FileUtils fileUtils = new FileUtils(path);
+			Log.d(tag,urlStr);
+			Log.d(tag,fileName);
+			Log.d(tag,(fileUtils.isFileExist(fileName))+"");
+			if (fileUtils.isFileExist(fileName)) {
 				return 1;
 			} else {
-				Log.d(tag,urlStr);
 				inputStream = getInputStreamFromUrl(urlStr);
-				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream,handler);
+				File resultFile = fileUtils.write2SDFromInput(fileName, inputStream,handler);
 				if (resultFile == null) {
 					return -2;
 				}

@@ -90,16 +90,16 @@ public class ClientTCP extends Client {
 				
 		InputStream inputStream = null;
 		try {
-			FileUtils fileUtils = new FileUtils();
+			FileUtils fileUtils = new FileUtils(path);
 			
-			if (fileUtils.isFileExist(path + fileName)) {
+			if (fileUtils.isFileExist(fileName)) {
 				return 1;
 			} else {
 				this.getConnetion();
 				inputStream = this.socket.getInputStream();
 				OutputStream outputstream =this.socket.getOutputStream();
 				outputstream.write(meg.getBytes());
-				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream);
+				File resultFile = fileUtils.write2SDFromInput(fileName, inputStream);
 				if (resultFile == null) {
 					return -1;
 				}
@@ -133,16 +133,16 @@ public class ClientTCP extends Client {
 			Handler handler) {
 		InputStream inputStream = null;
 		try {
-			FileUtils fileUtils = new FileUtils();
+			FileUtils fileUtils = new FileUtils(path);
 			
-			if (fileUtils.isFileExist(path + fileName)) {
+			if (fileUtils.isFileExist(fileName)) {
 				return 1;
 			} else {
 				this.getConnetion();
 				inputStream = this.socket.getInputStream();
 				OutputStream outputstream =this.socket.getOutputStream();
 				outputstream.write(meg.getBytes());
-				File resultFile = fileUtils.write2SDFromInput(path,fileName, inputStream,handler);
+				File resultFile = fileUtils.write2SDFromInput(fileName, inputStream,handler);
 				if (resultFile == null) {
 					return -1;
 				}
