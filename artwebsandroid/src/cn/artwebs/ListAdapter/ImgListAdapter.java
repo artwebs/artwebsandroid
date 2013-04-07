@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import cn.artwebs.R;
 import cn.artwebs.AsyncImageLoader.AsyncImageLoader;
 import cn.artwebs.AsyncImageLoader.IAsyncImageLoader;
+import cn.artwebs.object.BinList;
 
 
 import android.app.Activity;
@@ -17,13 +18,13 @@ import android.widget.TextView;
 
 
 
-public class ImgListAdapter extends ListAdapterByJSON {
-	public ImgListAdapter(JSONArray list, Activity activity) {
-		super(list, activity);
-		// TODO Auto-generated constructor stub
+public class ImgListAdapter extends ListAdapter {
+
+	protected IAsyncImageLoader loader = new AsyncImageLoader();
+	public ImgListAdapter(Activity activity) {
+		super(activity);
 	}
 
-	private IAsyncImageLoader loader = new AsyncImageLoader();
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {

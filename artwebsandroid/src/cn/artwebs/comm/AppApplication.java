@@ -156,14 +156,20 @@ public class AppApplication extends Application {
     {
     	
     	Version localVersion=getLocalVersion();
-    	HttpDownloader httpobj=new HttpDownloader();
-    	String url="http://artwebsapp.duapp.com/appversion/appupdate/%s/%f";
-    	String rs=httpobj.download(String.format(url, Utils.UrlEncode(localVersion.getAppName(), "utf-8"),localVersion.getVersion()));
     	Version ctlVersion=new Version();
-    	ctlVersion.setAppName(Utils.getMarkString(rs, "<appName>", "</appName>"));
-    	ctlVersion.setUpdateUrl(Utils.getMarkString(rs, "<updateUrl>", "</updateUrl>"));
-    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(rs, "<version>", "</version>")));
-    	ctlVersion.setApkSize(Integer.parseInt(Utils.getMarkString(rs, "<apkSize>", "</apkSize>")));
+    	try{
+	    	HttpDownloader httpobj=new HttpDownloader();
+	    	String url="http://artwebsapp.duapp.com/appversion/appupdate/%s/%f";
+	    	String rs=httpobj.download(String.format(url, Utils.UrlEncode(localVersion.getAppName(), "utf-8"),localVersion.getVersion()));
+	    	
+	    	ctlVersion.setAppName(Utils.getMarkString(rs, "<appName>", "</appName>"));
+	    	ctlVersion.setUpdateUrl(Utils.getMarkString(rs, "<updateUrl>", "</updateUrl>"));
+	    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(rs, "<version>", "</version>")));
+	    	ctlVersion.setApkSize(Integer.parseInt(Utils.getMarkString(rs, "<apkSize>", "</apkSize>")));
+    	}catch(Exception e){
+    		ctlVersion=null;
+    	}
+    	finally{}
 		return ctlVersion;
     	
     }

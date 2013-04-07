@@ -72,6 +72,7 @@ public class ArtWebView extends WebView {
     public void loadurl(final WebView view,final String url){
     	new Thread(){
         	public void run(){
+        		Log.d(tag,"loadurl="+url);
         		handler.sendEmptyMessage(0);
         		view.loadUrl(url);
         	}
