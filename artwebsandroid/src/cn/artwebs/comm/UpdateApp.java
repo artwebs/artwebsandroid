@@ -2,6 +2,7 @@ package cn.artwebs.comm;
 
 import cn.artwebs.utils.FileUtils;
 import cn.artwebs.utils.HttpDownloader;
+import cn.artwebs.utils.Utils;
 import android.R;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,8 +32,13 @@ public class UpdateApp {
 	
 	public static void install(Activity activity)
 	{
-		Version localVersion=AppApplication.getLocalVersion();
-		Version ctlVersion=AppApplication.getControlVersion();
+		installWithString(activity,getCtlContent());
+	}
+	
+	public static void installWithString(Activity activity,String content)
+	{
+		Version localVersion=getLocalVersion();
+		Version ctlVersion=getControlVersionWithString(content);
 		if(ctlVersion==null)return;
 		obj=new UpdateApp();
 		obj.version=ctlVersion;
@@ -70,10 +76,9 @@ public class UpdateApp {
 							 
 						 }).create();
 			dialog.show();
-			
-			
 		}
 	}
+	
 	private void downApk()
 	{
 		downPd=new ProgressDialog(activity);
@@ -90,6 +95,42 @@ public class UpdateApp {
 				obj.downFile(version.getUpdateUrl(),path, version.getAppName()+".apk", downHandler);
 			}}).start();
 	}
+	
+	public static Version getLocalVersion()
+    {
+    	Version obj=new Version();
+    	obj.setAppName(AppApplication.getPKG().applicationInfo.packageName.substring(AppApplication.getPKG().applicationInfo.packageName.lastIndexOf(".")+1));
+    	obj.setVersion(Float.valueOf(AppApplication.getPKG().versionName));
+    	obj.setUpdateUrl("");
+    	return obj;
+    }
+	
+	public static Version getControlVersionWithString(String content)
+	{
+		Version ctlVersion=new Version();
+		ctlVersion.setAppName(Utils.getMarkString(content, "<appName>", "</appName>"));
+    	ctlVersion.setUpdateUrl(Utils.getMarkString(content, "<updateUrl>", "</updateUrl>"));
+    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(content, "<version>", "</version>")));
+    	ctlVersion.setApkSize(Integer.parseInt(Utils.getMarkString(content, "<apkSize>", "</apkSize>")));
+    	return ctlVersion;
+	}
+    
+    public static String getCtlContent()
+    {
+    	
+    	Version localVersion=getLocalVersion();
+    	String rs="";
+    	try{
+	    	HttpDownloader httpobj=new HttpDownloader();
+	    	String url="http://artwebsapp.duapp.com/appversion/appupdate/%s/%f";
+	    	rs=httpobj.download(String.format(url, Utils.UrlEncode(localVersion.getAppName(), "utf-8"),localVersion.getVersion()));
+	    	
+    	}catch(Exception e){
+    		
+    	}
+    	finally{}
+		return rs;
+    }
 	
 	private Handler downHandler=new Handler()
 	{

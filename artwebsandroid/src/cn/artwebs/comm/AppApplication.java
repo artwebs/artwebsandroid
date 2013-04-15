@@ -120,6 +120,10 @@ public class AppApplication extends Application {
         return instance.getResources();
     }
     
+    public static PackageInfo getPKG()
+    {
+    	return pkg;
+    }
     
     
     
@@ -143,70 +147,7 @@ public class AppApplication extends Application {
     	notificationManager.cancel(id);
     }
     
-    public static Version getLocalVersion()
-    {
-    	Version obj=new Version();
-    	obj.setAppName(pkg.applicationInfo.packageName.substring(pkg.applicationInfo.packageName.lastIndexOf(".")+1));
-    	obj.setVersion(Float.valueOf(pkg.versionName));
-    	obj.setUpdateUrl("");
-    	return obj;
-    }
-    
-    public static Version getControlVersion()
-    {
-    	
-    	Version localVersion=getLocalVersion();
-    	Version ctlVersion=new Version();
-    	try{
-	    	HttpDownloader httpobj=new HttpDownloader();
-	    	String url="http://artwebsapp.duapp.com/appversion/appupdate/%s/%f";
-	    	String rs=httpobj.download(String.format(url, Utils.UrlEncode(localVersion.getAppName(), "utf-8"),localVersion.getVersion()));
-	    	
-	    	ctlVersion.setAppName(Utils.getMarkString(rs, "<appName>", "</appName>"));
-	    	ctlVersion.setUpdateUrl(Utils.getMarkString(rs, "<updateUrl>", "</updateUrl>"));
-	    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(rs, "<version>", "</version>")));
-	    	ctlVersion.setApkSize(Integer.parseInt(Utils.getMarkString(rs, "<apkSize>", "</apkSize>")));
-    	}catch(Exception e){
-    		ctlVersion=null;
-    	}
-    	finally{}
-		return ctlVersion;
-    	
-    }
+   
 }
 
-class Version
-{
-	private float version;
-	private String updateUrl;
-	private String appName;
-	private int apkSize;
-	
-	public float getVersion() {
-		return version;
-	}
-	public void setVersion(float version) {
-		this.version = version;
-	}
-	public String getUpdateUrl() {
-		return updateUrl;
-	}
-	public void setUpdateUrl(String updateUrl) {
-		this.updateUrl = updateUrl;
-	}
-	public String getAppName() {
-		return appName;
-	}
-	public void setAppName(String appName) {
-		this.appName = appName;
-	}
-	public int getApkSize() {
-		return apkSize;
-	}
-	public void setApkSize(int apkSize) {
-		this.apkSize = apkSize;
-	}
-	
-	
-}
 
