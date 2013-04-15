@@ -108,10 +108,16 @@ public class UpdateApp {
 	public static Version getControlVersionWithString(String content)
 	{
 		Version ctlVersion=new Version();
-		ctlVersion.setAppName(Utils.getMarkString(content, "<appName>", "</appName>"));
-    	ctlVersion.setUpdateUrl(Utils.getMarkString(content, "<updateUrl>", "</updateUrl>"));
-    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(content, "<version>", "</version>")));
-    	ctlVersion.setApkSize(Integer.parseInt(Utils.getMarkString(content, "<apkSize>", "</apkSize>")));
+		try{
+			ctlVersion.setAppName(Utils.getMarkString(content, "<appName>", "</appName>"));
+	    	ctlVersion.setUpdateUrl(Utils.getMarkString(content, "<updateUrl>", "</updateUrl>"));
+	    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(content, "<version>", "</version>")));
+	    	ctlVersion.setApkSize(Integer.parseInt(Utils.getMarkString(content, "<apkSize>", "</apkSize>")));
+		}catch(Exception e)
+		{
+			ctlVersion=null;
+		} finally
+		{}
     	return ctlVersion;
 	}
     
