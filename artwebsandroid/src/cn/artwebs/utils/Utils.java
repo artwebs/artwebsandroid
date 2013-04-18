@@ -227,6 +227,19 @@ public class Utils {
 	                | ((src[offset+3] & 0xFF)<<24));  
 	        return value;  
 	    }  
+	    
+	    public static long bytesToLong(byte[] src, int offset) {  
+	        long value;    
+	        value = (long) ((long)(src[offset] & 0xFF)   
+	                | (long)((src[offset+1] & 0xFF)<<8)   
+	                | (long)((src[offset+2] & 0xFF)<<16)   
+	                | (long)((src[offset+3] & 0xFF)<<24)
+	                | (long)((src[offset+4] & 0xFF)<<32)
+	                | (long)((src[offset+5] & 0xFF)<<40)
+	                | (long)((src[offset+6] & 0xFF)<<48) 
+	        		| (long)((src[offset+7] & 0xFF)<<56));  
+	        return value;  
+	    }  
 	      
 	     /**  
 	        * byte数组中取int数值，本方法适用于(低位在后，高位在前)的顺序。和intToBytes2（）配套使用 
@@ -239,6 +252,20 @@ public class Utils {
 	                |(src[offset+3] & 0xFF));  
 	        return value;  
 	    }  
+	    
+	    public static long bytesToLong2(byte[] src, int offset) {  
+	        long value;    
+	        value = (long) ((long)((src[offset] & 0xFF)<<56)  
+	                |(long)((src[offset+1] & 0xFF)<<48)  
+	                |(long)((src[offset+2] & 0xFF)<<40)  
+	                |(long)((src[offset+3] & 0xFF)<<32)  
+	                |(long)((src[offset+4] & 0xFF)<<24)  
+	                |(long)((src[offset+5] & 0xFF)<<16)  
+	                |(long)((src[offset+6] & 0xFF)<<8)  
+	                |(long)(src[offset+7] & 0xFF));  
+	        return value;  
+	    }  
+	     
 		   
 	    /**  
 	        * 将Long数值转换为占四个字节的byte数组，本方法适用于(低位在前，高位在后)的顺序。 和bytesToLong（）配套使用 
