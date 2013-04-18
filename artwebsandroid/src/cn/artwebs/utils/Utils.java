@@ -274,4 +274,19 @@ public class Utils {
 		    bais.close();
 		    return b;
 	   }
+	   
+	   public static String byteTohex(byte [] buffer){  
+	        String h = "";  
+	          
+	        for(int i = 0; i < buffer.length; i++){  
+	            String temp = Integer.toHexString(buffer[i] & 0xFF);  
+	            if(temp.length() == 1){  
+	                temp = "0" + temp;  
+	            }  
+	            h = h + " "+ temp;  
+	        }  
+	          
+	        return h;  
+	          
+	    }  
 }
