@@ -1,5 +1,6 @@
 package cn.artwebs.comm;
 
+import cn.artwebs.net.NetworkProber;
 import cn.artwebs.utils.FileUtils;
 import cn.artwebs.utils.HttpDownloader;
 import cn.artwebs.utils.Utils;
@@ -25,6 +26,7 @@ public class UpdateApp {
 	private Version version;
 	private Activity activity;
 	private static String path="artintall";
+	static Handler mHandler;
 	private UpdateApp()
 	{
 		
@@ -35,48 +37,62 @@ public class UpdateApp {
 		installWithString(activity,getCtlContent());
 	}
 	
-	public static void installWithString(Activity activity,String content)
+	public static void installWithString(final Activity activity,final String content)
 	{
-		Version localVersion=getLocalVersion();
-		Version ctlVersion=getControlVersionWithString(content);
-		if(ctlVersion==null)return;
-		obj=new UpdateApp();
-		obj.version=ctlVersion;
-		obj.activity=activity;
-		obj.fileUtils=new FileUtils(path);
-		if(obj.fileUtils.isFileExist(obj.version.getAppName()+".apk"))obj.fileUtils.deleteSDFile(obj.version.getAppName()+".apk");
-		if(localVersion.getVersion()<ctlVersion.getVersion())
-		{
-			Dialog dialog=new AlertDialog.Builder(obj.activity)
-						 .setIcon(R.drawable.ic_dialog_alert)
-						 .setTitle("软件升级？")
-						 .setMessage("您确定进行软件升级吗？")
-						 .setPositiveButton("升级", new DialogInterface.OnClickListener(){
+		Log.d(tag,"haveInternet="+NetworkProber.haveInternet());
+		if(!NetworkProber.haveInternet())return;
+		mHandler = new Handler();
+		new Thread(new Runnable(){
 
-							@Override
-							public void onClick(DialogInterface arg0, int arg1) {
-								if(!android.os.Environment.getExternalStorageState().equals(
-										android.os.Environment.MEDIA_MOUNTED))
-								{
-									Toast.makeText(AppApplication.getAppContext(), "设备无SDCard，无法完成自动升级",Toast.LENGTH_LONG).show();
-									return;
-								}
-								obj.downApk();
-							}
-							 
-						 })
-						 .setNegativeButton("以后再说", new DialogInterface.OnClickListener(){
+			@Override
+			public void run() {
+				mHandler.post(new Runnable(){
+					@Override
+					public void run() {
+						Version localVersion=getLocalVersion();
+						Version ctlVersion=getControlVersionWithString(content);
+						if(ctlVersion==null)return;
+						obj=new UpdateApp();
+						obj.version=ctlVersion;
+						obj.activity=activity;
+						obj.fileUtils=new FileUtils(path);
+						if(obj.fileUtils.isFileExist(obj.version.getAppName()+".apk"))obj.fileUtils.deleteSDFile(obj.version.getAppName()+".apk");
+						if(localVersion.getVersion()<ctlVersion.getVersion())
+						{
+							Dialog dialog=new AlertDialog.Builder(obj.activity)
+										 .setIcon(R.drawable.ic_dialog_alert)
+										 .setTitle("软件升级？")
+										 .setMessage("您确定进行软件升级吗？")
+										 .setPositiveButton("升级", new DialogInterface.OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// TODO Auto-generated method stub
-								
-							}
-							 
-						 }).create();
-			dialog.show();
-		}
+											@Override
+											public void onClick(DialogInterface arg0, int arg1) {
+												if(!android.os.Environment.getExternalStorageState().equals(
+														android.os.Environment.MEDIA_MOUNTED))
+												{
+													Toast.makeText(AppApplication.getAppContext(), "设备无SDCard，无法完成自动升级",Toast.LENGTH_LONG).show();
+													return;
+												}
+												obj.downApk();
+											}
+											 
+										 })
+										 .setNegativeButton("以后再说", new DialogInterface.OnClickListener(){
+
+											@Override
+											public void onClick(DialogInterface dialog,
+													int which) {
+												// TODO Auto-generated method stub
+												
+											}
+											 
+										 }).create();
+							dialog.show();
+						}
+					}});
+			}});
+		
+		
 	}
 	
 	private void downApk()

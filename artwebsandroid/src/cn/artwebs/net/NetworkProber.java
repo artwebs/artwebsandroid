@@ -1,6 +1,14 @@
 package cn.artwebs.net;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.List;  
+
+import cn.artwebs.socket.ClientTCP;
+import cn.artwebs.utils.HttpDownloader;
 
 
 import android.app.AlertDialog;
@@ -12,9 +20,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;  
 import android.provider.Settings;
 import android.telephony.TelephonyManager;  
+import android.util.Log;
   
 public class NetworkProber {  
-  
+	private static String tag="NetworkProber";
     /** 
      * 网络是否可用 
      *  
@@ -30,11 +39,13 @@ public class NetworkProber {
             if (info != null) {  
                 for (int i = 0; i < info.length; i++) {  
                     if (info[i].getState() == NetworkInfo.State.CONNECTED) {  
+                    	Log.d(tag,"isNetworkAvailable=true");
                         return true;  
                     }  
                 }  
             }  
         }  
+        Log.d(tag,"isNetworkAvailable=false");
         return false;  
     }  
   
@@ -165,6 +176,53 @@ public class NetworkProber {
         });
         builder.create();
         builder.show();
+    }
+    
+    public static boolean haveInternet(){ 
+//    	boolean flag=false;
+//    	try
+//    	{
+//    		String rs=new HttpDownloader().download("http://www.baidu.com");
+//    		if(rs==null)
+//			{
+//    			Log.d(tag,"rs="+rs);
+//    			return true;
+//			}
+//    	}
+//    	catch(Exception e)
+//    	{
+//    		return false;
+//    	}
+//    	finally{}
+    	return TestNetwork("www.baidu.com");
+    }
+    
+    public static boolean TestNetwork(String host)
+    {
+    	boolean flag=false;
+    	InetAddress inet;
+        try {
+			inet = InetAddress.getByName(host);
+			flag=true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{}
+        
+//        boolean flag=false;
+//    	InetAddress inet;
+//    	String line="";
+//        try {
+//        	Process pro = Runtime.getRuntime().exec("ping "+host);
+//            BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));
+//            if((line = buf.readLine()) != null)flag=true;
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+    	
+    	return flag;
+    	
     }
    
 }  
