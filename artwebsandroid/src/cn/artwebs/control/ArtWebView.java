@@ -78,5 +78,10 @@ public class ArtWebView extends WebView {
         	}
         }.start();
     }
+    
+    public void finish()
+    {
+    	pd.dismiss();
+    }
 	 
 }
