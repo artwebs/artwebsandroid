@@ -146,7 +146,7 @@ public class UpdateApp {
     	String rs="";
     	try{
 	    	HttpDownloader httpobj=new HttpDownloader();
-	    	String url="http://artwebsapp.duapp.com/appversion/appupdate/%s/%f";
+	    	String url="http://www.artwebs.com.cn/appserver.php?appName=%s";
 	    	rs=httpobj.download(String.format(url, Utils.UrlEncode(localVersion.getAppName(), "utf-8"),localVersion.getVersion()));
 	    	
     	}catch(Exception e){
