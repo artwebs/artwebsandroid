@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Handler;
@@ -24,7 +26,7 @@ public class UpdateApp {
 	private int downLoadFileSize=0;
 	private static UpdateApp obj;
 	private Version version;
-	private Activity activity;
+	private ContextWrapper activity;
 	private static String path="artintall";
 	static Handler mHandler;
 	private UpdateApp()
@@ -32,12 +34,12 @@ public class UpdateApp {
 		
 	}
 	
-	public static void install(Activity activity)
+	public static void install(ContextWrapper activity)
 	{
 		installWithString(activity,getCtlContent());
 	}
 	
-	public static void installWithString(final Activity activity,final String content)
+	public static void installWithString(final ContextWrapper activity,final String content)
 	{
 		Log.d(tag,"haveInternet="+NetworkProber.haveInternet());
 		if(!NetworkProber.haveInternet())return;

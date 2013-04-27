@@ -10,6 +10,7 @@ import cn.artwebs.comm.AppApplication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -157,7 +158,7 @@ public class FileUtils {
 		return file;
 	}
 	
-	public void installApk(Activity activity,String filename)
+	public void installApk(ContextWrapper activity,String filename)
 	{
 		File file=new File(filename);
 		Intent intent=new Intent();
