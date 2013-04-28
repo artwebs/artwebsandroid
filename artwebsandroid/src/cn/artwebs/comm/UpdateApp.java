@@ -36,6 +36,7 @@ public class UpdateApp {
 	
 	public static void install(ContextWrapper activity)
 	{
+		Log.d(tag,"UpdateApp start");
 		installWithString(activity,getCtlContent());
 	}
 	
@@ -92,7 +93,7 @@ public class UpdateApp {
 							dialog.show();
 						}
 					}});
-			}});
+			}}).start();
 		
 		
 	}
