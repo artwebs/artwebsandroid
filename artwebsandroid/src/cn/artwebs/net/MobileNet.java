@@ -5,13 +5,24 @@ import java.lang.reflect.Method;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 
 public class MobileNet {
 	private boolean netStatus=false;
-	private Activity act;
-	public MobileNet(Activity act)
+	private Context act;
+	public MobileNet(Context act)
 	{
 		this.act=act;
+	}
+	
+	public void setWiFiEnable()
+	{
+		WifiManager wifiManager = (WifiManager) act.getSystemService(Context.WIFI_SERVICE);  
+	    if (wifiManager.isWifiEnabled()) {  
+	        wifiManager.setWifiEnabled(false);  
+        } else {  
+        	wifiManager.setWifiEnabled(true);  
+        }
 	}
 	
 	public boolean isMobileNetEnable()
