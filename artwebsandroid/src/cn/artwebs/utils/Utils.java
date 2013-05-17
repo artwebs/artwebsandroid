@@ -8,6 +8,8 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -156,6 +158,27 @@ public class Utils {
 	 		}
 	 		return rs;
 	 	}
+	     
+	 	public static String getBeforeAfterDate(String date,int n){
+	 		return getBeforeAfterDate(date,n,Calendar.DAY_OF_MONTH);	
+	 	}
+	 	
+	 	public static String getBeforeAfterDate(String date,int n,int field){
+
+	 		Calendar cal=Calendar.getInstance();
+	 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	 		if(date.equals(""))date=df.format(cal.getTime());
+	 		try {
+	 		cal.setTime(df.parse(date));	
+	 		} catch (ParseException e) {
+	 		// TODO Auto-generated catch block
+	 		e.printStackTrace();
+	 		}
+	 		cal.set(field, cal.get(field)+n);
+	 		date=df.format(cal.getTime());
+	 		return date;	
+	 	}
+	     
 	     
      /**
 	    * 获取当前时间
