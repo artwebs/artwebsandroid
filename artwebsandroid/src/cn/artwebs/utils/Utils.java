@@ -166,7 +166,7 @@ public class Utils {
 	 	public static String getBeforeAfterDate(String date,int n,int field){
 
 	 		Calendar cal=Calendar.getInstance();
-	 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	 		if(date.equals(""))date=df.format(cal.getTime());
 	 		try {
 	 		cal.setTime(df.parse(date));	
