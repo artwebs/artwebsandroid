@@ -14,6 +14,9 @@ public class ArtWebView extends WebView {
 	private Context context;
 	ProgressDialog pd;
 	Handler handler;
+	private int positionX=0;
+	private int positionY=0;
+	int webviewContentWidth;
 	
 	public ArtWebView(Context context) {
 		super(context);
@@ -44,6 +47,13 @@ public class ArtWebView extends WebView {
 		loadurl(this,url);
 	}
 	
+	public void setPostion(int x,int y)
+	{
+		positionX=x;
+		positionY=y;
+	}
+	
+	
 	public void init(){//初始化
         this.getSettings().setJavaScriptEnabled(true);//可用JS
         this.setScrollBarStyle(0);
@@ -53,6 +63,17 @@ public class ArtWebView extends WebView {
             	handler.sendEmptyMessage(0);
                 return super.shouldOverrideUrlLoading(view, url);   
             }
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				
+				// TODO Auto-generated method stub
+				super.onPageFinished(view, url);
+				loadUrl("javascript:window.HTMLOUT.getContentWidth(document.getElementsByTagName('html')[0].scrollWidth);");
+				
+			}
+            
+            
  
         });
         this.setWebChromeClient(new WebChromeClient(){
@@ -63,6 +84,7 @@ public class ArtWebView extends WebView {
                 super.onProgressChanged(view, progress);   
             }   
         });
+        this.addJavascriptInterface(new JavaScriptInterface(), "HTMLOUT");
  
     	pd=new ProgressDialog(context);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -83,5 +105,25 @@ public class ArtWebView extends WebView {
     {
     	pd.dismiss();
     }
-	 
+	
+    class JavaScriptInterface {
+        public void getContentWidth(String value) {
+        	if(!Thread.currentThread().isInterrupted())
+        	{
+        		if (value != null) {
+                    webviewContentWidth = Integer.parseInt(value);
+                    int stx=0;
+    				int sty=0;
+    				if(webviewContentWidth>320)stx=positionX;
+    				if(getContentHeight()>480)sty=positionY;
+    				
+    				// TODO Auto-generated method stub
+//    				super.onPageFinished(view, url);
+    				Log.d(tag,"stx="+stx+"sty="+sty);
+    				scrollTo(stx, sty);
+                }
+        	}
+            
+        }
+    }
 }
