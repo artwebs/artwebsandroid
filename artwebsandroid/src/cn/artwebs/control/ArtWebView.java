@@ -1,5 +1,6 @@
 package cn.artwebs.control;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
@@ -66,15 +67,18 @@ public class ArtWebView extends WebView {
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
-				
+				loadUrl("javascript:window.HTMLOUT.getContentWidth(document.getElementsByTagName('html')[0].scrollWidth);");
 				// TODO Auto-generated method stub
 				super.onPageFinished(view, url);
-				loadUrl("javascript:window.HTMLOUT.getContentWidth(document.getElementsByTagName('html')[0].scrollWidth);");
-				
+				int stx=0;
+ 				int sty=0;
+ 				if(webviewContentWidth>320)stx=positionX;
+ 				if(getContentHeight()>480)sty=positionY;
+ 				Log.d(tag,"webviewContentWidth="+webviewContentWidth);
+ 				Log.d(tag,"stx="+stx+"sty="+sty);
+ 				scrollTo(stx, sty);
 			}
             
-            
- 
         });
         this.setWebChromeClient(new WebChromeClient(){
         	public void onProgressChanged(WebView view,int progress){//载入进度改变而触发 
@@ -112,15 +116,7 @@ public class ArtWebView extends WebView {
         	{
         		if (value != null) {
                     webviewContentWidth = Integer.parseInt(value);
-                    int stx=0;
-    				int sty=0;
-    				if(webviewContentWidth>320)stx=positionX;
-    				if(getContentHeight()>480)sty=positionY;
-    				
-    				// TODO Auto-generated method stub
-//    				super.onPageFinished(view, url);
-    				Log.d(tag,"stx="+stx+"sty="+sty);
-    				scrollTo(stx, sty);
+                   
                 }
         	}
             
