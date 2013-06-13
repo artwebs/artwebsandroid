@@ -43,6 +43,13 @@ public class ArtWebView extends WebView {
         };
 	}
 	
+	
+	public Handler getHandler() {
+		return handler;
+	}
+
+
+
 	public void openUrl(String url)
 	{
 		loadurl(this,url);
@@ -67,7 +74,7 @@ public class ArtWebView extends WebView {
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
-				loadUrl("javascript:window.HTMLOUT.getContentWidth(document.getElementsByTagName('html')[0].scrollWidth);");
+//				loadUrl("javascript:window.HTMLOUT.getContentWidth(document.getElementsByTagName('html')[0].scrollWidth);");
 				// TODO Auto-generated method stub
 				super.onPageFinished(view, url);
 				int stx=0;
@@ -88,7 +95,7 @@ public class ArtWebView extends WebView {
                 super.onProgressChanged(view, progress);   
             }   
         });
-        this.addJavascriptInterface(new JavaScriptInterface(), "HTMLOUT");
+//        this.addJavascriptInterface(new JavaScriptInterface(), "HTMLOUT");
  
     	pd=new ProgressDialog(context);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -110,16 +117,16 @@ public class ArtWebView extends WebView {
     	pd.dismiss();
     }
 	
-    class JavaScriptInterface {
-        public void getContentWidth(String value) {
-        	if(!Thread.currentThread().isInterrupted())
-        	{
-        		if (value != null) {
-                    webviewContentWidth = Integer.parseInt(value);
-                   
-                }
-        	}
-            
-        }
-    }
+//    class JavaScriptInterface {
+//        public void getContentWidth(String value) {
+//        	if(!Thread.currentThread().isInterrupted())
+//        	{
+//        		if (value != null) {
+//                    webviewContentWidth = Integer.parseInt(value);
+//                   
+//                }
+//        	}
+//            
+//        }
+//    }
 }

@@ -42,8 +42,8 @@ public class UpdateApp {
 	
 	public static void installWithString(final ContextWrapper activity,final String content)
 	{
-		Log.d(tag,"haveInternet="+NetworkProber.haveInternet());
-		if(!NetworkProber.haveInternet())return;
+//		Log.d(tag,"haveInternet="+NetworkProber.haveInternet());
+//		if(!NetworkProber.haveInternet())return;
 		mHandler = new Handler();
 		new Thread(new Runnable(){
 
