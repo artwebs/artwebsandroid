@@ -200,6 +200,7 @@ public class Utils {
 		      rsStr=rsStr.replace("dd", day+"");
 		      rsStr=rsStr.replace("ww", WeekOfYear+"");
 		      rsStr=rsStr.replace("hh", hour+"");
+		      rsStr=rsStr.replace("HH", hour+"");
 		      rsStr=rsStr.replace("mm", minute+"");
 		      rsStr=rsStr.replace("ss", second+"");		      
 		      return rsStr;

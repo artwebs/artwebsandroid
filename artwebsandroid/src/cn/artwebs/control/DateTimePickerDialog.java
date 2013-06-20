@@ -58,7 +58,7 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
      */
     public AlertDialog dateTimePicKDialog(final EditText dateTimeTextEdite, int type)
     {
-        return dateTimePicKDialog(dateTimeTextEdite, type ,Utils.getNowStr("yyyy-MM-dd hh:mm:ss"));
+        return dateTimePicKDialog(dateTimeTextEdite, type ,Utils.getNowStr("yyyy-MM-dd HH:mm:ss"));
     }
     
     /**
@@ -72,7 +72,7 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
     public AlertDialog dateTimePicKDialog(final EditText dateTimeTextEdite, int type ,String dtStr)
     {
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             c.setTime(form.parse(dtStr));
         } catch (java.text.ParseException e) {
