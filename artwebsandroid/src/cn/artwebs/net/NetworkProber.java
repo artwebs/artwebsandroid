@@ -18,6 +18,8 @@ import android.content.Intent;
 import android.location.LocationManager;  
 import android.net.ConnectivityManager;  
 import android.net.NetworkInfo;  
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;  
 import android.util.Log;
@@ -91,6 +93,23 @@ public class NetworkProber {
             return true;  
         }  
         return false;  
+    } 
+    
+    public static String getWifiIp(Context context)
+    {
+    	String rs="";
+    	if(isWifi(context))
+    	{
+    		WifiManager wifimanage=(WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+    		WifiInfo wifiinfo= wifimanage.getConnectionInfo();  
+    		rs=intToIp(wifiinfo.getIpAddress());  
+    	}
+    	return rs;
+    }
+    
+    public static String intToIp(int i)  
+    {  
+    	return ( i & 0xFF)+ "." + ((i >> 8 ) & 0xFF)+ "." + ((i >> 16 ) & 0xFF) +"."+((i >> 24 ) &0xFF);
     }  
   
     /** 
