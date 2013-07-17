@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
@@ -47,6 +48,19 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
         timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
         timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
     }
+    
+    public void init(DatePicker datePicker,TimePicker timePicker,Calendar calendar)
+    {
+//        Calendar calendar= Calendar.getInstance();
+        initDateTime=calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+
+                calendar.get(Calendar.DAY_OF_MONTH)+" "+
+                calendar.get(Calendar.HOUR_OF_DAY)+":"+
+                calendar.get(Calendar.MINUTE)+
+                calendar.get(Calendar.SECOND);
+        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH), this);
+        timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+        timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
+    }
      
     /**
      * 弹出日期时间选择框
@@ -58,7 +72,7 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
      */
     public AlertDialog dateTimePicKDialog(final EditText dateTimeTextEdite, int type)
     {
-        return dateTimePicKDialog(dateTimeTextEdite, type ,Utils.getNowStr("yyyy-MM-dd HH:mm:ss"));
+        return dateTimePicKDialog(dateTimeTextEdite, type ,dateTimeTextEdite.getText().toString());
     }
     
     /**
@@ -69,7 +83,7 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
      *                        2为时间类型:HH:mm:ss
      * @return
      */
-    public AlertDialog dateTimePicKDialog(final EditText dateTimeTextEdite, int type ,String dtStr)
+    public AlertDialog dateTimePicKDialog(final EditText dateTimeTextEdite, int type ,final String dtStr)
     {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -116,10 +130,10 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
                     true).show();
             return null;
         default:
-            LinearLayout dateTimeLayout  = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.datetime, null);
+        	ScrollView dateTimeLayout  = (ScrollView) activity.getLayoutInflater().inflate(R.layout.datetime, null);
             datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
             timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);
-            init(datePicker,timePicker);
+            init(datePicker,timePicker,c);
             timePicker.setIs24HourView(true);
             timePicker.setOnTimeChangedListener(this);
                      
@@ -155,10 +169,9 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
             int dayOfMonth)
     {
         Calendar calendar = Calendar.getInstance();
- 
         calendar.set(datePicker.getYear(), datePicker.getMonth(),
                 datePicker.getDayOfMonth(), timePicker.getCurrentHour(),
-                timePicker.getCurrentMinute());
+                timePicker.getCurrentMinute(),0);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateTime=sdf.format(calendar.getTime());
         ad.setTitle(dateTime);
