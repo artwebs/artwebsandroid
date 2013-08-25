@@ -26,6 +26,8 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
     private String dateTime;
     private String initDateTime;
     private Activity activity;
+    
+    private String outDtType="yyyy-MM-dd HH:mm:ss";
      
     /**
      * 日期时间弹出选择框构
@@ -34,6 +36,16 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
     public DateTimePickerDialog(Activity activity)
     {
         this.activity = activity;
+    }
+    
+    /**
+     * 日期时间弹出选择框构
+     * @param activity：调用的父activity
+     */
+    public DateTimePickerDialog(Activity activity,String outDtType)
+    {
+        this.activity = activity;
+        this.outDtType=outDtType;
     }
      
     public void init(DatePicker datePicker,TimePicker timePicker)
@@ -86,7 +98,7 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
     public AlertDialog dateTimePicKDialog(final EditText dateTimeTextEdite, int type ,final String dtStr)
     {
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat form = new SimpleDateFormat(this.outDtType);
         try {
             c.setTime(form.parse(dtStr));
         } catch (java.text.ParseException e) {
@@ -172,7 +184,7 @@ public class DateTimePickerDialog implements  OnDateChangedListener,OnTimeChange
         calendar.set(datePicker.getYear(), datePicker.getMonth(),
                 datePicker.getDayOfMonth(), timePicker.getCurrentHour(),
                 timePicker.getCurrentMinute(),0);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat(this.outDtType);
         dateTime=sdf.format(calendar.getTime());
         ad.setTitle(dateTime);
     }

@@ -1,6 +1,7 @@
 package cn.artwebs.utils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -8,6 +9,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -165,8 +167,13 @@ public class Utils {
 	 	
 	 	public static String getBeforeAfterDate(String date,int n,int field){
 
+	 		return getBeforeAfterDate(date,n,field,"yyyy-MM-dd HH:mm:ss");	
+	 	}
+	 	
+	 	public static String getBeforeAfterDate(String date,int n,int field,String type){
+
 	 		Calendar cal=Calendar.getInstance();
-	 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 		SimpleDateFormat df=new SimpleDateFormat(type);
 	 		if(date.equals(""))date=df.format(cal.getTime());
 	 		try {
 	 		cal.setTime(df.parse(date));	
@@ -178,8 +185,25 @@ public class Utils {
 	 		date=df.format(cal.getTime());
 	 		return date;	
 	 	}
-	     
-	     
+	 	
+	 	public static int compareDate(String DATE1, String DATE2) {
+	 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 		try {
+		 		Date dt1 = df.parse(DATE1);
+		 		Date dt2 = df.parse(DATE2);
+		 		if (dt1.getTime() > dt2.getTime()) {
+		 			return 1;
+		 		} else if (dt1.getTime() < dt2.getTime()) {
+			 		return -1;
+		 		} else {
+		 			return 0;
+		 		}
+	 		} catch (Exception exception) {
+	 			exception.printStackTrace();
+	 		}
+	 		return 0;
+	 	}
+	 	
      /**
 	    * 获取当前时间
 	    * @param type yyyy MM dd ww hh mm ss
@@ -341,6 +365,26 @@ public class Utils {
 	        return h;  
 	          
 	    }  
+	   
+	   public static void deleteFile(File file) {  
+	        if (file.isFile()) {  
+	            file.delete();  
+	            return;  
+	        }  
+	  
+	        if(file.isDirectory()){  
+	            File[] childFiles = file.listFiles();  
+	            if (childFiles == null || childFiles.length == 0) {  
+	                file.delete();  
+	                return;  
+	            }  
+	      
+	            for (int i = 0; i < childFiles.length; i++) {  
+	            	deleteFile(childFiles[i]);  
+	            }  
+	            file.delete();  
+	        }  
+	   }
 	   
 	  
 }

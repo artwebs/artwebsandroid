@@ -1,6 +1,8 @@
 package cn.artwebs.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -92,6 +94,25 @@ public class FileUtils {
 		File file = new File(SDPATH+fileName);
 		return file;
 	}
+	
+	public long getFileSize(String fileName){//取得文件大小
+        long s=0;
+        File file = new File(SDPATH+fileName);
+        try {
+	        if (file.exists()) {
+	           FileInputStream fis = null;
+			   fis = new FileInputStream(file);
+	           s= fis.available();
+	        } else {
+	        	file.createNewFile();
+	            System.out.println("文件不存在");
+	        }
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{}
+        return s;
+    }
 	
 	/**
 	 * 将一个InputStream里面的数据写入到SD卡中
