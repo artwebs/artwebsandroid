@@ -13,6 +13,8 @@ public final class R {
     public static final class drawable {
         public static int datetimeicon=0x7f020000;
         public static int ic_launcher=0x7f020001;
+        public static int img_progress=0x7f020002;
+        public static int progress=0x7f020003;
     }
     public static final class id {
         public static int ListViewPeople=0x7f070001;
@@ -36,7 +38,8 @@ public final class R {
         public static int datetime=0x7f030003;
         public static int diclistitem=0x7f030004;
         public static int imgbinlistitem=0x7f030005;
-        public static int main=0x7f030006;
+        public static int layout_progress=0x7f030006;
+        public static int main=0x7f030007;
     }
     public static final class menu {
         public static int activity_main=0x7f060000;
