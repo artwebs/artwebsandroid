@@ -28,7 +28,7 @@ public class UpdateApp {
 	private Version version;
 	private ContextWrapper activity;
 	private static String path="artintall";
-	static Handler mHandler;
+	
 	private UpdateApp()
 	{
 		
@@ -40,63 +40,78 @@ public class UpdateApp {
 		installWithString(activity,getCtlContent());
 	}
 	
+	public static void installWithUrl(final ContextWrapper activity,final String url)
+	{
+		String rs="";
+		rs=getCtlContent(url);
+		if(rs=="")return;
+		installWithString(activity, rs);
+		
+	}
+	
 	public static void installWithString(final ContextWrapper activity,final String content)
 	{
 //		Log.d(tag,"haveInternet="+NetworkProber.haveInternet());
 //		if(!NetworkProber.haveInternet())return;
-		mHandler = new Handler();
+		obj=new UpdateApp();
 		new Thread(new Runnable(){
 
 			@Override
 			public void run() {
-				mHandler.post(new Runnable(){
-					@Override
-					public void run() {
-						Version localVersion=getLocalVersion();
-						Version ctlVersion=getControlVersionWithString(content);
-						if(ctlVersion==null)return;
-						obj=new UpdateApp();
-						obj.version=ctlVersion;
-						obj.activity=activity;
-						obj.fileUtils=new FileUtils(path);
-						if(obj.fileUtils.isFileExist(obj.version.getAppName()+".apk"))obj.fileUtils.deleteSDFile(obj.version.getAppName()+".apk");
-						if(localVersion.getVersion()<ctlVersion.getVersion())
-						{
-							Dialog dialog=new AlertDialog.Builder(obj.activity)
-										 .setIcon(R.drawable.ic_dialog_alert)
-										 .setTitle("软件升级？")
-										 .setMessage("您确定进行软件升级吗？")
-										 .setPositiveButton("升级", new DialogInterface.OnClickListener(){
-
-											@Override
-											public void onClick(DialogInterface arg0, int arg1) {
-												if(!android.os.Environment.getExternalStorageState().equals(
-														android.os.Environment.MEDIA_MOUNTED))
-												{
-													Toast.makeText(AppApplication.getAppContext(), "设备无SDCard，无法完成自动升级",Toast.LENGTH_LONG).show();
-													return;
-												}
-												obj.downApk();
-											}
-											 
-										 })
-										 .setNegativeButton("以后再说", new DialogInterface.OnClickListener(){
-
-											@Override
-											public void onClick(DialogInterface dialog,
-													int which) {
-												// TODO Auto-generated method stub
-												
-											}
-											 
-										 }).create();
-							dialog.show();
-						}
-					}});
+				Version localVersion=getLocalVersion();
+				Version ctlVersion=getControlVersionWithString(content);
+				if(ctlVersion==null)return;
+				
+				obj.version=ctlVersion;
+				obj.activity=activity;
+				obj.fileUtils=new FileUtils(path);
+				if(obj.fileUtils.isFileExist(obj.version.getAppName()+".apk"))obj.fileUtils.deleteSDFile(obj.version.getAppName()+".apk");
+				Log.d(tag, "localVersion="+localVersion.getVersion());
+				Log.d(tag, "ctlVersion="+ctlVersion.getVersion());
+				if(localVersion.getVersion()<ctlVersion.getVersion())
+				{
+					obj.mHandler.sendEmptyMessage(0);
+				}
 			}}).start();
 		
 		
 	}
+	
+	private Handler mHandler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			Dialog dialog=new AlertDialog.Builder(obj.activity)
+			 .setIcon(R.drawable.ic_dialog_alert)
+			 .setTitle("软件升级？")
+			 .setMessage("您确定进行软件升级吗？")
+			 .setPositiveButton("升级", new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					if(!android.os.Environment.getExternalStorageState().equals(
+							android.os.Environment.MEDIA_MOUNTED))
+					{
+						Toast.makeText(AppApplication.getAppContext(), "设备无SDCard，无法完成自动升级",Toast.LENGTH_LONG).show();
+						return;
+					}
+					downApk();
+				}
+				 
+			 })
+			 .setNegativeButton("以后再说", new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dialog,
+						int which) {
+					// TODO Auto-generated method stub
+					
+				}
+				 
+			 }).create();
+			dialog.show();
+			
+		}
+	};
 	
 	private void downApk()
 	{
@@ -119,7 +134,7 @@ public class UpdateApp {
     {
     	Version obj=new Version();
     	obj.setAppName(AppApplication.getPKG().applicationInfo.packageName.substring(AppApplication.getPKG().applicationInfo.packageName.lastIndexOf(".")+1));
-    	obj.setVersion(Float.valueOf(AppApplication.getPKG().versionName));
+    	obj.setVersion(Float.valueOf(AppApplication.getPKG().versionCode));
     	obj.setUpdateUrl("");
     	return obj;
     }
@@ -142,14 +157,17 @@ public class UpdateApp {
     
     public static String getCtlContent()
     {
-    	
     	Version localVersion=getLocalVersion();
+    	String url="http://www.artwebs.com.cn/appserver.php?appName=%s";
+    	return getCtlContent(String.format(url, Utils.UrlEncode(localVersion.getAppName(), "utf-8")));
+    }
+    
+    public static String getCtlContent(String url)
+    {
     	String rs="";
     	try{
 	    	HttpDownloader httpobj=new HttpDownloader();
-	    	String url="http://www.artwebs.com.cn/appserver.php?appName=%s";
-	    	rs=httpobj.download(String.format(url, Utils.UrlEncode(localVersion.getAppName(), "utf-8"),localVersion.getVersion()));
-	    	
+	    	rs=httpobj.download(url);
     	}catch(Exception e){
     		
     	}
