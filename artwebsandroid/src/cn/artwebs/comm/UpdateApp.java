@@ -42,10 +42,29 @@ public class UpdateApp {
 	
 	public static void installWithUrl(final ContextWrapper activity,final String url)
 	{
-		String rs="";
-		rs=getCtlContent(url);
-		if(rs=="")return;
-		installWithString(activity, rs);
+		obj=new UpdateApp();
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				Version localVersion=getLocalVersion();
+				String content="";
+				content=getCtlContent(url);
+				if(content=="")return;
+				Version ctlVersion=getControlVersionWithString(content);
+				if(ctlVersion==null)return;
+				
+				obj.version=ctlVersion;
+				obj.activity=activity;
+				obj.fileUtils=new FileUtils(path);
+				if(obj.fileUtils.isFileExist(obj.version.getAppName()+".apk"))obj.fileUtils.deleteSDFile(obj.version.getAppName()+".apk");
+				Log.d(tag, "localVersion="+localVersion.getVersion());
+				Log.d(tag, "ctlVersion="+ctlVersion.getVersion());
+				if(localVersion.getVersion()<ctlVersion.getVersion())
+				{
+					obj.mHandler.sendEmptyMessage(0);
+				}
+			}}).start();
 		
 	}
 	
