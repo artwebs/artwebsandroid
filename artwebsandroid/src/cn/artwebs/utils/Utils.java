@@ -27,6 +27,7 @@ import android.util.Log;
 
 
 public class Utils {
+	private final static String tag="Utils";
 	public static void parseXMLBySAX(String xmlStr,ContentHandler handler)
 	{
 		SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -343,6 +344,7 @@ public class Utils {
 			int len;
 			b = new byte[size];
 			len = inputstream.read(b);
+//			Log.d(tag,"b="+Arrays.toString(b));
 		    bais = new ByteArrayOutputStream();
 		    bais.write(b, 0, len);
 		    bais.flush();

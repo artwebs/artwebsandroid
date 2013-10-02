@@ -152,11 +152,13 @@ public class UpdateApp {
 	public static Version getLocalVersion()
     {
     	Version obj=new Version();
-    	obj.setAppName(AppApplication.getPKG().applicationInfo.packageName.substring(AppApplication.getPKG().applicationInfo.packageName.lastIndexOf(".")+1));
+    	obj.setAppName(AppApplication.getAppName());
     	obj.setVersion(Float.valueOf(AppApplication.getPKG().versionCode));
     	obj.setUpdateUrl("");
     	return obj;
     }
+	
+	
 	
 	public static Version getControlVersionWithString(String content)
 	{

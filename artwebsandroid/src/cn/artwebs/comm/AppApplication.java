@@ -61,12 +61,16 @@ public class AppApplication extends Application {
         System.exit(0);  
     }
     
+    public static String getAppName()
+	{
+		return AppApplication.getPKG().applicationInfo.packageName.substring(AppApplication.getPKG().applicationInfo.packageName.lastIndexOf(".")+1);
+	}
+    
     private static AppApplication instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
         // Are we using advanced debugging - locale?
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String p = pref.getString("set_locale", "");
