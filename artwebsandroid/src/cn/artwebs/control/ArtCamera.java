@@ -71,11 +71,12 @@ public class ArtCamera extends RelativeLayout {
 		inflater.inflate(R.layout.artcamera, this);
 		mSurfaceview=(SurfaceView)findViewById(R.id.video_view);
 		timer=(TextView)findViewById(R.id.video_timer);
-		timer.setText("30:00");
+		timer.setText("");
 		// 绑定预览视图
 		holder = mSurfaceview.getHolder();
 		
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		timer.setVisibility(View.VISIBLE);
 	}
 	
 	
@@ -441,6 +442,7 @@ public class ArtCamera extends RelativeLayout {
 		{
 			mRecAudioFile.renameTo(out);
 			if(callBackObj!=null)callBackObj.onGetFileName(savePath+ fileName,OPERATE.VIDEO);
+			timer.setVisibility(View.VISIBLE);
 		}
 			
 	}
