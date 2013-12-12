@@ -15,18 +15,18 @@ public final class R {
 	}
 	public static final class id {
 		public static final int ListViewPeople = 0x7f080003;
-		public static final int datepicker = 0x7f080008;
+		public static final int datepicker = 0x7f08000c;
 		public static final int findkey = 0x7f080006;
 		public static final int first = 0x7f080004;
-		public static final int imageView = 0x7f08000b;
-		public static final int installApkButton = 0x7f08000d;
-		public static final int listButton = 0x7f08000c;
-		public static final int menu_settings = 0x7f08000f;
+		public static final int imageView = 0x7f08000f;
+		public static final int installApkButton = 0x7f080011;
+		public static final int listButton = 0x7f080010;
+		public static final int menu_settings = 0x7f080013;
 		public static final int mytextxx = 0x7f080002;
 		public static final int second = 0x7f080005;
-		public static final int text1 = 0x7f08000a;
-		public static final int timepicker = 0x7f080009;
-		public static final int uiButton = 0x7f08000e;
+		public static final int text1 = 0x7f08000e;
+		public static final int timepicker = 0x7f08000d;
+		public static final int uiButton = 0x7f080012;
 		public static final int video_timer = 0x7f080001;
 		public static final int video_view = 0x7f080000;
 	}
