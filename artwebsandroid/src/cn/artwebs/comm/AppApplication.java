@@ -50,15 +50,29 @@ public class AppApplication extends Application {
 	public void addActivity(Activity activity) {  
         activities.add(activity);  
     }  
+	
+	public void removeActivity(Activity activity)
+	{
+		if(activities.contains(activity))activities.remove(activity);
+	}
   
     @Override  
     public void onTerminate() {  
+    	onTerminate(false);
+    }
+    
+    public void onTerminate(boolean isExit) {  
         super.onTerminate();  
           
         for (Activity activity : activities) {  
-            activity.finish();  
+        	try{
+        		activity.finish(); 
+        	}catch(Exception e)
+        	{
+        		e.printStackTrace();
+        	}finally{}
         }  
-        System.exit(0);  
+        if(isExit)System.exit(0);  
     }
     
     public static String getAppName()
