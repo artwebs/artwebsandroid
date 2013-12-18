@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CameraActivity" android:label=""></activity>
+        <activity android:name=".QRCodeActivity" android:label=""></activity>
     </application>
 
 </manifest>

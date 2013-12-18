@@ -28,8 +28,9 @@ public final class R {
     }
     public static final class id {
         public static final int ListViewPeople=0x7f080003;
-        public static final int action_settings=0x7f080014;
+        public static final int action_settings=0x7f080015;
         public static final int artcamera=0x7f080008;
+        public static final int artqrcode=0x7f080013;
         public static final int datepicker=0x7f08000c;
         public static final int findkey=0x7f080006;
         public static final int first=0x7f080004;
@@ -37,7 +38,7 @@ public final class R {
         public static final int installApkButton=0x7f080011;
         public static final int listButton=0x7f080010;
         public static final int megTxt=0x7f080007;
-        public static final int menu_settings=0x7f080013;
+        public static final int menu_settings=0x7f080014;
         public static final int mytextxx=0x7f080002;
         public static final int saveAudioBtn=0x7f08000b;
         public static final int saveImageBtn=0x7f080009;
@@ -60,6 +61,7 @@ public final class R {
         public static final int imgbinlistitem=0x7f030007;
         public static final int layout_progress=0x7f030008;
         public static final int main=0x7f030009;
+        public static final int qrcode=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;

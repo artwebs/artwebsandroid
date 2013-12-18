@@ -21,7 +21,7 @@ public final class R {
 		public static final int imageView = 0x7f08000f;
 		public static final int installApkButton = 0x7f080011;
 		public static final int listButton = 0x7f080010;
-		public static final int menu_settings = 0x7f080013;
+		public static final int menu_settings = 0x7f080014;
 		public static final int mytextxx = 0x7f080002;
 		public static final int second = 0x7f080005;
 		public static final int text1 = 0x7f08000e;

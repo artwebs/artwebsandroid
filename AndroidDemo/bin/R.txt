@@ -5,8 +5,9 @@ int drawable ic_launcher 0x7f020001
 int drawable img_progress 0x7f020002
 int drawable progress 0x7f020003
 int id ListViewPeople 0x7f080003
-int id action_settings 0x7f080014
+int id action_settings 0x7f080015
 int id artcamera 0x7f080008
+int id artqrcode 0x7f080013
 int id datepicker 0x7f08000c
 int id findkey 0x7f080006
 int id first 0x7f080004
@@ -14,7 +15,7 @@ int id imageView 0x7f08000f
 int id installApkButton 0x7f080011
 int id listButton 0x7f080010
 int id megTxt 0x7f080007
-int id menu_settings 0x7f080013
+int id menu_settings 0x7f080014
 int id mytextxx 0x7f080002
 int id saveAudioBtn 0x7f08000b
 int id saveImageBtn 0x7f080009
@@ -35,6 +36,7 @@ int layout diclistitem 0x7f030006
 int layout imgbinlistitem 0x7f030007
 int layout layout_progress 0x7f030008
 int layout main 0x7f030009
+int layout qrcode 0x7f03000a
 int menu activity_main 0x7f070000
 int menu main 0x7f070001
 int string action_settings 0x7f040004

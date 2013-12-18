@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 		mainLayout=(LinearLayout)getLayoutInflater().inflate(R.layout.activity_main, null);
 		this.setContentView(mainLayout);
 		addButton("摄像头测试",CameraActivity.class);
+		addButton("二维码测试",QRCodeActivity.class);
 	}
 
 	private void addButton(String name,final Class obj)
