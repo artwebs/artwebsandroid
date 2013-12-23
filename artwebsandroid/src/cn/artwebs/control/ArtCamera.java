@@ -8,6 +8,7 @@ import java.util.Date;
 
 import cn.artwebs.R;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -55,6 +56,7 @@ public class ArtCamera extends RelativeLayout {
 	private SaveCallBack callBackObj;
 	private boolean isRecording = true;
 	private int displayRotate=0;
+	private Camera c;
 	
 	public enum CAMERATYPE{FRONT,BACK}
 	public enum OPERATE{IMAGE,VIDEO,AUDIO}
@@ -99,6 +101,31 @@ public class ArtCamera extends RelativeLayout {
 	{
 		this.callBackObj=obj;
 	}
+	
+	@SuppressLint("NewApi")
+	public void getCamera()
+	{
+		if(camera!=null)
+		{
+			camera.stopPreview();
+			camera.release();
+			camera = null;
+		}
+		try {
+			camera = Camera.open(cammeraIndex);
+			setCameraDisplayOrientation ();
+			Camera.Parameters parameters = camera.getParameters();
+			parameters.setPreviewFrameRate(5); // 每秒5帧
+			parameters.setPictureFormat(PixelFormat.JPEG);// 设置照片的输出格式
+			parameters.set("jpeg-quality", 85);// 照片质量
+			camera.setParameters(parameters);
+			camera.setPreviewDisplay(mSurfaceHolder);
+			camera.startPreview();
+			isPreview = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void show(CAMERATYPE type)
 	{
@@ -125,6 +152,7 @@ public class ArtCamera extends RelativeLayout {
 				mMediaRecorder = null;
 			}
 
+			@SuppressLint("NewApi")
 			@Override
 			public void surfaceCreated(SurfaceHolder holder) {
 				try {
@@ -161,8 +189,13 @@ public class ArtCamera extends RelativeLayout {
 			camera.takePicture(null, null, new PictureCallback() {
 				@Override
 				public void onPictureTaken(byte[] data, Camera camera) {
-					Bitmap bitmap = BitmapFactory.decodeByteArray(data,
-							0, data.length);
+					BitmapFactory.Options opts = new BitmapFactory.Options();  
+					opts.inJustDecodeBounds = true;  
+					BitmapFactory.decodeByteArray(data, 0, data.length, opts);
+					  
+					opts.inSampleSize = computeSampleSize(opts, -1, 1024*1024);  
+					opts.inJustDecodeBounds = false;  
+					Bitmap bitmap =BitmapFactory.decodeByteArray(data, 0, data.length, opts);
 					Matrix matrix = new Matrix();
 					// 设置缩放
 					matrix.postRotate(displayRotate);
@@ -186,16 +219,21 @@ public class ArtCamera extends RelativeLayout {
 								outStream);
 						outStream.close();
 						camera.startPreview();
+						if (bitmap != null && !bitmap.isRecycled())
+				            bitmap.recycle();
 						if(callBackObj!=null)callBackObj.onGetFileName(savePath+ fileName,OPERATE.IMAGE);
 					} catch (Exception e) {
 						e.printStackTrace();
 						if(callBackObj!=null)callBackObj.onGetError(e);
-					}finally{}
+					}finally{
+						
+					}
 				}
 			}); // 拍照
 		}
 	}
 	
+	@SuppressLint("NewApi")
 	public void saveVideo()
 	{
 		if (isRecording) {
@@ -215,6 +253,10 @@ public class ArtCamera extends RelativeLayout {
 				mMediaRecorder = new MediaRecorder();
 			else
 				mMediaRecorder.reset();
+			c = Camera.open(cammeraIndex);
+            c.setDisplayOrientation(displayRotate);
+            c.unlock();
+            mMediaRecorder.setCamera(c);
 			mMediaRecorder.setPreviewDisplay(mSurfaceHolder
 					.getSurface());
 			mMediaRecorder
@@ -229,7 +271,7 @@ public class ArtCamera extends RelativeLayout {
 					.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			mMediaRecorder.setVideoSize(320, 240);
 			mMediaRecorder.setVideoFrameRate(15);
-			mMediaRecorder.setOrientationHint(90);
+			mMediaRecorder.setOrientationHint(displayRotate);
 			try {
 				mRecAudioFile = File.createTempFile("Vedio", ".3gp",
 						mRecVedioPath);
@@ -261,6 +303,9 @@ public class ArtCamera extends RelativeLayout {
 				mMediaRecorder.release();
 				mMediaRecorder = null;
 				videoRename(OPERATE.VIDEO);
+				c.stopPreview();
+				c.release();
+				c = null;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -268,7 +313,8 @@ public class ArtCamera extends RelativeLayout {
 //			mVideoStartBtn.setBackgroundDrawable(iconStart);
 			
 //			showMsg("录制完成，已保存");
-
+			timer.setVisibility(View.INVISIBLE);
+			getCamera();
 		}
 	}
 	
@@ -481,5 +527,47 @@ public class ArtCamera extends RelativeLayout {
 		}
 		return s;
 	}
+	
+	public static int computeSampleSize(BitmapFactory.Options options,  
+	        int minSideLength, int maxNumOfPixels) {  
+	    int initialSize = computeInitialSampleSize(options, minSideLength,maxNumOfPixels);  
+	  
+	    int roundedSize;  
+	    if (initialSize <= 8 ) {  
+	        roundedSize = 1;  
+	        while (roundedSize < initialSize) {  
+	            roundedSize <<= 1;  
+	        }  
+	    } else {  
+	        roundedSize = (initialSize + 7) / 8 * 8;  
+	    }  
+	  
+	    return roundedSize;  
+	}  
+	  
+	private static int computeInitialSampleSize(BitmapFactory.Options options,int minSideLength, int maxNumOfPixels) {  
+	    double w = options.outWidth;  
+	    double h = options.outHeight;  
+	  
+	    int lowerBound = (maxNumOfPixels == -1) ? 1 :  
+	            (int) Math.ceil(Math.sqrt(w * h / maxNumOfPixels));  
+	    int upperBound = (minSideLength == -1) ? 128 :  
+	            (int) Math.min(Math.floor(w / minSideLength),  
+	            Math.floor(h / minSideLength));  
+	  
+	    if (upperBound < lowerBound) {  
+	        // return the larger one when there is no overlapping zone.  
+	        return lowerBound;  
+	    }  
+	  
+	    if ((maxNumOfPixels == -1) &&  
+	            (minSideLength == -1)) {  
+	        return 1;  
+	    } else if (minSideLength == -1) {  
+	        return lowerBound;  
+	    } else {  
+	        return upperBound;  
+	    }  
+	}  
 	
 }

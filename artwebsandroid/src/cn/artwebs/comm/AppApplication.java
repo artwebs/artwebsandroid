@@ -165,6 +165,12 @@ public class AppApplication extends Application {
     	notificationManager.cancel(id);
     }
     
+    
+    public static void logD(String tag,String meg)
+    {
+    	Log.d(tag, meg);
+    }
+    
    
 }
 
