@@ -21,7 +21,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.AudioManager;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class AppApplication extends Application {
@@ -171,6 +173,50 @@ public class AppApplication extends Application {
     	Log.d(tag, meg);
     }
     
+   private static int  currVolume;
+  //打开扬声器
+    public static void OpenSpeaker() {
+
+        try{
+        AudioManager audioManager = (AudioManager) getAppContext().getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setMode(AudioManager.ROUTE_SPEAKER);
+        currVolume= audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
+
+        if(!audioManager.isSpeakerphoneOn()) {
+          audioManager.setSpeakerphoneOn(true);
+
+          audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
+                 audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL ),
+                 AudioManager.STREAM_VOICE_CALL);
+        }
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+    }
+
+
+   //关闭扬声器
+   public static void CloseSpeaker() {
+   
+       try {
+           AudioManager audioManager = (AudioManager) getAppContext().getSystemService(Context.AUDIO_SERVICE);
+           if(audioManager != null) {
+               if(audioManager.isSpeakerphoneOn()) {
+                 audioManager.setSpeakerphoneOn(false);
+                 audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,currVolume,
+                            AudioManager.STREAM_VOICE_CALL);
+               }
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+         //Toast.makeText(context,"揚聲器已經關閉",Toast.LENGTH_SHORT).show();
+   }
+   
+   public static String getIMEI()
+   {
+	   return ((TelephonyManager) getAppContext().getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+   }
    
 }
 

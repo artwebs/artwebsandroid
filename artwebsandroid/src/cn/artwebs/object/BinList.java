@@ -172,6 +172,21 @@ public class BinList extends IBinObject {
 		}
 		return Flage;
 	}
+
+	public int getContainsValueItem(Object value)
+	{
+		int rsInt=-1;
+		for(int i=0;i<item.size();i++)
+		{
+			HashMap hm=(HashMap)item.get(i);
+			if(hm.containsValue(value))
+			{
+				rsInt=i;
+				break;				
+			}	
+		}
+		return rsInt;
+	}
 	
 	public void addend(BinList adder)
 	{

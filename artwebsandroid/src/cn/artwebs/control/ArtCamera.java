@@ -347,7 +347,7 @@ public class ArtCamera extends RelativeLayout {
 	         /* 设置音频文件的编码：AAC/AMR_NB/AMR_MB/Default */
 	         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			try {
-				mRecAudioFile = File.createTempFile("Vedio", ".amrnb",
+				mRecAudioFile = File.createTempFile("Vedio", ".amr",
 						mRecVedioPath);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -471,7 +471,7 @@ public class ArtCamera extends RelativeLayout {
 			ex=".3gp";
 			break;
 		case AUDIO:
-			ex=".amrnb";
+			ex=".amr";
 			break;
 		default:
 			ex=".3gp";
