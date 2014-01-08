@@ -60,6 +60,7 @@ public class ArtCamera extends RelativeLayout {
 	
 	public enum CAMERATYPE{FRONT,BACK}
 	public enum OPERATE{IMAGE,VIDEO,AUDIO}
+	private CAMERATYPE cameraType;
 	public ArtCamera(Context context) {
 		super(context);
 		this.context=context;
@@ -193,12 +194,15 @@ public class ArtCamera extends RelativeLayout {
 					opts.inJustDecodeBounds = true;  
 					BitmapFactory.decodeByteArray(data, 0, data.length, opts);
 					  
-					opts.inSampleSize = computeSampleSize(opts, -1, 1024*1024);  
+					opts.inSampleSize = computeSampleSize(opts, 0, 1024*1024);  
 					opts.inJustDecodeBounds = false;  
 					Bitmap bitmap =BitmapFactory.decodeByteArray(data, 0, data.length, opts);
 					Matrix matrix = new Matrix();
 					// 设置缩放
-					matrix.postRotate(displayRotate);
+					if(cameraType==CAMERATYPE.FRONT)
+						matrix.postRotate(360-displayRotate);
+					else
+						matrix.postRotate(displayRotate);
 					matrix.postScale(1f, 1f);
 					bitmap = Bitmap.createBitmap(bitmap, 0, 0,
 							bitmap.getWidth(), bitmap.getHeight(),
@@ -271,7 +275,11 @@ public class ArtCamera extends RelativeLayout {
 					.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			mMediaRecorder.setVideoSize(320, 240);
 			mMediaRecorder.setVideoFrameRate(15);
-			mMediaRecorder.setOrientationHint(displayRotate);
+			// 设置缩放
+			if(cameraType==CAMERATYPE.FRONT)
+				mMediaRecorder.setOrientationHint(360-displayRotate);
+			else
+				mMediaRecorder.setOrientationHint(displayRotate);
 			try {
 				mRecAudioFile = File.createTempFile("Vedio", ".3gp",
 						mRecVedioPath);
@@ -396,7 +404,7 @@ public class ArtCamera extends RelativeLayout {
                 
         for ( int camIdx = 0; camIdx < cameraCount;camIdx++ ) {  
             Camera.getCameraInfo( camIdx, cameraInfo ); // get camerainfo  
-            if ( cameraInfo.facing ==Camera.CameraInfo.CAMERA_FACING_FRONT ) {   
+            if ( cameraInfo.facing ==Camera.CameraInfo.CAMERA_FACING_FRONT ) {  
                 // 代表摄像头的方位，目前有定义值两个分别为CAMERA_FACING_FRONT前置和CAMERA_FACING_BACK后置  
                return camIdx;  
             }  
@@ -412,7 +420,7 @@ public class ArtCamera extends RelativeLayout {
                 
         for ( int camIdx = 0; camIdx < cameraCount;camIdx++ ) {  
             Camera.getCameraInfo( camIdx, cameraInfo ); // get camerainfo  
-            if ( cameraInfo.facing ==Camera.CameraInfo.CAMERA_FACING_BACK ) {   
+            if ( cameraInfo.facing ==Camera.CameraInfo.CAMERA_FACING_BACK ) {  
                 // 代表摄像头的方位，目前有定义值两个分别为CAMERA_FACING_FRONT前置和CAMERA_FACING_BACK后置  
                return camIdx;  
             }  
@@ -443,6 +451,7 @@ public class ArtCamera extends RelativeLayout {
 	 
 	      int result ;
 	      if ( info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT ) {
+	    	 cameraType=CAMERATYPE.FRONT;
 	         result = ( info.orientation + degrees ) % 360 ;
 	         result = ( 360 - result ) % 360 ;   // compensate the mirror
 	      } else {   // back-facing
