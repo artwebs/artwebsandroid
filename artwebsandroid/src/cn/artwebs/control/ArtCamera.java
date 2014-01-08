@@ -194,7 +194,7 @@ public class ArtCamera extends RelativeLayout {
 					opts.inJustDecodeBounds = true;  
 					BitmapFactory.decodeByteArray(data, 0, data.length, opts);
 					  
-					opts.inSampleSize = computeSampleSize(opts, 0, 1024*1024);  
+					opts.inSampleSize = computeSampleSize(opts, -1, 1024*1024);  
 					opts.inJustDecodeBounds = false;  
 					Bitmap bitmap =BitmapFactory.decodeByteArray(data, 0, data.length, opts);
 					Matrix matrix = new Matrix();
