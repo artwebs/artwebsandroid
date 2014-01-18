@@ -30,6 +30,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.SurfaceHolder.Callback;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class ArtCamera extends RelativeLayout {
 	private int cammeraIndex;
 	private Button mVideoStartBtn;
 	private SurfaceView mSurfaceview;
+	private ImageView mimageview;
 	private MediaRecorder mMediaRecorder;
 	private SurfaceHolder mSurfaceHolder;
 	private File mRecVedioPath;
@@ -73,6 +75,7 @@ public class ArtCamera extends RelativeLayout {
 		LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.artcamera, this);
 		mSurfaceview=(SurfaceView)findViewById(R.id.video_view);
+		mimageview=(ImageView)findViewById(R.id.image_view);
 		timer=(TextView)findViewById(R.id.video_timer);
 		timer.setText("");
 		// 绑定预览视图
@@ -127,9 +130,21 @@ public class ArtCamera extends RelativeLayout {
 			e.printStackTrace();
 		}
 	}
-
-	public void show(CAMERATYPE type)
+	
+	public void show(CAMERATYPE type,OPERATE opt)
 	{
+		switch(opt)
+		{
+		case IMAGE:
+			mSurfaceview.setVisibility(View.VISIBLE);
+			break;
+		case VIDEO:
+			mSurfaceview.setVisibility(View.VISIBLE);
+			break;
+		case AUDIO:
+			mimageview.setVisibility(View.VISIBLE);
+			break;
+		}
 		if(type==CAMERATYPE.FRONT)
 		{
 			cammeraIndex=FindFrontCamera();
@@ -179,6 +194,11 @@ public class ArtCamera extends RelativeLayout {
 				mSurfaceHolder = holder;
 			}
 		});
+	}
+
+	public void show(CAMERATYPE type)
+	{
+		show(type,OPERATE.IMAGE);
 	}
 	
 	

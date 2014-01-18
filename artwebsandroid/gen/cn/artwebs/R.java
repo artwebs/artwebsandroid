@@ -14,23 +14,25 @@ public final class R {
         public static int datetimeicon=0x7f020000;
         public static int ic_launcher=0x7f020001;
         public static int img_progress=0x7f020002;
-        public static int progress=0x7f020003;
+        public static int mic=0x7f020003;
+        public static int progress=0x7f020004;
     }
     public static final class id {
-        public static int ListViewPeople=0x7f070003;
-        public static int datepicker=0x7f070007;
-        public static int findkey=0x7f070006;
-        public static int first=0x7f070004;
-        public static int imageView=0x7f07000a;
-        public static int installApkButton=0x7f07000c;
-        public static int listButton=0x7f07000b;
-        public static int menu_settings=0x7f07000e;
-        public static int mytextxx=0x7f070002;
-        public static int second=0x7f070005;
-        public static int text1=0x7f070009;
-        public static int timepicker=0x7f070008;
-        public static int uiButton=0x7f07000d;
-        public static int video_timer=0x7f070001;
+        public static int ListViewPeople=0x7f070004;
+        public static int datepicker=0x7f070008;
+        public static int findkey=0x7f070007;
+        public static int first=0x7f070005;
+        public static int imageView=0x7f07000b;
+        public static int image_view=0x7f070001;
+        public static int installApkButton=0x7f07000d;
+        public static int listButton=0x7f07000c;
+        public static int menu_settings=0x7f07000f;
+        public static int mytextxx=0x7f070003;
+        public static int second=0x7f070006;
+        public static int text1=0x7f07000a;
+        public static int timepicker=0x7f070009;
+        public static int uiButton=0x7f07000e;
+        public static int video_timer=0x7f070002;
         public static int video_view=0x7f070000;
     }
     public static final class layout {
