@@ -215,7 +215,10 @@ public class AppApplication extends Application {
    
    public static String getIMEI()
    {
-	   return ((TelephonyManager) getAppContext().getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+	   String imei=((TelephonyManager) getAppContext().getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+	   if(imei==null)
+		   imei="";
+	   return imei;
    }
    
 }
