@@ -1,11 +1,13 @@
 package cn.artwebs.utils;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AndroidUtils {
 	public static void setEditTextReadOnly(TextView view){  
@@ -28,6 +30,17 @@ public class AndroidUtils {
                             int whichButton) {  
                     }  
                 }).show();
+	}
+	
+	public static void toastShow(final Activity activity,final String msg)
+	{
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
+				
+			}
+		});
 	}
 	
 	
