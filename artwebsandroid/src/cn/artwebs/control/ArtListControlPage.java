@@ -35,6 +35,7 @@ public class ArtListControlPage implements OnScrollListener {
 	{
 		this.window=window;
 		this.adapter=adapter;
+		this.adapter.setList(list);
 	}
 	
 	public void load()
