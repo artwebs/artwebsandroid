@@ -221,6 +221,24 @@ public class AppApplication extends Application {
 	   return imei;
    }
    
+   public static String readPreferences(String perferencesName, String key)
+	{
+		SharedPreferences preferences = getAppContext().getSharedPreferences(perferencesName,
+				Context.MODE_WORLD_READABLE);
+		String result = preferences.getString(key, null);
+		return result;
+	}
+
+	public static void writePreferences(String perferencesName, String key,
+			String value)
+	{
+		SharedPreferences preferences = getAppContext().getSharedPreferences(perferencesName,
+				Context.MODE_WORLD_WRITEABLE);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(key, value);
+		editor.commit();
+	}
+   
 }
 
 
