@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BinMap extends IBinObject {
 	private ArrayList item=new ArrayList();
 	public ArrayList getItem() {
@@ -184,6 +187,31 @@ public class BinMap extends IBinObject {
 	public void addend(BinMap adder)
 	{
 		adder.getItem().addAll(0,this.item);
+	}
+	
+	public JSONObject toJSONObject()
+	{
+		JSONObject obj=new JSONObject();
+		for(int i=0;i<this.item.size();i++)
+		{
+			  HashMap hm=(HashMap)item.get(i);
+			  Iterator it= hm.keySet().iterator();	
+			   Object key=new Object();
+				Object value=new Object();
+				while(it.hasNext())
+				{			
+					key=(Object)it.next();
+					value=hm.get(key);
+					try {
+						obj.put(key.toString(), value.toString());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			  
+		}
+		return obj;
 	}
 	public static void main(String[] args) {
 		BinMap pm=new BinMap();

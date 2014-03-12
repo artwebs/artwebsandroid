@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BinList extends IBinObject {
 	private ArrayList item=new ArrayList();
 	public void setItem(ArrayList item) {
@@ -28,6 +32,21 @@ public class BinList extends IBinObject {
 		BinMap para=new BinMap();
 		para.setItemByHashMap((HashMap)item.get(i));
 		return para;
+	}
+	
+	public JSONObject getMapItem2JSONObject(int i)
+	{
+		JSONObject obj=new JSONObject();
+		BinMap map=getMapItem(i);
+		for(int ni=0;ni<map.size();ni++)
+			try {
+				obj.put(map.getKey(ni).toString(), map.getValue(ni).toString());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return obj;
+		
 	}
 	
 	@SuppressWarnings("unchecked")

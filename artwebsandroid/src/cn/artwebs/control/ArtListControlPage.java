@@ -13,7 +13,7 @@ public class ArtListControlPage implements OnScrollListener {
 	private BinList list=new BinList();
 	private  Activity window;
 	private ListAdapter adapter;
-	private int page=0;
+	private int page=1;
 	private int pageSize=5;
 	private int visibleLastIndex = 0;  
 	private int visibleItemCount=0;  
@@ -40,10 +40,11 @@ public class ArtListControlPage implements OnScrollListener {
 	
 	public void load()
 	{
-		page=0;
+		page=1;
 		setDataSize(pageSize);
 		visibleLastIndex = 0;
 		visibleItemCount=0;
+		list.clear();
 		loadData();
 	}
 	
@@ -88,18 +89,28 @@ public class ArtListControlPage implements OnScrollListener {
         	Log.d(tag, "listener 没有设置");
         	return;
         }
-		BinList tmpList=listener.loadMoreData(page,pageSize);
-    	if(tmpList.size()>0)
+		listener.loadMoreData(page,pageSize);
+	}
+	
+	public void notifyDataChanged(BinList tmpList)
+	{
+		if(tmpList.size()>0)
     	{
     		list.addend(tmpList);
-    		adapter.notifyDataSetChanged();
+    		window.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					adapter.notifyDataSetChanged();
+				}
+			});
+    		
     		page++;
     	}
 	}
 	
 	public interface OnControlPageListener
 	{
-		public BinList loadMoreData(int page,int pageSize);
+		public void loadMoreData(int page,int pageSize);
 	}
 	
 	
