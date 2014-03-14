@@ -34,6 +34,16 @@ public class BinList extends IBinObject {
 		return para;
 	}
 	
+	public JSONArray getArray2JSONArray()
+	{
+		JSONArray array=new JSONArray();
+		for(int i=0;i<size();i++)
+		{
+			array.put(getMapItem2JSONObject(i));
+		}
+		return array;
+	}
+	
 	public JSONObject getMapItem2JSONObject(int i)
 	{
 		JSONObject obj=new JSONObject();

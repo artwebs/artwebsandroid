@@ -20,7 +20,10 @@ public class ArtListControlPage implements OnScrollListener {
 	private int dataSize=0;
 	private OnControlPageListener listener;
 	
-	
+	public BinList getList() {
+		return list;
+	}
+
 	public void setDataSize(int dataSize) {
 		this.dataSize = dataSize;
 	}
