@@ -14,7 +14,7 @@ public class ArtListControlPage implements OnScrollListener {
 	private  Activity window;
 	private ListAdapter adapter;
 	private int page=1;
-	private int pageSize=5;
+	private int pageSize=10;
 	private int visibleLastIndex = 0;  
 	private int visibleItemCount=0;  
 	private int dataSize=0;
@@ -72,10 +72,10 @@ public class ArtListControlPage implements OnScrollListener {
         int lastIndex = itemsLastIndex + 1;  
         Log.d(tag, (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL )+"");
         Log.d(tag, (visibleLastIndex == lastIndex )+"");
-        Log.d(tag, (adapter.getCount()<dataSize)+"");
+        Log.d(tag, (adapter.getCount()<dataSize-1)+"");
         Log.d(tag, "------------------------");
         if (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL  
-                && visibleLastIndex == lastIndex &&adapter.getCount()<dataSize) { 
+                && visibleLastIndex == lastIndex &&adapter.getCount()<dataSize-1) { 
         	Log.d(tag, "loadMoreData");
         	loadData();
         }  
