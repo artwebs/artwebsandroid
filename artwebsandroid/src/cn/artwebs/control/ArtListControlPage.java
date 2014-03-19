@@ -43,6 +43,7 @@ public class ArtListControlPage implements OnScrollListener {
 	
 	public void load()
 	{
+		this.adapter.clearItem();
 		page=1;
 		setDataSize(pageSize);
 		visibleLastIndex = 0;

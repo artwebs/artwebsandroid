@@ -52,9 +52,14 @@ public class ListAdapter extends BaseAdapter {
 	public void clearItem()
 	{
 		this.list.clear();
+		rowViews.clear();
 	}
 	
-	
+	public void removeItem(int index)
+	{
+		this.list.remove(index);
+		rowViews.remove(index);
+	}
 	
 	public int getDataSize() {
 		return dataSize;
