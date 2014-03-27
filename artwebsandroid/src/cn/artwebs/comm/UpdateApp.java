@@ -96,6 +96,29 @@ public class UpdateApp {
 		
 	}
 	
+	public static void installWithObject(final ContextWrapper activity,final Version ctlVersion)
+	{
+		obj=new UpdateApp();
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				Version localVersion=getLocalVersion();
+				if(ctlVersion==null)return;
+				obj.version=ctlVersion;
+				obj.activity=activity;
+				obj.fileUtils=new FileUtils(path);
+				if(obj.fileUtils.isFileExist(obj.version.getAppName()+".apk"))obj.fileUtils.deleteSDFile(obj.version.getAppName()+".apk");
+				Log.d(tag, "localVersion="+localVersion.getVersion());
+				Log.d(tag, "ctlVersion="+ctlVersion.getVersion());
+				if(localVersion.getVersion()<ctlVersion.getVersion())
+				{
+					obj.mHandler.sendEmptyMessage(0);
+				}
+			}}).start();
+	}
+	
+	
 	private Handler mHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
