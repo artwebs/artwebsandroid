@@ -34,10 +34,15 @@ public class AndroidUtils {
 	
 	public static void toastShow(final Activity activity,final String msg)
 	{
+		toastShow(activity,msg,Toast.LENGTH_LONG);
+	}
+	
+	public static void toastShow(final Activity activity,final String msg, final int duration)
+	{
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
+				Toast.makeText(activity, msg, duration).show();
 				
 			}
 		});
