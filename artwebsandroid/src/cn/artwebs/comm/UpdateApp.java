@@ -1,5 +1,7 @@
 package cn.artwebs.comm;
 
+import org.json.JSONObject;
+
 import cn.artwebs.net.NetworkProber;
 import cn.artwebs.utils.FileUtils;
 import cn.artwebs.utils.HttpDownloader;
@@ -28,6 +30,11 @@ public class UpdateApp {
 	private Version version;
 	private ContextWrapper activity;
 	private static String path="artintall";
+	public static enum DATAType
+	{
+		JSON,
+		XML
+	};
 	
 	private UpdateApp()
 	{
@@ -42,6 +49,11 @@ public class UpdateApp {
 	
 	public static void installWithUrl(final ContextWrapper activity,final String url)
 	{
+		installWithUrl(activity, url,DATAType.XML);
+	}
+	
+	public static void installWithUrl(final ContextWrapper activity,final String url,final DATAType type)
+	{
 		obj=new UpdateApp();
 		new Thread(new Runnable(){
 
@@ -51,7 +63,18 @@ public class UpdateApp {
 				String content="";
 				content=getCtlContent(url);
 				if(content=="")return;
-				Version ctlVersion=getControlVersionWithString(content);
+				Version ctlVersion=null;
+				switch (type) {
+				case JSON:
+					ctlVersion=getControlVersionWithJson(content);
+					break;
+				case XML:
+					ctlVersion=getControlVersionWithXml(content);
+					break;
+				default:
+					
+					return;
+				}
 				if(ctlVersion==null)return;
 				
 				obj.version=ctlVersion;
@@ -65,7 +88,6 @@ public class UpdateApp {
 					obj.mHandler.sendEmptyMessage(0);
 				}
 			}}).start();
-		
 	}
 	
 	public static void installWithString(final ContextWrapper activity,final String content)
@@ -78,7 +100,7 @@ public class UpdateApp {
 			@Override
 			public void run() {
 				Version localVersion=getLocalVersion();
-				Version ctlVersion=getControlVersionWithString(content);
+				Version ctlVersion=getControlVersionWithXml(content);
 				if(ctlVersion==null)return;
 				
 				obj.version=ctlVersion;
@@ -183,7 +205,7 @@ public class UpdateApp {
 	
 	
 	
-	public static Version getControlVersionWithString(String content)
+	public static Version getControlVersionWithXml(String content)
 	{
 		Version ctlVersion=new Version();
 		try{
@@ -197,6 +219,25 @@ public class UpdateApp {
 		} finally
 		{}
     	return ctlVersion;
+	}
+	
+	public static Version getControlVersionWithJson(String content)
+	{
+		Version ctlVersion=new Version();
+		try {
+
+			JSONObject rootObj=new JSONObject(content);
+			JSONObject updateData=rootObj.getJSONObject("result");
+			
+			ctlVersion.setAppName(updateData.getString("appName"));
+	    	ctlVersion.setUpdateUrl(updateData.getString("updateUrl"));
+	    	ctlVersion.setVersion(Float.valueOf(updateData.getString("version")));
+	    	ctlVersion.setApkSize(Integer.parseInt(updateData.getString("apkSize")));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{}
+		
+		return ctlVersion;
 	}
     
     public static String getCtlContent()
