@@ -9,10 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
-    
-    <cn.artwebs.artqrcode.ArtQrCodeView
-        android:id="@+id/artqrcode"
-        android:layout_width="fill_parent"
-        android:layout_height="200dip" />
+
     
 </LinearLayout>
