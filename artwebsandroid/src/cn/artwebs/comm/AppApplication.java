@@ -213,13 +213,7 @@ public class AppApplication extends Application {
          //Toast.makeText(context,"揚聲器已經關閉",Toast.LENGTH_SHORT).show();
    }
    
-   public static String getIMEI()
-   {
-	   String imei=((TelephonyManager) getAppContext().getSystemService(TELEPHONY_SERVICE)).getDeviceId();
-	   if(imei==null)
-		   imei="";
-	   return imei;
-   }
+   
    
    public static String readPreferences(String perferencesName, String key)
 	{
@@ -238,6 +232,9 @@ public class AppApplication extends Application {
 		editor.putString(key, value);
 		editor.commit();
 	}
+	
+	
+	
    
 }
 
