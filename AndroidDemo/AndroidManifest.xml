@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".CameraActivity" android:label=""></activity>
         <activity android:name=".QRCodeActivity" android:label=""></activity>
+        <activity android:name=".ScratchSardViewActivity" android:label=""></activity>
     </application>
 
 </manifest>
