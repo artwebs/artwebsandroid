@@ -127,7 +127,7 @@ public class AppApplication extends Application {
     /**
      * @return the main context of the Application
      */
-    public static Context getAppContext()
+    public synchronized static Context getAppContext()
     {
         return instance;
     }

@@ -45,7 +45,7 @@ public class Phone{
 		iccid=tm.getSimSerialNumber();
 	}
 	
-	public static Phone instance()
+	public synchronized static Phone instance()
 	{
 		if(obj==null)
 			obj=new Phone();
