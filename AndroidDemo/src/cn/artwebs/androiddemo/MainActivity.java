@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 		this.setContentView(mainLayout);
 		addButton("摄像头测试",CameraActivity.class);
 		addButton("二维码测试",QRCodeActivity.class);
+		addButton("刮刮卡",ScratchSardViewActivity.class);
 	}
 
 	private void addButton(String name,final Class obj)
