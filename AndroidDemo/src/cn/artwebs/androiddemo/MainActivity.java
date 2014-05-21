@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 		addButton("摄像头测试",CameraActivity.class);
 		addButton("二维码测试",QRCodeActivity.class);
 		addButton("刮刮卡",ScratchSardViewActivity.class);
+		addButton("单选控件",SingleChoiceActivity.class);
 	}
 
 	private void addButton(String name,final Class obj)
