@@ -84,7 +84,7 @@ public class SingleChoiceView extends RelativeLayout {
 	
 	public void show()
 	{
-		Log.d(tag, "sourceStr="+sourceStr);
+//		Log.d(tag, "sourceStr="+sourceStr);
 		list.clear();
 		itemGroup.removeAllViews();
 		try {
