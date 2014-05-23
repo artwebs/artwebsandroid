@@ -38,7 +38,7 @@ public class ScratchSardView extends TextView {
 	MyThread mThread;
 	int messageCount;
 	int[] pixels;
-	int color = 0xFFD6D6D6;
+	int color = Color.rgb(0xD6,0xD6,0xD6);
 	private ArtOnTuchListener listener;
 	private boolean isBegin=false;
 
@@ -52,10 +52,12 @@ public class ScratchSardView extends TextView {
 	 * 再一次抽奖
 	 */
 	public void againLotter() {
+//		Color.rgb(red, green, blue)
 		isBegin=false;
 		messageCount = 0;
 		tempCanvas.drawColor(color);
 		setGravity(Gravity.CENTER);
+		setBackgroundColor(Color.WHITE);
 	}
 	
 	public void setArtOnTuchListener(ArtOnTuchListener listener)
