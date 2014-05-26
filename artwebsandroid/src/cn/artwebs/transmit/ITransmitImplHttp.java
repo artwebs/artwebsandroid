@@ -1,11 +1,12 @@
 package cn.artwebs.transmit;
 
+import java.io.IOException;
 import java.io.InputStream;
+
 
 
 import android.os.Handler;
 import android.util.Log;
-
 import cn.artwebs.transmit.ITransmit;
 import cn.artwebs.utils.HttpDownloader;
 
@@ -51,7 +52,13 @@ public class ITransmitImplHttp implements ITransmit {
 	public InputStream downStream(String arg0) {	
 		String inStr=this.host+arg0;
 		Log.i(tag,inStr);
-		return client.getInputStreamFromUrl(inStr);
+		try {
+			client.openConn(inStr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return client.getInputStream();
 	}
 
 	@Override

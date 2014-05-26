@@ -28,13 +28,18 @@ public final class R {
         public static int imageView=0x7f07000c;
         public static int image_view=0x7f070001;
         public static int installApkButton=0x7f07000e;
+        public static int itemGroup=0x7f070011;
         public static int listButton=0x7f07000d;
         public static int menuTbl=0x7f070003;
-        public static int menu_settings=0x7f070010;
+        public static int menu_settings=0x7f070015;
         public static int mytextxx=0x7f070004;
+        public static int radio0=0x7f070012;
+        public static int radio1=0x7f070013;
+        public static int radio2=0x7f070014;
         public static int second=0x7f070007;
         public static int text1=0x7f07000b;
         public static int timepicker=0x7f07000a;
+        public static int titleView=0x7f070010;
         public static int uiButton=0x7f07000f;
         public static int video_timer=0x7f070002;
         public static int video_view=0x7f070000;
@@ -50,6 +55,7 @@ public final class R {
         public static int imgbinlistitem=0x7f030007;
         public static int layout_progress=0x7f030008;
         public static int main=0x7f030009;
+        public static int singlechoice_view=0x7f03000a;
     }
     public static final class menu {
         public static int activity_main=0x7f060000;

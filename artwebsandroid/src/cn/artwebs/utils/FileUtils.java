@@ -160,7 +160,7 @@ public class FileUtils {
 			{
 				
 				output.write(buffer, 0, count);
-				handler.sendEmptyMessage(1);
+				handler.sendMessage(handler.obtainMessage(1, count));
 			}
 			handler.sendEmptyMessage(2);
 			output.flush();

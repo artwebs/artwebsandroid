@@ -25,7 +25,6 @@ public class UpdateApp {
 	private final static String tag="UpdateApp";
 	private ProgressDialog downPd;
 	private FileUtils fileUtils;
-	private int downLoadFileSize=0;
 	private static UpdateApp obj;
 	private Version version;
 	private ContextWrapper activity;
@@ -270,8 +269,7 @@ public class UpdateApp {
 		        switch (msg.what)
 		        {
 		          case 1:
-		        	downLoadFileSize++;
-		            downPd.incrementProgressBy(1);
+		            downPd.incrementProgressBy(Integer.valueOf(msg.obj.toString()));
 		            break;
 		          case 2:
 		        	downPd.dismiss();
@@ -279,7 +277,10 @@ public class UpdateApp {
 					Log.i(tag,fileUtils.getSDPATH()+version.getAppName()+".apk");
 					fileUtils.installApk(activity, fileUtils.getSDPATH()+version.getAppName()+".apk");
 		            break;
-	 
+
+			      case 3:
+			    	  downPd.setMax(Integer.valueOf(msg.obj.toString()));
+			    	  break;
 		          case -1:
 		            String error = msg.getData().getString("error");
 		            Toast.makeText(AppApplication.getAppContext(), error,Toast.LENGTH_LONG).show();

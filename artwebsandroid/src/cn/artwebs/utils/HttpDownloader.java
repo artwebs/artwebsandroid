@@ -16,6 +16,17 @@ import android.util.Log;
 public class HttpDownloader {
 	private final static String tag="HttpDownloader";
 	private URL url = null;
+	private HttpURLConnection urlConn;
+	
+	public void openConn(String urlStr) throws IOException
+	{
+		url = new URL(urlStr);
+		// 创建一个Http连接
+		urlConn = (HttpURLConnection) url
+				.openConnection();
+		urlConn.connect();
+	}
+	
 
 	/**
 	 * 根据URL下载文件，前提是这个文件当中的内容是文本，函数的返回值就是文件当中的内容
@@ -32,11 +43,7 @@ public class HttpDownloader {
 		BufferedReader buffer = null;
 		try {
 			// 创建一个URL对象
-			url = new URL(urlStr);
-			// 创建一个Http连接
-			HttpURLConnection urlConn = (HttpURLConnection) url
-					.openConnection();
-			urlConn.connect();
+			openConn(urlStr);
 			// 使用IO流读取数据
 			buffer = new BufferedReader(new InputStreamReader(urlConn
 					.getInputStream()));
@@ -68,7 +75,8 @@ public class HttpDownloader {
 			if (fileUtils.isFileExist(fileName)) {
 				return 1;
 			} else {
-				inputStream = getInputStreamFromUrl(urlStr);
+				openConn(urlStr);
+				inputStream = getInputStream();
 				File resultFile = fileUtils.write2SDFromInput(fileName, inputStream);
 				if (resultFile == null) {
 					return -1;
@@ -102,7 +110,9 @@ public class HttpDownloader {
 			if (fileUtils.isFileExist(fileName)) {
 				return 1;
 			} else {
-				inputStream = getInputStreamFromUrl(urlStr);
+				openConn(urlStr);
+				handler.sendMessage(handler.obtainMessage(3,urlConn.getContentLength()+""));
+				inputStream = getInputStream();
 				File resultFile = fileUtils.write2SDFromInput(fileName, inputStream,handler);
 				if (resultFile == null) {
 					return -2;
@@ -129,11 +139,9 @@ public class HttpDownloader {
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
-	public InputStream getInputStreamFromUrl(String urlStr){
+	public InputStream getInputStream(){
 		InputStream inputStream=null;
 		try {
-			url = new URL(urlStr);
-			HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
 			inputStream = urlConn.getInputStream();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -141,4 +149,6 @@ public class HttpDownloader {
 		}		
 		return inputStream;
 	}
+	
+	
 }
