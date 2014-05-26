@@ -1,15 +1,15 @@
 package cn.artwebs.comm;
 
 public class Version {
-	private float version;
+	private long version;
 	private String updateUrl;
 	private String appName;
 	private int apkSize;
 	
-	public float getVersion() {
+	public long getVersion() {
 		return version;
 	}
-	public void setVersion(float version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 	public String getUpdateUrl() {

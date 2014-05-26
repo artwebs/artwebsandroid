@@ -197,7 +197,7 @@ public class UpdateApp {
     {
     	Version obj=new Version();
     	obj.setAppName(AppApplication.getAppName());
-    	obj.setVersion(Float.valueOf(AppApplication.getPKG().versionCode));
+    	obj.setVersion(Long.valueOf(AppApplication.getPKG().versionCode));
     	obj.setUpdateUrl("");
     	return obj;
     }
@@ -210,7 +210,7 @@ public class UpdateApp {
 		try{
 			ctlVersion.setAppName(Utils.getMarkString(content, "<appName>", "</appName>"));
 	    	ctlVersion.setUpdateUrl(Utils.getMarkString(content, "<updateUrl>", "</updateUrl>"));
-	    	ctlVersion.setVersion(Float.valueOf(Utils.getMarkString(content, "<version>", "</version>")));
+	    	ctlVersion.setVersion(Long.valueOf(Utils.getMarkString(content, "<version>", "</version>")));
 	    	ctlVersion.setApkSize(Integer.parseInt(Utils.getMarkString(content, "<apkSize>", "</apkSize>")));
 		}catch(Exception e)
 		{
@@ -230,7 +230,7 @@ public class UpdateApp {
 			
 			ctlVersion.setAppName(updateData.getString("appName"));
 	    	ctlVersion.setUpdateUrl(updateData.getString("updateUrl"));
-	    	ctlVersion.setVersion(Float.valueOf(updateData.getString("version")));
+	    	ctlVersion.setVersion(Long.valueOf(updateData.getString("version")));
 	    	ctlVersion.setApkSize(Integer.parseInt(updateData.getString("apkSize")));
 		} catch (Exception e) {
 			// TODO: handle exception
