@@ -25,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="cn.artwebs.androiddemo.ArtServiceTest"></service>
         <activity android:name=".CameraActivity" android:label=""></activity>
         <activity android:name=".QRCodeActivity" android:label=""></activity>
         <activity android:name=".ScratchSardViewActivity" android:label=""></activity>
