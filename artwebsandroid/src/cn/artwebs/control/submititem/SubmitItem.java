@@ -12,7 +12,7 @@ import android.widget.TextView;
 public abstract class SubmitItem {
 	private String name;
 	public static enum ItemKey{
-		name,cname,value,dicvalue,type,display,readonly,unit
+		name,cname,value,dicvalue,type,display,readonly,unit,mache,maxValue,minValue
 	};
 	public static enum ItemValueType{
 		textBox,singleChoice,multipleChoice,dropdownList
