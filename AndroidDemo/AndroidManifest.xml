@@ -27,6 +27,7 @@
         </activity>
         <service android:name="cn.artwebs.androiddemo.ArtServiceTest"></service>
         <activity android:name=".CameraActivity" android:label=""></activity>
+        <activity android:name=".SubmitDataActivity" android:label=""></activity>
         <activity android:name=".QRCodeActivity" android:label=""></activity>
         <activity android:name=".ScratchSardViewActivity" android:label=""></activity>
         <activity android:name=".SingleChoiceActivity" android:label=""></activity>

@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
 		addButton("二维码测试",QRCodeActivity.class);
 		addButton("刮刮卡",ScratchSardViewActivity.class);
 		addButton("单选控件",SingleChoiceActivity.class);
+		addButton("提交控件",SubmitDataActivity.class);
 		
 		ArtServiceTest.start(this);
 	}
