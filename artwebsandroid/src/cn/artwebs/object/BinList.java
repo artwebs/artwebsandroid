@@ -72,6 +72,13 @@ public class BinList extends IBinObject {
 		}
 		return value;
 	}
+	
+	public String getValueString(int i,Object key)
+	{
+		Object value=getValue(i, key);
+		return value==null?"":value.toString();
+	}
+	
 	public void setValue(int i,Object key,Object value){
 		HashMap hm=(HashMap)item.get(i);
 		Iterator it= hm.keySet().iterator();			

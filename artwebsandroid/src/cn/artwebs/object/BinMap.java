@@ -35,6 +35,12 @@ public class BinMap extends IBinObject {
 		return key;
 	}
 	
+	public String getKeyString(int i)
+	{
+		Object key=getKey(i);
+		return key==null?"":key.toString();
+	}
+	
 	public Object getKey(Object value) {
 		Object key=new Object(); 
 		for(int i=0;i<item.size();i++)
@@ -49,6 +55,12 @@ public class BinMap extends IBinObject {
 		}
 		return key;
 	}
+	
+	public String getKeyString(Object value)
+	{
+		Object key=getKey(value);
+		return key==null?"":key.toString();
+	}
 
 	public Object getValue(int index) {
 		HashMap hm=(HashMap)item.get(index);
@@ -61,6 +73,12 @@ public class BinMap extends IBinObject {
 			value=hm.get(key);
 		}
 		return value;
+	}
+	
+	public String getValueString(int index)
+	{
+		Object value=getValue(index);
+		return value==null?"":value.toString();
 	}
 
 
@@ -80,6 +98,11 @@ public class BinMap extends IBinObject {
 		return value;
 	}
 	
+	public String getValueString(Object key)
+	{
+		Object value=getValue(key);
+		return value==null?"":value.toString();
+	}
 
 	public void setValue(Object key,Object value){
 		for(int i=0;i<item.size();i++)
