@@ -38,7 +38,12 @@ public class ArtCircleDialog {
 				progressDialog.setOnCancelListener(selfcancel);
 			else
 				progressDialog.setOnCancelListener(cancel);
-			progressDialog.show();
+			window.runOnUiThread(new Runnable(){
+
+				@Override
+				public void run() {
+					progressDialog.show();
+				}});
 		}
 		
 	}
@@ -47,7 +52,12 @@ public class ArtCircleDialog {
 	{
 		if(progressDialog!=null)
 		{
-			progressDialog.dismiss();
+			window.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					progressDialog.dismiss();
+				}
+			});
 			progressDialog=null;
 		}
 	}
