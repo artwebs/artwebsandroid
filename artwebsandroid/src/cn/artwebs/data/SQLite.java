@@ -26,7 +26,11 @@ public abstract class SQLite{
 		this.dbName=dbName;
 	}
 	
-	protected void connection()
+	public SQLiteDatabase getDb() {
+		return db;
+	}
+	
+	public void connection()
 	{	
 		if(this.db==null)
 		{

@@ -41,7 +41,8 @@ public class SubmitItem2TextBox extends SubmitItem {
 	@Override
 	public String getValue() {
 		// TODO Auto-generated method stub
-		return this.isChanged()?nameETxt.getText().toString():nameETxt.getHint().toString();
+		
+		return this.isChanged()?(nameETxt.getText()==null?"":nameETxt.getText().toString()):getOriginValue();
 	}
 
 }
