@@ -29,7 +29,7 @@ public class SubmitDataActivity extends Activity {
 		submitBtn=(Button)findViewById(R.id.submitBtn);
 		reloadBtn=(Button)findViewById(R.id.reloadBtn);
 		para=getPara();
-		SubmitView.buildData(para, this.getData(), 0);
+//		SubmitView.buildData(para, this.getData(), 0);
 		submitView.setSource(para);
 		submitView.reLoad();
 		
