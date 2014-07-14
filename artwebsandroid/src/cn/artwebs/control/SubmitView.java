@@ -148,4 +148,17 @@ public class SubmitView extends ScrollView {
 		return rsMap;
 	}
 	
+	public BinMap getResult(boolean isChanged)
+	{
+		BinMap rsMap=new BinMap();
+		for(int i=0;i<ctlMap.size();i++)
+		{
+			SubmitItem item=(SubmitItem) ctlMap.getValue(i);
+			if(item.isChanged()!=isChanged)continue;
+			rsMap.put(item.getName(), item.getValue());
+		}
+		return rsMap;
+	}
+	
+	
 }
