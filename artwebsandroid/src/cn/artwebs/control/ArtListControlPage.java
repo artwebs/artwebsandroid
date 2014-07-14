@@ -107,7 +107,7 @@ public class ArtListControlPage implements OnScrollListener {
 					adapter.notifyDataSetChanged();
 				}
 			});
-    		
+    		dataSize+=tmpList.size();
     		page++;
     	}
 	}

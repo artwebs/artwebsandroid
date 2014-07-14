@@ -35,7 +35,10 @@ public class SubmitItem2TextBox extends SubmitItem {
 	@Override
 	public boolean isChanged() {
 		// TODO Auto-generated method stub
-		return !getOriginValue().equals(nameETxt.getText().toString());
+		if(nameETxt.getText()!=null)
+			if(!"".equals(nameETxt.getText().toString()))
+				return !getOriginValue().equals(nameETxt.getText().toString());
+		return false;
 	}
 
 	@Override
