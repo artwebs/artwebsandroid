@@ -7,12 +7,12 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 
 public class ArtCircleDialog {
-	protected ProgressDialog progressDialog = null;
-	private Activity window;
+	protected static ProgressDialog progressDialog = null;
+	private static Activity window;
 	private static ArtCircleDialog dialogObj;
 	private ArtCircleDialog(Activity window)
 	{
-		this.window=window;
+		window=window;
 	}
 	
 	public static ArtCircleDialog instance(Activity window)
@@ -29,7 +29,7 @@ public class ArtCircleDialog {
 	
 	public void show(DialogStyle style,OnCancelListener cancel)
 	{
-		if(progressDialog==null)
+		if(progressDialog==null&&style!=DialogStyle.none)
 		{
 			progressDialog = ProgressDialog.show(window,style.getTitle(), style.getContent(), true);
 			progressDialog.setCancelable(true);
@@ -48,7 +48,7 @@ public class ArtCircleDialog {
 		
 	}
 	
-	public void close()
+	public static void close()
 	{
 		if(progressDialog!=null)
 		{
