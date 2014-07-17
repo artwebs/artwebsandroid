@@ -7,20 +7,14 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 
 public class ArtCircleDialog {
-	protected static ProgressDialog progressDialog = null;
-	private static Activity window;
-	private static ArtCircleDialog dialogObj;
-	private ArtCircleDialog(Activity window)
+	protected  ProgressDialog progressDialog = null;
+	private  Activity window;
+	public ArtCircleDialog(Activity window)
 	{
-		window=window;
+		this.window=window;
 	}
 	
-	public static ArtCircleDialog instance(Activity window)
-	{
-		if(dialogObj==null)
-			dialogObj=new ArtCircleDialog(window);
-		return dialogObj;
-	}
+	
 	
 	public void show(DialogStyle style)
 	{
@@ -29,8 +23,9 @@ public class ArtCircleDialog {
 	
 	public void show(DialogStyle style,OnCancelListener cancel)
 	{
-		if(progressDialog==null&&style!=DialogStyle.none)
+		if(progressDialog==null)
 		{
+			if(style==DialogStyle.none)return;
 			progressDialog = ProgressDialog.show(window,style.getTitle(), style.getContent(), true);
 			progressDialog.setCancelable(true);
 			progressDialog.setCanceledOnTouchOutside(false);
@@ -44,22 +39,32 @@ public class ArtCircleDialog {
 				public void run() {
 					progressDialog.show();
 				}});
+		}else
+		{
+			if(progressDialog.isShowing())
+				this.close();
 		}
+			
 		
 	}
 	
-	public static void close()
+	public  void close()
 	{
-		if(progressDialog!=null)
-		{
+		if(window!=null){
 			window.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					progressDialog.dismiss();
+					if(progressDialog!=null)
+					{
+						progressDialog.dismiss();
+						progressDialog=null;
+					}
+					
 				}
 			});
-			progressDialog=null;
 		}
+			
+		
 	}
 	
 	private OnCancelListener selfcancel = new OnCancelListener() 
