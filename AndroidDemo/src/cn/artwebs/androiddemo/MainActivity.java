@@ -1,5 +1,6 @@
 package cn.artwebs.androiddemo;
 
+import cn.artwebs.service.ArtServiceManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +24,7 @@ public class MainActivity extends Activity {
 		addButton("单选控件",SingleChoiceActivity.class);
 		addButton("提交控件",SubmitDataActivity.class);
 		
-		ArtServiceTest.start(this);
+		ArtServiceManager.start(this, ArtServiceTest.class);
 	}
 
 	private void addButton(String name,final Class obj)
