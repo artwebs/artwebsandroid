@@ -1,24 +1,20 @@
 package cn.artwebs.service;
 
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 
 public abstract class ArtService extends Service {
-	
+
 	private static LocalBroadcastManager broadcaster;
-	
+
 	private static String SERVICE_RESULT="cn.artwebs.service.ArtService";
 	public final static String RESULT_TAG="tag";
 	private static boolean isSendbroad=false;
 	private static ArtService self;
-	
-	
+
+
 	
 	public static void setServiceResult(String tag)
 	{
