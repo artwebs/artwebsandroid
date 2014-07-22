@@ -3,18 +3,15 @@ package cn.artwebs.security;
 import cn.artwebs.utils.Base64;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
 /**
  * Created by artwebs on 14-7-21.
  */
-public class ArtSecurity3DES {
+public class ArtSecurity3DES extends ArtAbsSecurity {
 
     private static final String MCRYPT_TRIPLEDES = "DESede";
     private static final String TRANSFORMATION = "DESede/CBC/PKCS5Padding";
@@ -69,7 +66,7 @@ public class ArtSecurity3DES {
 
     public static byte[] encrypt(byte[] data, byte[] key, byte[] iv) throws Exception {
         DESedeKeySpec spec = new DESedeKeySpec(key);
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(MCRYPT_TRIPLEDES);
         SecretKey sec = keyFactory.generateSecret(spec);
         Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         IvParameterSpec IvParameters = new IvParameterSpec(iv);
@@ -79,51 +76,10 @@ public class ArtSecurity3DES {
 
 
 
-    public static byte[] generateSecretKey() throws NoSuchAlgorithmException {
-        KeyGenerator keygen = KeyGenerator.getInstance(MCRYPT_TRIPLEDES);
-        return keygen.generateKey().getEncoded();
-    }
-
-    public static byte[] randomIVBytes() {
-        Random ran = new Random();
-        byte[] bytes = new byte[8];
-        for (int i = 0; i < bytes.length; ++i) {
-            bytes[i] = (byte) ran.nextInt(Byte.MAX_VALUE + 1);
-        }
-        return bytes;
-    }
-
-    public static byte[] getKeyByte(String key)
-    {
-        byte[] rs=new byte[24];
-        byte[] keyByte=key.getBytes();
-        for (int i = 0; i < 24; i++) {
-            if (i <keyByte.length) {
-                rs[i]=keyByte[i];
-            }else {
-                rs[i]=0;
-            }
-        }
-        return rs;
-    }
-
-    public static byte[] getIVBtye(String iv)
-    {
-        byte[] rs=new byte[8];
-        byte[] ivByte=iv.getBytes();
-        for (int i = 0; i < 8; i++) {
-            if (i<ivByte.length)
-                rs[i]=ivByte[i];
-            else
-                rs[i]=0;
-
-        }
-        return rs;
-    }
 
     public static void main(String args[]) throws Exception {
         String plainText = "a12*&1c中文";
-        final byte[] secretBytes = ArtSecurity3DES.generateSecretKey();
+        final byte[] secretBytes = ArtSecurity3DES.generateSecretKey(MCRYPT_TRIPLEDES);
 //        System.out.println(secretBytes.length);
         final byte[] ivbytes = ArtSecurity3DES.randomIVBytes();
 //        System.out.println("plain text: " + plainText);
@@ -137,7 +93,7 @@ public class ArtSecurity3DES {
         System.out.println(rs);
         System.out.println(ArtSecurity3DES.decode(rs, secretBytes, ivbytes));
 
-        rs= ArtSecurity3DES.encode(plainText, key, iv);
+        rs= ArtSecurity3DES.encode("1103010900000013", key, iv);
         System.out.println(rs);
         System.out.println(ArtSecurity3DES.decode(rs, key, iv));
 
