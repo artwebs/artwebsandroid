@@ -55,12 +55,11 @@ public class ArtSecurity3DES extends ArtAbsSecurity {
     {
         byte[] data=null;
         try {
-            data=encrypt(content.getBytes("utf-8"),key,iv);
+            data=encrypt(content.getBytes(),key,iv);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
         }
-
         return new String(Base64.encode(data));
     }
 
@@ -89,13 +88,15 @@ public class ArtSecurity3DES extends ArtAbsSecurity {
 
         String key="www.zcline.net";
         String iv="artwebs";
-        String rs= ArtSecurity3DES.encode(plainText, secretBytes, ivbytes);
-        System.out.println(rs);
-        System.out.println(ArtSecurity3DES.decode(rs, secretBytes, ivbytes));
+        String rs;
+//        String rs= ArtSecurity3DES.encode(plainText, secretBytes, ivbytes);
+//        System.out.println(rs);
+//        System.out.println(ArtSecurity3DES.decode(rs, secretBytes, ivbytes));
 
         rs= ArtSecurity3DES.encode("1103010900000013", key, iv);
         System.out.println(rs);
         System.out.println(ArtSecurity3DES.decode(rs, key, iv));
+        System.out.println(ArtSecurity3DES.decode("bXgKYTR47dosKznX/32ARw==", key, iv));
 
     }
 

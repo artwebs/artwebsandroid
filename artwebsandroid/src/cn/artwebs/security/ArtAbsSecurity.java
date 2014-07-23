@@ -36,11 +36,12 @@ public class ArtAbsSecurity {
     {
         byte[] rs=new byte[len];
         byte[] keyByte=key.getBytes();
-        for (int i = 0; i < keyByte.length; i++) {
-            if (i <keyByte.length) {
-                rs[i]=keyByte[i];
-            }
+        for (int i = 0,j=0; i < len; i++,j++) {
+            if (j >=keyByte.length)
+                    j=0;
+            rs[i]=keyByte[j];
         }
+        System.out.println(new String(rs));
         return rs;
     }
 
@@ -48,11 +49,13 @@ public class ArtAbsSecurity {
     {
         byte[] rs=new byte[8];
         byte[] ivByte=iv.getBytes();
-        for (int i = 0; i < 8; i++) {
-            if (i<ivByte.length)
-                rs[i]=ivByte[i];
+        for (int i = 0,j=0; i < 8; i++,j++) {
+            if (j>=ivByte.length)
+                j=0;
+            rs[i]=ivByte[j];
 
         }
+        System.out.println(new String(rs));
         return rs;
     }
 
