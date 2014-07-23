@@ -93,10 +93,10 @@ public class ArtSecurity3DES extends ArtAbsSecurity {
 //        System.out.println(rs);
 //        System.out.println(ArtSecurity3DES.decode(rs, secretBytes, ivbytes));
 
-        rs= ArtSecurity3DES.encode("1103010900000013", key, iv);
+        rs= ArtSecurity3DES.encode(plainText, key, iv);
         System.out.println(rs);
         System.out.println(ArtSecurity3DES.decode(rs, key, iv));
-        System.out.println(ArtSecurity3DES.decode("bXgKYTR47dosKznX/32ARw==", key, iv));
+//        System.out.println(ArtSecurity3DES.decode("bXgKYTR47dosKznX/32ARzoeuuBsdfIn", key, iv));
 
     }
 
