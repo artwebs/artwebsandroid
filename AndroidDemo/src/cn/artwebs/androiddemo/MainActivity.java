@@ -1,14 +1,13 @@
 package cn.artwebs.androiddemo;
 
-import cn.artwebs.service.ArtServiceManager;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import cn.artwebs.service.ArtServiceManager;
 
 
 public class MainActivity extends Activity {
@@ -23,7 +22,7 @@ public class MainActivity extends Activity {
 		addButton("刮刮卡",ScratchSardViewActivity.class);
 		addButton("单选控件",SingleChoiceActivity.class);
 		addButton("提交控件",SubmitDataActivity.class);
-		
+		addButton("调用其他应用",OtherAppActivity.class);
 		ArtServiceManager.start(this, ArtServiceTest.class);
 	}
 

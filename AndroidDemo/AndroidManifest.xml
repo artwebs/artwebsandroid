@@ -31,6 +31,7 @@
         <activity android:name=".QRCodeActivity" android:label=""></activity>
         <activity android:name=".ScratchSardViewActivity" android:label=""></activity>
         <activity android:name=".SingleChoiceActivity" android:label=""></activity>
+        <activity android:name=".OtherAppActivity" android:label=""></activity>
     </application>
 
 </manifest>
