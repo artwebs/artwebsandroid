@@ -32,20 +32,26 @@ public class NetworkProber {
      * @param activity 
      * @return 
      */  
-    public static boolean isNetworkAvailable(Context context) {  
+    public static boolean isNetworkAvailable(Context context) throws Exception {
         ConnectivityManager connectivity = (ConnectivityManager) context  
                 .getSystemService(Context.CONNECTIVITY_SERVICE);  
         if (connectivity == null) {  
-        } else {  
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();  
-            if (info != null) {  
-                for (int i = 0; i < info.length; i++) {  
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {  
-                    	Log.d(tag,"isNetworkAvailable=true");
-                        return true;  
-                    }  
-                }  
-            }  
+        } else {
+            try {
+                NetworkInfo[] info = connectivity.getAllNetworkInfo();
+                if (info != null) {
+                    for (int i = 0; i < info.length; i++) {
+                        if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                            Log.d(tag,"isNetworkAvailable=true");
+                            return true;
+                        }
+                    }
+                }
+            }catch (Exception e)
+            {
+                throw e;
+            }
+
         }  
         Log.d(tag,"isNetworkAvailable=false");
         return false;  
@@ -193,7 +199,7 @@ public class NetworkProber {
 	}
     
     
-    public static void setEnable(Context context){
+    public static void setEnable(Context context) throws Exception {
     	if(!isNetworkAvailable(context)){
     		setNewWork(context);
     	}
