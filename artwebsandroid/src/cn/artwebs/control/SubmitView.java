@@ -1,45 +1,38 @@
 package cn.artwebs.control;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-
-import cn.artwebs.R;
-import cn.artwebs.UI.CodeUI;
-import cn.artwebs.UI.Form.AbsControl;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import cn.artwebs.control.submititem.SubmitItem;
 import cn.artwebs.control.submititem.SubmitItem.ItemKey;
 import cn.artwebs.control.submititem.SubmitItem.ItemValueType;
 import cn.artwebs.object.BinList;
 import cn.artwebs.object.BinMap;
-import cn.artwebs.utils.AndroidUtils;
-import android.app.Activity;
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
+
+import java.lang.reflect.Constructor;
 
 public class SubmitView extends ScrollView {
 	private Context context;
 	private BinList source;
 	private BinMap ctlMap;
 	private TableLayout tblLayout;
+    private SubmitItem.SubmitItemDelegate itemDelegate=null;
 	
 	
 	public void setSource(BinList source) {
 		this.source = source;
 	}
-	
 
+    public void setItemDelegate(SubmitItem.SubmitItemDelegate itemDelegate) {
+        this.itemDelegate = itemDelegate;
+    }
 
-
-
-	public SubmitView(Context context) {
+    public SubmitView(Context context) {
 		super(context,null);
 	}
+
 	
 	public SubmitView(Context context, AttributeSet attrs) {
 		super(context, attrs);

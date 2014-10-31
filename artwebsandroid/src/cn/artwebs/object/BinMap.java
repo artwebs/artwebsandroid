@@ -1,12 +1,12 @@
 package cn.artwebs.object;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class BinMap extends IBinObject {
 	private ArrayList item=new ArrayList();
@@ -80,6 +80,16 @@ public class BinMap extends IBinObject {
 		Object value=getValue(index);
 		return value==null?"":value.toString();
 	}
+
+    public String getAllValueSplitString(String sstr)
+    {
+        String rs="";
+        for (int i = 0; i <size() ; i++) {
+            if(i>0)rs+=sstr;
+            rs+=getValueString(i);
+        }
+        return rs;
+    }
 
 
 	@SuppressWarnings("unchecked")

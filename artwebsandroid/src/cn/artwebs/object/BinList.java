@@ -1,18 +1,12 @@
 package cn.artwebs.object;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class BinList extends IBinObject {
 	private ArrayList item=new ArrayList();
@@ -33,7 +27,29 @@ public class BinList extends IBinObject {
 		para.setItemByHashMap((HashMap)item.get(i));
 		return para;
 	}
-	
+
+    public BinList appendFromJSONArray(JSONArray array)
+    {
+        try {
+            for (int i = 0; i <array.length() ; i++) {
+                boolean isStart=false;
+                JSONObject json=array.getJSONObject(i);
+                Iterator<?> it = json.keys();
+                while(it.hasNext()){
+                    String key= (String) it.next();
+                    put(isStart,key,json.getString(key));
+                    if(!isStart)isStart=true;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+
+        }
+        return this;
+
+    }
+
 	public JSONArray getArray2JSONArray()
 	{
 		JSONArray array=new JSONArray();
