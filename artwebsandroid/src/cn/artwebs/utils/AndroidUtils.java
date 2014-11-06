@@ -6,8 +6,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class AndroidUtils {
 	public static void setEditTextReadOnly(TextView view){  
@@ -47,6 +52,61 @@ public class AndroidUtils {
 			}
 		});
 	}
+
+    public static String stringForPhone(String str){
+        return stringInsertSpace(str,new int[]{3,7});
+    }
+
+    public  static String stringInsertSpace(String str,int[] pos){
+        int count=0;
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<pos.length&&count<str.length();i++){
+            if(pos[i]>=str.length())break;
+            sb.append(str.substring(count,pos[i]));
+            count=pos[i];
+            if(count<str.length())sb.append(" ");
+        }
+        if(count<str.length()){
+            sb.append(str.substring(count,str.length()));
+        }
+
+        return sb.toString();
+
+    }
+
+    public static void editTextForMobileNumber(final EditText editText){
+        editTextForMobileNumber(0, editText);
+    }
+    public static void editTextForMobileNumber(final int sstart, final EditText editText){
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ArrayList<Integer> indexs=new ArrayList<Integer>();
+                indexs.add(4+sstart);
+                indexs.add(9+sstart);
+                if (count == 1) {
+                    if (indexs.contains((s.length() + 1))) {
+                        editText.setText(s + " ");
+                        editText.setSelection(s.length() + 1);
+                    }
+                }else if (count == 0) {
+                    if (s.length() > 0 &&indexs.contains((s.length() + 1))) {
+                        editText.setText(s.subSequence(0, s.length() - 1));
+                        editText.setSelection(s.length() - 1);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
 	
 	
 

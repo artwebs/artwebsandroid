@@ -2,14 +2,14 @@ package cn.artwebs.control;
 
 import android.os.Handler;
 
-public class ArtTimer {
+public class ArtAnimationTimer {
 	private int hour = 0;
 	private int minute = 0;
 	private int second = 0;
 	private boolean bool;
-	private TimerCallBack callObj;
+	private ArtAnimationTimerDelegate callObj;
 	
-	public ArtTimer(TimerCallBack obj)
+	public ArtAnimationTimer(ArtAnimationTimerDelegate obj)
 	{
 		callObj=obj;
 	}
@@ -48,7 +48,7 @@ public class ArtTimer {
 		}
 	};
 	
-	public interface TimerCallBack
+	public interface ArtAnimationTimerDelegate
 	{
 		public void timerRetrun(String timeStr);
 	}
