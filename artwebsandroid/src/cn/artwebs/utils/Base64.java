@@ -93,6 +93,27 @@ public class Base64
     return encode(bytes, 0);
   }
 
+  public static String encode2Str(byte[] bytes)
+  {
+    try {
+      return new String(encode(bytes, 0), "ASCII");
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public static byte[] decode2Byte(String str){
+    byte[] bytes;
+    try
+    {
+      bytes = str.getBytes("ASCII");
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException("ASCII is not supported!", e);
+    }
+    return decode(bytes);
+  }
+
   public static byte[] encode(byte[] bytes, int wrapAt)
     throws RuntimeException
   {
