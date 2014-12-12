@@ -29,7 +29,7 @@ public class StorageScan {
         if(path!=null &&path.isDirectory()){
             if(path.canWrite()&&path.canRead()){
                 list.add(path.getAbsolutePath());
-                if(isAll)
+                if(!isAll)
                     return ;
             }
             File[] files = path.listFiles();
