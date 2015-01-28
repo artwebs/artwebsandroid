@@ -111,7 +111,7 @@ public class ArtListControlPage implements OnScrollListener {
     		page++;
     	}
 	}
-	
+
 	public interface OnControlPageListener
 	{
 		public void loadMoreData(int page,int pageSize);
