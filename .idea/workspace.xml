@@ -6,9 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a8044f-40c0-4767-93de-f0355f96dafc" name="Default" comment="增加图片按钮控件">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_support_v13.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/artwebsandroid_fat.xml" />
+    <list default="true" id="50a8044f-40c0-4767-93de-f0355f96dafc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="artwebsandroid.iws" />
@@ -501,7 +499,7 @@
       <workItem from="1422517626973" duration="195000" />
       <workItem from="1422517839606" duration="11000" />
       <workItem from="1422517890702" duration="63000" />
-      <workItem from="1422518033543" duration="471000" />
+      <workItem from="1422518033543" duration="575000" />
     </task>
     <task id="LOCAL-00001" summary="增加图片按钮控件">
       <created>1422518200641</created>
@@ -509,11 +507,17 @@
       <option name="project" value="LOCAL" />
       <updated>1422518200641</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="增加图片按钮控件">
+      <created>1422518521983</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1422518521983</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1768000" />
+    <option name="totallyTimeSpent" value="1872000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="742" extended-state="0" />
