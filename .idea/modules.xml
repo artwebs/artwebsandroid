@@ -3,12 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidDemo/AndroidDemo.iml" filepath="$PROJECT_DIR$/AndroidDemo/AndroidDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../Speed4G/Speed4G.iml" filepath="$PROJECT_DIR$/../Speed4G/Speed4G.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ZCTech/ZCTechBase/ZCTechBase.iml" filepath="$PROJECT_DIR$/../ZCTech/ZCTechBase/ZCTechBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ZCTech/ZCTechDemo/ZCTechDemo.iml" filepath="$PROJECT_DIR$/../ZCTech/ZCTechDemo/ZCTechDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../appcompat_v7/android-support-v7-appcompat.iml" filepath="$PROJECT_DIR$/../appcompat_v7/android-support-v7-appcompat.iml" />
       <module fileurl="file://$PROJECT_DIR$/artwebsandroid/artwebsandroid.iml" filepath="$PROJECT_DIR$/artwebsandroid/artwebsandroid.iml" />
     </modules>
   </component>
 </project>
-
