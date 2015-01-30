@@ -1,6 +1,7 @@
 package cn.artwebs.UI;
 
 import cn.artwebs.ListAdapter.ListAdapter;
+import cn.artwebs.ListAdapter.ListAdapterDefault;
 import cn.artwebs.UI.DataParseXML.DataPagelist;
 import cn.artwebs.object.BinList;
 import cn.artwebs.object.BinMap;
@@ -36,7 +37,7 @@ public class CodeUIPagelist extends CodeUIList implements OnScrollListener {
 					
 		listView=new ListView(activity);
 		listView.addFooterView(loadMoreLayout);
-		if(adapter==null)this.setAdapter(new ListAdapter(this.para,activity));
+		if(adapter==null)this.setAdapter(new ListAdapterDefault(this.para,activity));
 		listView.setAdapter(adapter);		
 		datasize=adapter.getDataSize();
 		listView.setOnItemClickListener(this.onItemClickListener);

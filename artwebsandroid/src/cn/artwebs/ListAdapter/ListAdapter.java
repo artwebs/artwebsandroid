@@ -14,10 +14,11 @@ import cn.artwebs.object.BinList;
 import cn.artwebs.object.BinMap;
 
 import cn.artwebs.R;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class ListAdapter extends BaseAdapter {
+public abstract class ListAdapter<T extends ListAdapter.ViewHolder> extends BaseAdapter {
 	private final String tag="ListAdapter";
-	protected HashMap<Integer,View> rowViews=new HashMap<Integer,View>();
 	protected BinMap para=new BinMap();
 	protected BinList list=new BinList();
 	protected Activity activity=null;
@@ -52,13 +53,11 @@ public class ListAdapter extends BaseAdapter {
 	public void clearItem()
 	{
 		this.list.clear();
-		rowViews.clear();
 	}
 	
 	public void removeItem(int index)
 	{
 		this.list.remove(index);
-		rowViews.remove(index);
 	}
 	
 	public int getDataSize() {
@@ -83,13 +82,57 @@ public class ListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View rowView=rowViews.get(position);
-		rowView=(LinearLayout)this.activity.getLayoutInflater().inflate(R.layout.binlistitem, null);
-		TextView firstView=(TextView)rowView.findViewById(R.id.first);
-		firstView.setMaxLines(2);
-		HashMap<Object, Object> row=(HashMap<Object, Object>)this.getItem(position);
-		firstView.setText(row.get("text").toString());
-		rowViews.put(position, rowView);
-		return rowView;
+		T obj;
+		if(convertView==null){
+			convertView=initLayout(initLayoutID());
+			obj=initViewHolder();
+			convertView.setTag(obj);
+		}else {
+			obj= (T) convertView.getTag();
+		}
+		BinMap map=new BinMap();
+		map.setItemByHashMap((HashMap) this.getItem(position));
+		obj.setJson(map.toJSONObject());
+		updateUI(convertView,obj);
+		return convertView;
 	}
+
+	public abstract int initLayoutID();
+	public abstract T initViewHolder();
+
+	public View initLayout(int layoutid){
+		return this.activity.getLayoutInflater().inflate(layoutid, null);
+	}
+
+
+	public abstract void updateUI(View convertView,T obj);
+
+	public class ViewHolder{
+		private JSONObject json;
+
+		public String getString(String key){
+			return getString(key,"");
+		}
+			public String getString(String key,String defaultValue){
+			try {
+				return getJson().getString(key);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}finally {
+			}
+			return defaultValue;
+		}
+
+		public JSONObject getJson() {
+			return json;
+		}
+
+		public void setJson(JSONObject json) {
+			this.json = json;
+		}
+
+
+
+	}
+
 }
