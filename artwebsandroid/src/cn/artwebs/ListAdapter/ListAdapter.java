@@ -14,6 +14,7 @@ import cn.artwebs.object.BinList;
 import cn.artwebs.object.BinMap;
 
 import cn.artwebs.R;
+import cn.artwebs.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -111,16 +112,7 @@ public abstract class ListAdapter<T extends ListAdapter.ViewHolder> extends Base
 		private JSONObject json;
 
 		public String getString(String key){
-			return getString(key,"");
-		}
-			public String getString(String key,String defaultValue){
-			try {
-				return getJson().getString(key);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}finally {
-			}
-			return defaultValue;
+			return Utils.getJSONString(getJson(),key);
 		}
 
 		public JSONObject getJson() {

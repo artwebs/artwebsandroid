@@ -2,6 +2,8 @@ package cn.artwebs.utils;
 
 import android.graphics.drawable.Drawable;
 import cn.artwebs.transmit.ITransmit;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -455,6 +457,20 @@ public class Utils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }finally{}
+    }
+
+    public static String getJSONString(JSONObject josn,String key){
+        return getJSONString(josn, key, "");
+    }
+
+    public static String getJSONString(JSONObject josn,String key,String defaultValue){
+        try {
+            return josn.getString(key);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }finally {
+        }
+        return defaultValue;
     }
 
 
