@@ -1,11 +1,15 @@
 package cn.artwebs.utils;
 
+import android.graphics.drawable.Drawable;
+import cn.artwebs.transmit.ITransmit;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.DateFormat;
@@ -425,6 +429,32 @@ public class Utils {
         {
             return true;
         }
+    }
+
+    public static Drawable loadImageFromUrl(String imageUrl) {
+        return loadImageFromUrl(null,imageUrl);
+    }
+
+    //该方法用于根据图片的URL，从网络上下载图片
+    public static Drawable loadImageFromUrl(ITransmit trans, String imageUrl) {
+        InputStream inputStream;
+        try {
+
+            if(trans!=null)
+                inputStream=trans.downStream(imageUrl);
+            else{
+                URL url = new URL(imageUrl);
+                HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+                inputStream = urlConn.getInputStream();
+            }
+            Drawable drawable=Drawable.createFromStream(inputStream, "src");
+            inputStream.close();
+            inputStream=null;
+            //根据图片的URL，下载图片，并生成一个Drawable对象
+            return drawable;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally{}
     }
 
 

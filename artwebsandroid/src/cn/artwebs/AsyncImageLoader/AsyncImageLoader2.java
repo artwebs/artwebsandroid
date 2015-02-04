@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import cn.artwebs.utils.Utils;
 
 //该类的主要作用是实现图片的异步加载
 public class AsyncImageLoader2 implements IAsyncImageLoader {
@@ -37,7 +38,7 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 	}
 
 	//实现图片的异步加载
-	public Drawable loadDrawable(final String imageUrl,final ImageCallback callback,ITransmit trans){
+	public Drawable loadDrawable(final String imageUrl,final ImageCallback callback, final ITransmit trans){
 		this.trans=trans;
 	
 		//查询缓存，查看当前需要下载的图片是否已经存在于缓存当中
@@ -57,7 +58,7 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 		//新开辟一个线程，该线程用于进行图片的下载
 		new Thread(){
 			public void run() {
-				Drawable drawable=loadImageFromUrl(imageUrl);
+				Drawable drawable= Utils.loadImageFromUrl(trans,imageUrl);
 				imageCache.put(imageUrl, new SoftReference<Drawable>(drawable));
 				Message message = handler.obtainMessage(0, drawable);
 				handler.sendMessage(message);
@@ -65,28 +66,7 @@ public class AsyncImageLoader2 implements IAsyncImageLoader {
 		}.start();
 		return null;
 	}
-	//该方法用于根据图片的URL，从网络上下载图片
-	protected Drawable loadImageFromUrl(String imageUrl) {
-		InputStream inputStream;
-		try {
-			
-			if(this.trans!=null)
-				inputStream=this.trans.downStream(imageUrl);
-			else{
-				URL url = new URL(imageUrl);
-				HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-				inputStream = urlConn.getInputStream();
-			}
-			Drawable drawable=Drawable.createFromStream(inputStream, "src");
-			inputStream.close();
-			inputStream=null;
-			//根据图片的URL，下载图片，并生成一个Drawable对象
-			return drawable;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}finally{}
-	}
-	
+
 
 
 }
