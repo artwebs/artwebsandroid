@@ -126,7 +126,7 @@ public class ArtListView extends ListView implements AbsListView.OnScrollListene
         lastUpdatedTextView = (TextView) headView
                 .findViewById(R.id.head_lastUpdatedTextView);
 
-        footView = (RelativeLayout) inflater.inflate(R.layout.footer, null);
+        footView = (RelativeLayout) inflater.inflate(R.layout.artlistview_footer, null);
 
         mLoadMoreTextView = (TextView) footView.findViewById(R.id.load_more_tv);
         mLoadMoreView = (RelativeLayout) footView

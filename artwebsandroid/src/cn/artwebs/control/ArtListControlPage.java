@@ -11,14 +11,14 @@ import cn.artwebs.object.BinList;
 public class ArtListControlPage implements OnScrollListener {
 	private final static String tag="ArtListViewPage";
 	private BinList list=new BinList();
-	private  Activity window;
+	protected  Activity window;
 	private ListAdapter adapter;
-	private int page=1;
-	private int pageSize=10;
+	protected int page=1;
+	protected int pageSize=10;
 	private int visibleLastIndex = 0;  
 	private int visibleItemCount=0;  
 	private int dataSize=0;
-	private OnControlPageListener listener;
+	protected OnControlPageListener listener;
 	
 	public BinList getList() {
 		return list;
@@ -64,7 +64,7 @@ public class ArtListControlPage implements OnScrollListener {
 		this.visibleItemCount = visibleItemCount;  
         visibleLastIndex = firstVisibleItem + visibleItemCount;    
         if(totalItemCount == list.size()+1){  
-//	            listView.removeFooterView(loadMoreLayout);  
+//	            listView.removeFooterView(loadMoreLayout);
             Toast.makeText(window, "加载完成", Toast.LENGTH_LONG).show();  
         }  
 	}
