@@ -11,4 +11,9 @@
             <enum name="vertical" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="ArtRoundImageView">
+        <attr name="roundWidth" format="dimension" />
+        <attr name="roundHeight" format="dimension" />
+    </declare-styleable>
 </resources>

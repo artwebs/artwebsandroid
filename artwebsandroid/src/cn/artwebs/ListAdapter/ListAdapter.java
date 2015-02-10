@@ -15,6 +15,7 @@ import cn.artwebs.object.BinMap;
 
 import cn.artwebs.R;
 import cn.artwebs.utils.Utils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -113,6 +114,10 @@ public abstract class ListAdapter<T extends ListAdapter.ViewHolder> extends Base
 
 		public String getString(String key){
 			return Utils.getJSONString(getJson(),key);
+		}
+
+		public BinList getList(String key){
+			return  new BinList().appendFromJSONArray(Utils.getJSONArray(getJson(),key));
 		}
 
 		public JSONObject getJson() {

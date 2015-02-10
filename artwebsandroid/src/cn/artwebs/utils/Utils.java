@@ -1,7 +1,11 @@
 package cn.artwebs.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import cn.artwebs.transmit.ITransmit;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xml.sax.ContentHandler;
@@ -439,6 +443,16 @@ public class Utils {
 
     //该方法用于根据图片的URL，从网络上下载图片
     public static Drawable loadImageFromUrl(ITransmit trans, String imageUrl) {
+        return loadImageFromUrl(trans,imageUrl,-1);
+    }
+
+    public static Drawable loadImageFromUrl(String imageUrl,int quality)
+    {
+        return loadImageFromUrl(null,imageUrl, quality);
+    }
+
+    //该方法用于根据图片的URL，从网络上下载图片
+    public static Drawable loadImageFromUrl(ITransmit trans, String imageUrl,int quality) {
         InputStream inputStream;
         try {
 
@@ -449,8 +463,19 @@ public class Utils {
                 HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
                 inputStream = urlConn.getInputStream();
             }
-            Drawable drawable=Drawable.createFromStream(inputStream, "src");
-            inputStream.close();
+            Drawable drawable;
+            if(quality==-1){
+                drawable=Drawable.createFromStream(inputStream,"src");
+                inputStream.close();
+            }else{
+                BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                bitmapOptions.inSampleSize = 4;
+                Bitmap bm;
+                bm=BitmapFactory.decodeStream(inputStream,null,bitmapOptions);
+                drawable=new BitmapDrawable(bm);
+                inputStream.close();
+            }
+
             inputStream=null;
             //根据图片的URL，下载图片，并生成一个Drawable对象
             return drawable;
@@ -471,6 +496,18 @@ public class Utils {
         }finally {
         }
         return defaultValue;
+    }
+
+    public static JSONArray getJSONArray(JSONObject json,String key){
+        try {
+            return new JSONArray(json.getString(key));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }finally {
+
+        }
+        return new JSONArray();
+
     }
 
 
