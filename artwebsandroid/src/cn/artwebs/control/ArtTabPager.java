@@ -3,7 +3,10 @@ package cn.artwebs.control;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,27 +52,29 @@ public class ArtTabPager extends RelativeLayout {
         inflater.inflate(initTabPageLayoutID(), this);
         tabPager= (ViewPager) findViewById(R.id.tabPager);
         tabGridView= (GridView) findViewById(R.id.tabGridView);
-        adapter=new TabAdapter((Activity)context);
-        tabGridView.setAdapter(adapter);
 
-        tabPager.setOnPageChangeListener(pageChangeListener);
-        tabGridView.setOnItemClickListener(tabOnItemClicker);
         colorDown=0xff009688;
-        colorUp=0x868686;
-        colorWhite=getResources().getColor(R.color.white);
+        colorUp=0xff868686;
+        colorWhite=0xffffffff;
     }
 
     public void appendItem(String title,Fragment fragment){
         list.put(false,"title",title);
-        list.put(true,"selected",list.size()==0?"true":"false");
+        list.put(true,"selected",list.size()==1?"true":"false");
         list.put(true,"pager",fragment);
     }
 
-    public void refresh(){
+    public void refresh(ActionBarActivity window){
+        adapter=new TabAdapter(window);
+        tabGridView.setAdapter(adapter);
+        tabPager.setOnPageChangeListener(pageChangeListener);
+        tabGridView.setOnItemClickListener(tabOnItemClicker);
+
         tabPager.setOffscreenPageLimit(list.size()); //设置缓存
         tabGridView.setNumColumns(list.size());
         adapter.appendItem(list);
         adapter.notifyDataSetChanged();
+        tabPager.setAdapter(new TabFragmentPagerAdapter(window.getSupportFragmentManager()));
     }
 
     private AdapterView.OnItemClickListener tabOnItemClicker =new AdapterView.OnItemClickListener() {
@@ -127,6 +132,24 @@ public class ArtTabPager extends RelativeLayout {
 
         class TabView extends ViewHolder{
 
+        }
+    }
+
+    public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
+
+        public TabFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int arg) {
+            HashMap map= (HashMap) adapter.getItem(arg);
+            return (Fragment) map.get("pager");
+        }
+
+        @Override
+        public int getCount() {
+            return adapter.getCount();
         }
     }
 

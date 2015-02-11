@@ -77,7 +77,7 @@ public class ArtListControlPage implements OnScrollListener {
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		Log.e(tag, "onScrollStateChanged");
+//		Log.e(tag, "onScrollStateChanged");
 		if (lastPage !=page&&isLastRow && scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
 			//加载元素
 			loadData();
