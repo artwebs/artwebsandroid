@@ -13,7 +13,7 @@ public class BinMap extends IBinObject {
 	public ArrayList getItem() {
 		return item;
 	}
-	public void setItemByHashMap(HashMap hm){
+	public BinMap setItemByHashMap(HashMap hm){
 		Iterator it= hm.keySet().iterator();
 		Object key=new Object();
 		Object value=new Object();
@@ -23,6 +23,7 @@ public class BinMap extends IBinObject {
 			value=hm.get(key);
 			this.put(key, value);
 		}
+		return this;
 	}
 	public Object getKey(int i) {		
 		HashMap hm=(HashMap)item.get(i);

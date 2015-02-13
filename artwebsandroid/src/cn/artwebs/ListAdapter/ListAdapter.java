@@ -92,10 +92,8 @@ public abstract class ListAdapter<T extends ListAdapter.ViewHolder> extends Base
 		}else {
 			obj= (T) convertView.getTag();
 		}
-		BinMap map=new BinMap();
-		map.setItemByHashMap((HashMap) this.getItem(position));
-		obj.setJson(map.toJSONObject());
-		updateUI(convertView,obj);
+		obj.setMap((HashMap) this.getItem(position));
+		updateUI(convertView, obj);
 		return convertView;
 	}
 
@@ -110,7 +108,7 @@ public abstract class ListAdapter<T extends ListAdapter.ViewHolder> extends Base
 	public abstract void updateUI(View convertView,T obj);
 
 	public class ViewHolder{
-		private JSONObject json;
+		private HashMap map;
 
 		public String getString(String key){
 			return Utils.getJSONString(getJson(),key);
@@ -121,11 +119,18 @@ public abstract class ListAdapter<T extends ListAdapter.ViewHolder> extends Base
 		}
 
 		public JSONObject getJson() {
-			return json;
+			return new BinMap().setItemByHashMap(this.map).toJSONObject();
 		}
 
-		public void setJson(JSONObject json) {
-			this.json = json;
+
+		public void setMap(HashMap map){
+			this.map=map;
+		}
+
+		public void setValue(String key,Object value){
+			if(this.map!=null){
+				this.map.put(key,value);
+			}
 		}
 
 
