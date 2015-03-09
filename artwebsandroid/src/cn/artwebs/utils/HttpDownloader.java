@@ -134,7 +134,7 @@ public class HttpDownloader {
 	/**
 	 * 根据URL得到输入流
 	 * 
-	 * @param urlStr
+	 * @param
 	 * @return
 	 * @throws MalformedURLException
 	 * @throws IOException
