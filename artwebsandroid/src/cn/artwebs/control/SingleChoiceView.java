@@ -8,9 +8,7 @@ import cn.artwebs.R;
 import cn.artwebs.object.BinList;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -68,7 +66,7 @@ public class SingleChoiceView extends RelativeLayout {
 		this.context=context;
 		LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.singlechoice_view, this);
-		titleView=(TextView) findViewById(R.id.titleView);
+		titleView=(TextView) findViewById(R.id.titleTextView);
 		itemGroup=(RadioGroup) findViewById(R.id.itemGroup);
 		itemGroup.setOnCheckedChangeListener(onCheckedChangeListener);
 		list=new BinList();
