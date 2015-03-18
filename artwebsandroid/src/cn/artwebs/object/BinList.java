@@ -210,6 +210,18 @@ public class BinList extends IBinObject {
 		}
 		return Flage;
 	}
+
+	public boolean containsKey(int index,Object key)
+	{
+		boolean Flage=false;
+		if(index<item.size())
+		{
+			if(((HashMap)item.get(index)).containsKey(key))
+				Flage=true;
+		}
+		return Flage;
+	}
+
 	public boolean containsValue(Object value)
 	{
 		boolean Flage=false;
