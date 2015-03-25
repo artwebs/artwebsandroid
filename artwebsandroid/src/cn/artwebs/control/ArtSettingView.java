@@ -30,6 +30,11 @@ public class ArtSettingView extends LinearLayout {
         super(context, attrs);
     }
 
+    public void clearViews(){
+        this.list.clear();
+        this.removeAllViews();
+    }
+
     public void reloadView(){
         this.removeAllViews();
         for(int i=0;i<list.size();i++){

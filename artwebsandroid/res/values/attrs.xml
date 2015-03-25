@@ -12,8 +12,9 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="ArtRoundImageView">
+    <declare-styleable name="ArtRoundView">
         <attr name="roundWidth" format="dimension" />
         <attr name="roundHeight" format="dimension" />
     </declare-styleable>
+
 </resources>

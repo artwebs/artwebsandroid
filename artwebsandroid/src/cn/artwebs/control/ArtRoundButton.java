@@ -4,29 +4,29 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+import android.widget.Button;
 import cn.artwebs.R;
 
 /**
- * Created by rsmac on 15/2/10.
+ * Created by rsmac on 15/3/25.
  */
-public class ArtRoundImageView extends ImageView {
+public class ArtRoundButton extends Button {
     private Paint paint;
     private int roundWidth = 5;
     private int roundHeight = 5;
     private Paint paint2;
 
-    public ArtRoundImageView(Context context, AttributeSet attrs, int defStyle) {
+    public ArtRoundButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs);
     }
 
-    public ArtRoundImageView(Context context, AttributeSet attrs) {
+    public ArtRoundButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public ArtRoundImageView(Context context) {
+    public ArtRoundButton(Context context) {
         super(context);
         init(context, null);
     }
