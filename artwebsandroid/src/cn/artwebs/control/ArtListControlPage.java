@@ -106,10 +106,16 @@ public class ArtListControlPage implements OnScrollListener {
 				@Override
 				public synchronized void run() {
 					adapter.notifyDataSetChanged();
+					if(dataSize!=-1&&dataSize<=adapter.getCount()){
+						finishLoadData();
+						isLastRow=false;
+					}
 				}
 			});
     		page++;
     	}
+
+
 	}
 
 	public interface OnControlPageListener
