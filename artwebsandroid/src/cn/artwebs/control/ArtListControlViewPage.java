@@ -49,8 +49,9 @@ public class ArtListControlViewPage extends ArtListControlPage {
 
 	@Override
 	protected void loadData() {
+		if(this.listView.getFooterViewsCount()==0)
+			this.listView.addFooterView(footerView);
 		super.loadData();
-
 	}
 
 	protected void finishLoadData(){
