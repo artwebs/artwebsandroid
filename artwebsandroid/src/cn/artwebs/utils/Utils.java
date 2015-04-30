@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import cn.artwebs.comm.AppApplication;
 import cn.artwebs.transmit.ITransmit;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -463,19 +464,28 @@ public class Utils {
                 HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
                 inputStream = urlConn.getInputStream();
             }
+
+            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            Bitmap bm;
+            FileUtils fileUtils=new FileUtils(AppApplication.getAppName());
+            String fileName=Base64.encode(imageUrl)+".jpg";
+            File file = fileUtils.creatSDFile(fileName);
+            FileOutputStream output = new FileOutputStream(file);
             Drawable drawable;
             if(quality==-1){
-                drawable=Drawable.createFromStream(inputStream,"src");
+                bm=BitmapFactory.decodeStream(inputStream,null,bitmapOptions);
+                bm.compress(Bitmap.CompressFormat.JPEG, 100,output);
                 inputStream.close();
             }else{
-                BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
                 bitmapOptions.inSampleSize = 4;
-                Bitmap bm;
                 bm=BitmapFactory.decodeStream(inputStream,null,bitmapOptions);
-                drawable=new BitmapDrawable(bm);
+                bm.compress(Bitmap.CompressFormat.JPEG, 50,output);
                 inputStream.close();
             }
 
+            drawable=Drawable.createFromStream(new FileInputStream(fileUtils.getFile(fileName)), fileName);
+            output.close();
+            output.flush();
             inputStream=null;
             //根据图片的URL，下载图片，并生成一个Drawable对象
             return drawable;
