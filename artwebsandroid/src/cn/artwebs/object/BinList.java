@@ -32,14 +32,8 @@ public class BinList extends IBinObject {
     {
         try {
             for (int i = 0; i <array.length() ; i++) {
-                boolean isStart=false;
                 JSONObject json=array.getJSONObject(i);
-                Iterator<?> it = json.keys();
-                while(it.hasNext()){
-                    String key= (String) it.next();
-                    put(isStart,key,json.getString(key));
-                    if(!isStart)isStart=true;
-                }
+				appendFromJSONObject(json);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -49,6 +43,23 @@ public class BinList extends IBinObject {
         return this;
 
     }
+
+	public BinList appendFromJSONObject(JSONObject json){
+		boolean isStart=false;
+		Iterator<?> it = json.keys();
+		while(it.hasNext()){
+			String key= (String) it.next();
+			try {
+				put(isStart,key,json.getString(key));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}finally {
+
+			}
+			if(!isStart)isStart=true;
+		}
+		return this;
+	}
 
 	public JSONArray getArray2JSONArray()
 	{
